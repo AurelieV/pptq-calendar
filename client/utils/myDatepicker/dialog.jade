@@ -1,0 +1,34 @@
+md-dialog.mdc-date-picker
+  div(md-theme='{{mdTheme}}')
+    md-toolbar.md-hue-2.mdc-date-picker__current-day-of-week
+      span {{ moment(selected.date).format('dddd') }}
+    // Current date
+    md-toolbar.mdc-date-picker__current-date
+      span {{ moment(selected.date).format('MMM') }}
+      strong {{ moment(selected.date).format('DD') }}
+      a(ng-click='displayYearSelection()') {{ moment(selected.date).format('YYYY') }}
+    // Calendar
+    .mdc-date-picker__calendar(ng-if='!yearSelection')
+      .mdc-date-picker__nav(layout="row" layout-align="start center")
+        md-button.md-fab.md-primary.md-mini(aria-label='Previous month', ng-click='previousMonth()' layout="column" layout-align="center center")
+          md-icon.material-icons.md-icon-fab-mini(md-font-icon="icon-previous")
+        .push(flex)
+        div {{ activeDate.format('MMMM YYYY') }}
+        .push(flex)
+        md-button.md-fab.md-primary.md-mini(aria-label='Next month', ng-click='nextMonth()' layout="column" layout-align="center center")
+          md-icon.material-icons.md-icon-fab-mini(md-font-icon="icon-next")
+      .mdc-date-picker__days-of-week
+        span(ng-repeat='day in daysOfWeek') {{ day }}
+      .mdc-date-picker__days
+        span.mdc-date-picker__day.mdc-date-picker__day--is-empty(ng-repeat='x in emptyFirstDays')  
+        .mdc-date-picker__day(ng-class="{ 'mdc-date-picker__day--is-selected': day.selected, 'mdc-date-picker__day--is-today': day.today }", ng-repeat='day in days')
+          a(ng-click='select(day)') {{ day ? day.format('D') : '' }}
+        span.mdc-date-picker__day.mdc-date-picker__day--is-empty(ng-repeat='x in emptyLastDays')  
+    // Year selection
+    .mdc-date-picker__year-selector(ng-show='yearSelection')
+      a.mdc-date-picker__year(ng-class="{ 'mdc-date-picker__year--is-active': year == activeDate.format('YYYY') }", ng-repeat='year in years', ng-click='selectYear(year)', ng-if='yearSelection')
+        span {{year}}
+    // Actions
+    .md-actions.mdc-date-picker__actions(layout='row', layout-align='end')
+      md-button.md-primary(ng-click='cancel()') Cancel
+      md-button.md-primary(ng-click='closePicker()') Ok

@@ -1,0 +1,65 @@
+{
+  "name": "pptq-calendar",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "pretest": "jshint ."
+  },
+  "dependencies": {
+    "async": "^1.4.0",
+    "bower": "1.3.x",
+    "coffee-script": "^1.9.3",
+    "compression": "^1.0.3",
+    "del": "1.1.x",
+    "errorhandler": "^1.1.1",
+    "gulp": "3.8.x",
+    "gulp-angular-templatecache": "1.5.x",
+    "gulp-autoprefixer": "2.1.x",
+    "gulp-coffee": "2.2.x",
+    "gulp-coffeelint": "0.4.x",
+    "gulp-concat": "2.4.x",
+    "gulp-connect": "^2.2.0",
+    "gulp-filesize": "0.0.x",
+    "gulp-filter": "2.0.x",
+    "gulp-jade": "0.11.x",
+    "gulp-less": "^3.0.1",
+    "gulp-livereload": "3.5.x",
+    "gulp-loopback-sdk-angular": "^0.1.3",
+    "gulp-ng-annotate": "0.5.x",
+    "gulp-plumber": "0.6.x",
+    "gulp-rename": "1.2.x",
+    "gulp-replace": "0.5.x",
+    "gulp-rev": "3.0.x",
+    "gulp-rev-collector": "0.1.x",
+    "gulp-uglify": "1.1.x",
+    "gulp-util": "3.0.x",
+    "gulp-watch": "^4.2.4",
+    "gulp-webserver": "0.9.x",
+    "jade": "~1.9.2",
+    "jshint": "^2.5.6",
+    "less": "^2.3.1",
+    "loopback": "^2.8.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-connector-mongodb": "^1.8.0",
+    "loopback-connector-mysql": "^2.1.1",
+    "loopback-datasource-juggler": "^2.7.0",
+    "main-bower-files": "2.5.x",
+    "moment": "^2.10.3",
+    "pow-mongodb-fixtures": "^0.10.0",
+    "require-dir": "0.1.x",
+    "run-sequence": "1.0.x",
+    "serve-favicon": "^2.0.1",
+    "vinyl-paths": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "loopback-explorer": "^1.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "description": "pptq-calendar"
+}

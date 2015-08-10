@@ -1,0 +1,24 @@
+{
+  "arrow_spacing":{
+    "level": "warn"
+  },
+  "colon_assignment_spacing":{
+    "spacing": {
+      "left": 0,
+      "right": 1
+    },
+    "level": "warn"
+  },
+  "no_empty_param_list":{
+    "level": "warn"
+  },
+  "no_unnecessary_double_quotes":{
+    "level": "warn"
+  },
+  "prefer_english_operator":{
+    "level": "warn"
+  },
+  "space_operators":{
+    "level": "warn"
+  }
+}
