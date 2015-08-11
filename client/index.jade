@@ -14,8 +14,10 @@ html(lang="fr", xmlns:ng="http://angularjs.org", id="ng-app", ng-app="pptq-calen
     md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left")
       md-content
         ul(layout="column" layout-align="start center")
-          li(flex)
+          li
             a(ui-sref="home") Home
+          li(flex)
+            a(ui-sref="login") Se connecter
     md-toolbar.mainbar
       .md-toolbar-tools
         md-button.md-icon-button(ng-click="$root.openMenu()" aria-label="openMenu")

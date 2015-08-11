@@ -19,7 +19,15 @@ angular.module('pptq-calendar', [
   $rootScope.$on '$stateChangeSuccess', (event) ->
     $mdSidenav('left').close()
 
+  $rootScope.$on 'auth-failed', (event) ->
+    event.preventDefault()
+    $state.nextAfterLogin = $state.current.name
+    $state.go 'login'
+
   $rootScope.$state = $state
+
+.config ($httpProvider) ->
+  $httpProvider.interceptors.push 'authInterceptor'
 
 
 
