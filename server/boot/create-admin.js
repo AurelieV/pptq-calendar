@@ -3,7 +3,7 @@ module.exports = function createAdmin(app) {
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
 
-  var adminData = {username: 'admin', email: 'orwel.violette@gmail.com', password: 'admin'};
+  var adminData = {username: 'admin', email: 'pptq.calendar@gmail.com', password: 'admin'};
 
   User.findOrCreate( {where: {username: 'admin'}}, adminData, function(err, admin) {
     if (err) throw err;
