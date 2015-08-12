@@ -5,10 +5,11 @@ angular.module('pptq-calendar', [
   'ngMaterial'
   'alAngularHero'
   'ngAnimate'
+  'ngStorage'
 
   'pptq-calendar.templates'
 ])
-.run ($mdSidenav, $rootScope, $state, MyUser) ->
+.run ($mdSidenav, $rootScope, $state, MyUser, loginFactory, $mdToast) ->
   moment.locale 'fr'
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
@@ -16,6 +17,13 @@ angular.module('pptq-calendar', [
 
   $rootScope.$on '$stateChangeSuccess', (event) ->
     $mdSidenav('left').close()
+
+  $rootScope.$on '$stateChangeStart', (event, toState) ->
+    return unless toState.data?.roleRequired?
+    return unless loginFactory.isGranted(toState.data.roleRequired?)
+    event.preventDefault()
+    $mdToast 'Vous n\'avez pas les droits nécessaire pour accéder à cette page'
+
 
   $rootScope.$on 'auth-failed', (event) ->
     event.preventDefault()

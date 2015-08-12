@@ -21,7 +21,8 @@
     "angular-hero": "~0.0.6",
     "angular-resource": "~1.4.0",
     "angular-animate": "~1.4.0",
-    "angular-material": "~0.10.0"
+    "angular-material": "~0.10.0",
+    "ngstorage": "~0.3.7"
   },
   "resolutions": {
     "angular": "1.4.3",

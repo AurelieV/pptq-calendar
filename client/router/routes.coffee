@@ -19,5 +19,11 @@ angular.module 'pptq-calendar'
     url: '/create-login'
     controller: 'createLoginController'
     templateUrl: 'login/create/view.html'
+  .state 'admin',
+    url: '/admin'
+    controller: 'adminController'
+    templateUrl: 'admin/view.html'
+    data:
+      roleRequired: 'admin'
 
   delete $httpProvider.defaults.headers.common['X-Requested-With']

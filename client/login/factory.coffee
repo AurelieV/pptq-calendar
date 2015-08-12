@@ -1,19 +1,30 @@
 angular.module 'pptq-calendar'
-.factory 'loginFactory', ($state, MyUser, $mdToast) ->
+.factory 'loginFactory', ($state, MyUser, $mdToast, $localStorage) ->
   @connect = (credentials) =>
     MyUser.login credentials
     , (data) =>
-      next = $state.nextAfterLogin or 'home'
-      $state.go next
-      $mdToast.showSimple 'Connexion réussie'
+      MyUser.findById
+        id: data.userId
+        filter:
+          include:
+            relation: "roles"
+      , (user) ->
+        $localStorage.roles = _.map user.roles, 'name'
+        next = $state.nextAfterLogin or 'home'
+        $state.go next
+        $mdToast.showSimple 'Connexion réussie'
     , (err) =>
       $mdToast.showSimple 'Impossible de se connecter, veuillez réessayer'
+
+  @isGranted = (role) =>
+    _.indexOf($localStorage.roles, role) > -1
 
   connect: @connect
   disconnect: =>
     MyUser.logout =>
       $state.go 'login'
       $mdToast.showSimple 'Déconnexion réussie'
+      $localStorage.roles = null
     , (err) =>
       $mdToast.showSimple 'Erreur lors de la déconnexion'
 
@@ -30,4 +41,9 @@ angular.module 'pptq-calendar'
 
   getUser: =>
     MyUser.getCachedCurrent()?.username
+
+  isGranted: @isGranted
+  isAdmin: =>
+    @isGranted 'admin'
+
 
