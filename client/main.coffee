@@ -8,10 +8,8 @@ angular.module('pptq-calendar', [
 
   'pptq-calendar.templates'
 ])
-.run ($mdSidenav, $rootScope, $state) ->
+.run ($mdSidenav, $rootScope, $state, MyUser) ->
   moment.locale 'fr'
-
-  $rootScope.openMenu = -> $mdSidenav('left').toggle()
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
     console.log error
@@ -21,10 +19,14 @@ angular.module('pptq-calendar', [
 
   $rootScope.$on 'auth-failed', (event) ->
     event.preventDefault()
-    $state.nextAfterLogin = $state.current.name
+    #Good redirection if authentication fail in login page
+    $state.nextAfterLogin = $state.current.name if $state.nextAfterLogin isnt 'login'
     $state.go 'login'
 
   $rootScope.$state = $state
+
+  #Check Authentication
+  MyUser.getCurrent() if MyUser.isAuthenticated()
 
 .config ($httpProvider) ->
   $httpProvider.interceptors.push 'authInterceptor'

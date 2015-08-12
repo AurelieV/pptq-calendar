@@ -9,6 +9,14 @@
     "username": {
       "type": "string",
       "required": true
+    },
+    "firstname": {
+      "type": "string",
+      "required": false
+    },
+    "lastname": {
+      "type": "string",
+      "required": false
     }
   },
   "validations": [],

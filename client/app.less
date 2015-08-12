@@ -47,31 +47,6 @@ body {
       bottom: 16px;
     }
   }
-  md-sidenav {
-    ul {
-      list-style: none;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      margin-top: 20px;
-      li {
-        padding: 8px 16px;
-        width: 100%;
-        min-height: 30px;
-        cursor: pointer;
-        &:hover {
-          background: @hover-background;
-        }
-        a {
-          text-decoration: none;
-          color: black;
-          &:visited, &:active, &:hover {
-            color: black;
-          }
-        }
-      }
-    }
-  }
 }
 
 @media (max-width: @sm-screen) {
@@ -82,5 +57,8 @@ body {
 }
 
 //App less
-@import 'utils/styles';
+@import 'header/styles';
 @import 'home/styles';
+@import 'login/styles';
+@import 'menu/styles';
+@import 'utils/styles';

@@ -1,5 +1,5 @@
 angular.module 'pptq-calendar'
-.factory 'authInterceptor', ($q, $rootScope) ->
+.factory 'authInterceptor', ($q, $rootScope, LoopBackAuth) ->
   responseError: (rejection) ->
     if rejection.status is 401
       #Now clearing the loopback values from client browser for safe logout...

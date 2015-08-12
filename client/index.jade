@@ -11,21 +11,8 @@ html(lang="fr", xmlns:ng="http://angularjs.org", id="ng-app", ng-app="pptq-calen
     meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
 
   body
-    md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left")
-      md-content
-        ul(layout="column" layout-align="start center")
-          li
-            a(ui-sref="home") Home
-          li(flex)
-            a(ui-sref="login") Se connecter
-    md-toolbar.mainbar
-      .md-toolbar-tools
-        md-button.md-icon-button(ng-click="$root.openMenu()" aria-label="openMenu")
-          md-icon.material-icons(md-font-icon="icon-menu")
-        a(ui-sref="{{ $state.current.data.previous }}" ng-if="$state.current.data.previous")
-          md-button.md-icon-button(aria-label="openMenu")
-            md-icon.material-icons(md-font-icon="icon-previous")
-        .title.md-flex PPTQ Calendar
+    .side-menu
+    .header-bar
     md-content.body-content.hero-transition.page-transition(ui-view)
 
     script(src="js/vendor.js")
