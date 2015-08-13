@@ -1,2 +1,5 @@
 angular.module 'pptq-calendar'
-.controller 'homeController', ->
+.controller 'homeController', ($scope, loginFactory) ->
+  $scope.isJudgeTwo = ->
+    loginFactory.isGranted 'judgeTwo'
+

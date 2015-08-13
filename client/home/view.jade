@@ -1,3 +1,4 @@
 #home
-  md-content.md-whiteframe-z1(layout="row" layout-align="center center")
-    span /!\ En construction /!\
+  md-content.md-whiteframe-z1(layout="column" layout-align="center center")
+    div /!\ En construction /!\
+    div(ng-if="isJudgeTwo()") Vous êtes authentifié en tant qu'arbitre niveau 2 ou plus

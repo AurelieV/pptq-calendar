@@ -19,39 +19,37 @@ module.exports = (myUser) ->
           principalType: RoleMapping.USER
           principalId: userId
         , (err, principalAdded) ->
-            return next(err) if err
-            myUser.find
-              where:
-                id: userId
-              include: 'roles'
-            , next
+          return next(err) if err
+          myUser.find
+            where:
+              id: userId
+            include: 'roles'
+          , (err, users) ->
+            next(err, users[0])
 
-    myUser.removeRole = (userId, role, next) ->
-      Role = myUser.app.models.Role
-      RoleMapping = myUser.app.models.RoleMapping
-      Role.findOne
+  myUser.removeRole = (userId, role, next) ->
+    Role = myUser.app.models.Role
+    RoleMapping = myUser.app.models.RoleMapping
+    Role.findOne
+      where:
+        name: role
+    , (err, role) ->
+      return next(err) if (err)
+      return next(null) unless role?
+      RoleMapping.findOne
         where:
-          name: role
-      , (err, role) ->
+          roleId: role.id
+          principalId: userId
+      , (err, roleMapping) ->
         return next(err) if (err)
-        console.log 'err3', err
-        return next(null) unless role?
-        RoleMapping.findOne
-          where:
-            roleId: role.id
-            principalId: userId
-        , (err, roleMapping) ->
-          return next(err) if (err)
-          console.log 'err2', err
-          return next(null) unless roleMapping?
-          roleMapping.destroy (err) ->
-            console.log 'err', err
-            return next(err) if err
-            myUser.find
-              where:
-                id: userId
-              include: 'roles'
-            , next
+        return next(null) unless roleMapping?
+        roleMapping.destroy (err) ->
+          return next(err) if err
+          myUser.findOne
+            where:
+              id: userId
+            include: 'roles'
+          , next
 
   myUser.remoteMethod 'addRole',
     accepts: [
@@ -64,6 +62,7 @@ module.exports = (myUser) ->
     returns:
       arg: 'user'
       type: 'object'
+      root: true
     http:
       path: '/addRole'
       verb: 'post'
@@ -79,6 +78,7 @@ module.exports = (myUser) ->
     returns:
       arg: 'user'
       type: 'object'
+      root: true
     http:
       path: '/removeRole'
       verb: 'post'
