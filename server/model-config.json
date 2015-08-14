@@ -35,5 +35,13 @@
   "MyUser": {
     "dataSource": "db",
     "public": true
+  },
+  "Season": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Tournament": {
+    "dataSource": "db",
+    "public": true
   }
 }
