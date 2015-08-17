@@ -1,10 +1,24 @@
+@import 'users/styles';
+@import 'tournaments/styles';
+
 #admin {
+  .tabs {
+    min-height: 50px;
+    padding: 8px 4px;
+    .tab {
+      padding: 4px 8px;
+      color: grey;
+      opacity: 0.8;
+      font-size: larger;
+      font-weight: bold;
+      &.active {
+        color: blue;
+        border-bottom: 1px solid blue;
+      }
+    }
+  }
   md-content {
     min-height: 100px;
     padding: 4px 16px;
-
-    md-list.users {
-      width: 100%;
-    }
   }
 }

@@ -1,5 +1,5 @@
 angular.module 'pptq-calendar'
-.controller 'adminController', ($scope, MyUser, loginFactory, $mdToast) ->
+.controller 'adminUsersController', ($scope, MyUser, loginFactory, $mdToast) ->
   $scope.users = MyUser.find
     filter:
       include: 'roles'

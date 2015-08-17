@@ -1,19 +1,9 @@
 #admin
-  md-content.md-whiteframe-z1(layout="column" layout-align="start start")
-    h3 Administration des utilisateurs
-    md-list.users
-      md-list-item(ng-repeat="user in users")
-        .md-avatar
-          md-icon.material-icons.md-icon-avatar(md-font-icon="icon-person-outline" ng-if="!isJudgeTwo(user)")
-          md-icon.material-icons.md-icon-avatar(md-font-icon="icon-person" ng-if="isJudgeTwo(user)")
-        .md-list-item-text
-          .name
-            span {{ user.username }}
-            span(ng-if="user.lastname || user.firstname") -
-            span {{ user.lastname | uppercase }} {{ user.firstname }}
-          .email {{ user.email }}
-        div(flex)
-        md-button.md-primary.md-raised(ng-click="addRole(user, 'judgeTwo')" ng-if="!isJudgeTwo(user)") Nommer arbitre
-        md-button.md-primary.md-raised(ng-click="removeRole(user, 'judgeTwo')" ng-if="isJudgeTwo(user)") Retirer role arbitre
+  .tabs(layout="row")
+    .tab(ui-sref-active="active")
+      a.no-style(ui-sref="admin.tournaments") Création Tournoi
+    .tab(ui-sref-active="active")
+      a.no-style(ui-sref="admin.users") Utilisateurs
+  md-content.md-whiteframe-z1(layout="row" layout-align="center start" ui-view)
 
 

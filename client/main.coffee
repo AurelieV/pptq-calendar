@@ -32,6 +32,7 @@ angular.module('pptq-calendar', [
     $state.go 'login'
 
   $rootScope.$state = $state
+  $rootScope.loginFactory = loginFactory
 
   #Check Authentication
   MyUser.getCurrent() if MyUser.isAuthenticated()

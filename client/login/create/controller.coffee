@@ -1,2 +1,3 @@
 angular.module 'pptq-calendar'
-.controller 'createLoginController', ->
+.controller 'createLoginController', ($scope, loginFactory) ->
+  $scope.loginFactory = loginFactory
