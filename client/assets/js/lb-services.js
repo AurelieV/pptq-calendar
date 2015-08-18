@@ -2669,6 +2669,12 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Availability.judge() instead.
+        "::get::Availability::judge": {
+          url: urlBase + "/Availabilities/:id/judge",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.MyUser#getCurrent
@@ -2916,6 +2922,58 @@ module.factory(
         // INTERNAL. Use Tournament.creator() instead.
         "prototype$__get__creator": {
           url: urlBase + "/Tournaments/:id/creator",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.findById() instead.
+        "prototype$__findById__availabilities": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Tournaments/:id/availabilities/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.destroyById() instead.
+        "prototype$__destroyById__availabilities": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Tournaments/:id/availabilities/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.updateById() instead.
+        "prototype$__updateById__availabilities": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Tournaments/:id/availabilities/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Tournament.availabilities() instead.
+        "prototype$__get__availabilities": {
+          isArray: true,
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.create() instead.
+        "prototype$__create__availabilities": {
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.destroyAll() instead.
+        "prototype$__delete__availabilities": {
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.count() instead.
+        "prototype$__count__availabilities": {
+          url: urlBase + "/Tournaments/:id/availabilities/count",
           method: "GET"
         },
 
@@ -3337,6 +3395,12 @@ module.factory(
           url: urlBase + "/Tournaments/change-stream",
           method: "POST"
         },
+
+        // INTERNAL. Use Availability.tournament() instead.
+        "::get::Availability::tournament": {
+          url: urlBase + "/Availabilities/:id/tournament",
+          method: "GET"
+        },
       }
     );
 
@@ -3507,6 +3571,1033 @@ module.factory(
         R.creator = function() {
           var TargetResource = $injector.get("MyUser");
           var action = TargetResource["::get::Tournament::creator"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Tournament.availabilities
+     * @header lbServices.Tournament.availabilities
+     * @object
+     * @description
+     *
+     * The object `Tournament.availabilities` groups methods
+     * manipulating `Availability` instances related to `Tournament`.
+     *
+     * Call {@link lbServices.Tournament#availabilities Tournament.availabilities()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament#availabilities
+         * @methodOf lbServices.Tournament
+         *
+         * @description
+         *
+         * Queries availabilities of Tournament.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        R.availabilities = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::get::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#count
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Counts availabilities of Tournament.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.availabilities.count = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::count::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#create
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Creates a new instance in availabilities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        R.availabilities.create = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::create::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#createMany
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Creates a new instance in availabilities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        R.availabilities.createMany = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::createMany::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#destroyAll
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Deletes all availabilities of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.availabilities.destroyAll = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::delete::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#destroyById
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Delete a related item by id for availabilities.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for availabilities
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.availabilities.destroyById = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::destroyById::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#findById
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Find a related item by id for availabilities.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for availabilities
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        R.availabilities.findById = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::findById::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament.availabilities#updateById
+         * @methodOf lbServices.Tournament.availabilities
+         *
+         * @description
+         *
+         * Update a related item by id for availabilities.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for availabilities
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        R.availabilities.updateById = function() {
+          var TargetResource = $injector.get("Availability");
+          var action = TargetResource["::updateById::Tournament::availabilities"];
+          return action.apply(R, arguments);
+        };
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.Availability
+ * @header lbServices.Availability
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Availability` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Availability",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Availabilities/:id",
+      { 'id': '@id' },
+      {
+
+        // INTERNAL. Use Availability.judge() instead.
+        "prototype$__get__judge": {
+          url: urlBase + "/Availabilities/:id/judge",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Availability.tournament() instead.
+        "prototype$__get__tournament": {
+          url: urlBase + "/Availabilities/:id/tournament",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#create
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "create": {
+          url: urlBase + "/Availabilities",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#createMany
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "createMany": {
+          isArray: true,
+          url: urlBase + "/Availabilities",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#upsert
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/Availabilities",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#exists
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Check whether a model instance exists in the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `exists` – `{boolean=}` - 
+         */
+        "exists": {
+          url: urlBase + "/Availabilities/:id/exists",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#findById
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         *  - `filter` – `{object=}` - Filter defining fields and include
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/Availabilities/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#find
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/Availabilities",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#findOne
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Find first instance of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "findOne": {
+          url: urlBase + "/Availabilities/findOne",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#updateAll
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "updateAll": {
+          url: urlBase + "/Availabilities/update",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#deleteById
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "deleteById": {
+          url: urlBase + "/Availabilities/:id",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#count
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Count instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "count": {
+          url: urlBase + "/Availabilities/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#prototype$updateAttributes
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Update attributes for a model instance and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        "prototype$updateAttributes": {
+          url: urlBase + "/Availabilities/:id",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#createChangeStream
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Create a change stream.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `changes` – `{ReadableStream=}` - 
+         */
+        "createChangeStream": {
+          url: urlBase + "/Availabilities/change-stream",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.findById() instead.
+        "::findById::Tournament::availabilities": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Tournaments/:id/availabilities/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.destroyById() instead.
+        "::destroyById::Tournament::availabilities": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Tournaments/:id/availabilities/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.updateById() instead.
+        "::updateById::Tournament::availabilities": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Tournaments/:id/availabilities/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Tournament.availabilities() instead.
+        "::get::Tournament::availabilities": {
+          isArray: true,
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.create() instead.
+        "::create::Tournament::availabilities": {
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.createMany() instead.
+        "::createMany::Tournament::availabilities": {
+          isArray: true,
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.destroyAll() instead.
+        "::delete::Tournament::availabilities": {
+          url: urlBase + "/Tournaments/:id/availabilities",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Tournament.availabilities.count() instead.
+        "::count::Tournament::availabilities": {
+          url: urlBase + "/Tournaments/:id/availabilities/count",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#updateOrCreate
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Availability` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#update
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["update"] = R["updateAll"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#destroyById
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["destroyById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#removeById
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["removeById"] = R["deleteById"];
+
+
+    /**
+    * @ngdoc property
+    * @name lbServices.Availability#modelName
+    * @propertyOf lbServices.Availability
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Availability`.
+    */
+    R.modelName = "Availability";
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#judge
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Fetches belongsTo relation judge.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.judge = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::Availability::judge"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Availability#tournament
+         * @methodOf lbServices.Availability
+         *
+         * @description
+         *
+         * Fetches belongsTo relation tournament.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Tournament` object.)
+         * </em>
+         */
+        R.tournament = function() {
+          var TargetResource = $injector.get("Tournament");
+          var action = TargetResource["::get::Availability::tournament"];
           return action.apply(R, arguments);
         };
 

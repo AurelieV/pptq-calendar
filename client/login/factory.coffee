@@ -42,6 +42,9 @@ angular.module 'pptq-calendar'
   getUser: =>
     MyUser.getCachedCurrent()?.username
 
+  getUserId: =>
+    MyUser.getCachedCurrent()?.id
+
   isGranted: @isGranted
   isAdmin: =>
     @isGranted 'admin'

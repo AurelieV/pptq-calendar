@@ -31,8 +31,11 @@
   "relations": {
     "creator": {
       "type": "belongsTo",
-      "model": "MyUser",
-      "foreignKey": ""
+      "model": "MyUser"
+    },
+    "availabilities": {
+      "type": "hasMany",
+      "model": "Availability"
     }
   },
   "acls": [],

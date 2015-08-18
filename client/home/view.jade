@@ -1,4 +1,45 @@
-#home
-  md-content.md-whiteframe-z1(layout="column" layout-align="center center")
-    div /!\ En construction /!\
-    div(ng-if="isJudgeTwo()") Vous êtes authentifié en tant qu'arbitre niveau 2 ou plus
+#home(layout="column" flex)
+  .notice
+    span Les événements signalés par
+    md-icon.material-icons.warning(md-font-icon="icon-warning")
+    span sont des événements dont la date n'a pas été confirmée. Rapprochez vous de l'organisateur pour vous assurer des informations
+
+  md-content.tournaments(ng-if="tournaments.length == 0" flex)
+    |  Aucun tournoi
+  md-content.tournaments(
+    ng-if="tournaments.length > 0"
+    layout="column"
+    flex
+  )
+    md-list(flex)
+      md-list-item.tournament.md-whiteframe-z1(
+        ng-repeat="tournament in tournaments | orderBy:['date']"
+        ng-class="{'first': $first, 'last': $last}"
+      )
+        .md-list-item-text
+          .name(layout="row" layout-align="start center")
+            span {{ tournament.town }}
+            md-icon.material-icons.warning(ng-if="!tournament.isDateConfirmed" md-font-icon="icon-warning")
+          .date.info
+            md-icon.material-icons(md-font-icon="icon-today")
+            span {{ tournament.moment.format('DD MMM YYYY') }}
+          .organizer.info
+            md-icon.material-icons(md-font-icon="icon-group")
+            span {{ tournament.organizer }}
+
+md-button.md-fab.main-button(aria-label="Add" layout="column" layout-align="center center" ng-if="isAdmin()")
+  a(ui-sref="admin.tournaments")
+    md-icon.material-icons(md-font-icon="icon-add")
+
+
+
+
+
+
+
+
+
+
+
+
+

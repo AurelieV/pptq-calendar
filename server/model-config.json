@@ -39,5 +39,9 @@
   "Tournament": {
     "dataSource": "db",
     "public": true
+  },
+  "Availability": {
+    "dataSource": "db",
+    "public": true
   }
 }
