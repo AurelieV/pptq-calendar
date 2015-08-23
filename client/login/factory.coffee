@@ -10,7 +10,7 @@ angular.module 'pptq-calendar'
             relation: "roles"
       , (user) ->
         $localStorage.roles = _.map user.roles, 'name'
-        next = $state.nextAfterLogin or 'home'
+        next = $state.nextAfterLogin or 'tournamentList'
         $state.go next
         $mdToast.showSimple 'Connexion réussie'
     , (err) =>

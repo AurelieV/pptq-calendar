@@ -28,7 +28,7 @@ angular.module('pptq-calendar', [
   $rootScope.$on 'auth-failed', (event) ->
     event.preventDefault()
     #Good redirection if authentication fail in login page
-    $state.nextAfterLogin = $state.current.name if $state.nextAfterLogin isnt 'login'
+    $state.nextAfterLogin = $state.current.name if ($state.current.name isnt 'login')
     $state.go 'login'
 
   $rootScope.$state = $state

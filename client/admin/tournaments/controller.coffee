@@ -4,7 +4,7 @@ angular.module 'pptq-calendar'
     Tournament.create tournament
     , ->
       $mdToast.showSimple 'Tournoi créé avec succès'
-      $state.go 'home'
+      $state.go 'tournamentList'
     , (err) =>
       $mdToast.showSimple 'Erreur lors de la création'
 

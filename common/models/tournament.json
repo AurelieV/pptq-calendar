@@ -10,11 +10,19 @@
       "type": "string",
       "required": true
     },
+    "format": {
+      "type": "string"
+    },
     "date": {
       "type": "date",
       "required": true
     },
     "isDateConfirmed": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isDateOnCalendar": {
       "type": "boolean",
       "required": true,
       "default": false
@@ -25,11 +33,24 @@
     },
     "information": {
       "type": "string"
+    },
+    "phoneContact": {
+      "type": "string"
+    },
+    "emailContact": {
+      "type": "string"
+    },
+    "adress": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
     "creator": {
+      "type": "belongsTo",
+      "model": "MyUser"
+    },
+    "headJudge": {
       "type": "belongsTo",
       "model": "MyUser"
     },

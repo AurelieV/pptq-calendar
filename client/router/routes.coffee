@@ -7,10 +7,27 @@ angular.module 'pptq-calendar'
   $urlMatcherFactoryProvider.strictMode(false)
 
   $stateProvider
-  .state 'home',
+  .state 'tournamentList',
     url: '/'
-    controller: 'homeController'
-    templateUrl: 'home/view.html'
+    controller: 'tournamentListController'
+    templateUrl: 'tournament/list/view.html'
+  .state 'tournamentDetail',
+    url: '/tournament/:id'
+    controller: 'tournamentDetailController'
+    templateUrl: 'tournament/detail/view.html'
+    resolve:
+      tournament: ($stateParams, Tournament) ->
+        Tournament.findById
+          id: $stateParams.id
+          filter:
+            include: [
+              'headJudge'
+              ,
+                relation: 'availabilities'
+                scope:
+                  include: 'judge'
+            ]
+        .$promise
   .state 'login',
     url: '/login'
     controller: 'loginController'
