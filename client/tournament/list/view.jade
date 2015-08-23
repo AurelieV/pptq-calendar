@@ -29,7 +29,7 @@
               span.value {{ tournament.organizer }}
             .judging
               .judge(ng-if="isJudgeTwo() || isAdmin()")
-                span(ng-if="tournament.headJudge") HJ: {{ tournament.headJudge }}
+                span(ng-if="tournament.headJudge") HJ: {{ tournament.headJudge.lastname | uppercase }} {{ tournament.headJudge.firstname }}
               .availabilities(ng-if="isJudgeTwo()")
                 span(ng-if="tournament.availabilities[0]") {{ tournament.availabilities[0].value }}
                 span(ng-if="!tournament.availabilities[0]") Dispo non renseignée

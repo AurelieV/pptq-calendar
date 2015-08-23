@@ -10,11 +10,13 @@ angular.module 'pptq-calendar'
 
   Tournament.find
     filter:
-      include:
+      include: ['headJudge'
+      ,
         relation: 'availabilities'
         scope:
           where:
             judgeId: loginFactory.getUserId()
+      ]
   , (tournaments) ->
     for tournament in tournaments
       tournament.moment = moment(tournament.date)
@@ -28,7 +30,6 @@ angular.module 'pptq-calendar'
         start: tournaments[0].moment.clone().startOf('week').format('DD MMM')
         end: tournaments[0].moment.clone().endOf('week').format('DD MMM')
     $scope.weeks = weeks
-    console.log weeks
 
 
 

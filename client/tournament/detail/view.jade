@@ -89,7 +89,7 @@
         span.value(ng-if="!myAvailability")  Non renseigné
       .block(ng-if="isJudgeTwo()" layout="row" layout-align="start center")
         span.title Modifier ma dispo
-        form.value.changeMyAvailability(name="editAvailability" layout="row" layout-align="start center")
+        form.value.horizontal-form(name="editAvailability" layout="row" layout-align="start center")
           md-input-container
             md-select(ng-model="value" required)
               md-option Dispo/intéressé
@@ -97,13 +97,19 @@
               md-option Pas dispo
           md-button.md-primary(ng-click="changeMyAvailability(value)" ng-disabled="!editAvailability.$valid") Modifier
 
-
     div(ng-if="isAdmin()")
       h3 Administration
       .block(layout="row" layout-align="start")
         md-button.md-icon-button(ng-click="toggleIsDateOnCalendar()")
           md-icon.material-icons.danger(md-font-icon="icon-event_busy" ng-if="!tournament.isDateOnCalendar")
           md-icon.material-icons.success(md-font-icon="icon-event_available" ng-if="tournament.isDateOnCalendar")
+      .block
+        form.horizontal-form(name="nominateHeadJudgeForm" layout="row")
+          md-input-container
+            md-select(ng-model="judge" required)
+              md-option(ng-repeat="judge in judges" value="{{ judge.id }}") {{ judge.lastname | uppercase }} {{ judge.firstname }}
+          md-button.md-primary(ng-click="nominateHeadJudge(judge)" ng-disabled="!nominateHeadJudgeForm.$valid") Nommer
+
 
 md-button.md-fab.main-button(aria-label="Edit" layout="column" layout-align="center center" ng-if="isAdmin() && !editMode" ng-click="edit()")
   md-icon.material-icons(md-font-icon="icon-create")

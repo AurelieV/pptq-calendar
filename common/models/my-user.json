@@ -54,6 +54,13 @@
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "removeRole"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "findByRole"
     }
   ],
   "methods": []

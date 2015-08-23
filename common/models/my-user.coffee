@@ -1,3 +1,5 @@
+_ = require 'lodash'
+
 module.exports = (myUser) ->
   myUser.addRole = (userId, role, next) ->
     Role = myUser.app.models.Role
@@ -51,6 +53,30 @@ module.exports = (myUser) ->
             include: 'roles'
           , next
 
+  myUser.findByRole = (role, next) ->
+    RoleMapping = myUser.app.models.RoleMapping
+    MyUser = myUser.app.models.MyUser
+    Role = myUser.app.models.Role
+    Role.findOne
+      where:
+        name: role
+    , (err, role) ->
+      return next(err) if err
+      return next(null, []) unless role
+      RoleMapping.find
+        where:
+          roleId: role.id
+          principalType: 'USER'
+      , (err, roleMappings) ->
+        throw err if err
+        ids = _.map(roleMappings, 'principalId')
+        MyUser.find
+          where:
+            id:
+              inq: ids
+        , next
+
+
   myUser.remoteMethod 'addRole',
     accepts: [
       arg: 'userId'
@@ -82,3 +108,14 @@ module.exports = (myUser) ->
     http:
       path: '/removeRole'
       verb: 'post'
+
+  myUser.remoteMethod 'findByRole',
+    accepts:
+      arg: 'role'
+      type: 'string'
+    returns:
+      arg: 'users'
+      type: '[object]'
+    http:
+      path: '/findByRole'
+      verb: 'get'

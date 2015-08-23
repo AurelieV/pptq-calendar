@@ -1,5 +1,5 @@
 angular.module 'pptq-calendar'
-.controller 'tournamentDetailController', ($scope, Tournament, Availability, $mdToast, tournament, loginFactory) ->
+.controller 'tournamentDetailController', ($scope, Tournament, Availability, $mdToast, tournament, loginFactory, MyUser) ->
   $scope.tournament = tournament
   me = loginFactory.getUserId()
 
@@ -7,6 +7,11 @@ angular.module 'pptq-calendar'
     loginFactory.isGranted 'judgeTwo'
   $scope.isAdmin = ->
     loginFactory.isGranted 'admin'
+
+  if $scope.isAdmin()
+    MyUser.findByRole {role: 'judgeTwo'}
+    , (data) ->
+      $scope.judges = data.users
 
   $scope.toggleIsDateOnCalendar = ->
     Tournament.prototype$updateAttributes {id: tournament.id}
@@ -57,6 +62,15 @@ angular.module 'pptq-calendar'
         $mdToast.showSimple 'Dispo modifiée'
       , (err) ->
         $mdToast.showSimple 'Impossible de modifier la dispo'
+
+  $scope.nominateHeadJudge = (headJudge) ->
+    Tournament.prototype$updateAttributes {id: tournament.id}, {headJudgeId: headJudge}
+    , (data) ->
+      tournament.headJudge = _.find $scope.judges, (judge) -> judge.id is headJudge
+      $mdToast.showSimple 'HeadJudge nommé'
+    , (err) ->
+      $mdToast 'Impossible de modifier le head judge'
+
 
 
 

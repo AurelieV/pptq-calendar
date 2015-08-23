@@ -2663,9 +2663,49 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.MyUser#findByRole
+         * @methodOf lbServices.MyUser
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `role` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `users` – `{[object]=}` - 
+         */
+        "findByRole": {
+          url: urlBase + "/MyUsers/findByRole",
+          method: "GET"
+        },
+
         // INTERNAL. Use Tournament.creator() instead.
         "::get::Tournament::creator": {
           url: urlBase + "/Tournaments/:id/creator",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.headJudge() instead.
+        "::get::Tournament::headJudge": {
+          url: urlBase + "/Tournaments/:id/headJudge",
           method: "GET"
         },
 
@@ -2922,6 +2962,12 @@ module.factory(
         // INTERNAL. Use Tournament.creator() instead.
         "prototype$__get__creator": {
           url: urlBase + "/Tournaments/:id/creator",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Tournament.headJudge() instead.
+        "prototype$__get__headJudge": {
+          url: urlBase + "/Tournaments/:id/headJudge",
           method: "GET"
         },
 
@@ -3571,6 +3617,42 @@ module.factory(
         R.creator = function() {
           var TargetResource = $injector.get("MyUser");
           var action = TargetResource["::get::Tournament::creator"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Tournament#headJudge
+         * @methodOf lbServices.Tournament
+         *
+         * @description
+         *
+         * Fetches belongsTo relation headJudge.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `MyUser` object.)
+         * </em>
+         */
+        R.headJudge = function() {
+          var TargetResource = $injector.get("MyUser");
+          var action = TargetResource["::get::Tournament::headJudge"];
           return action.apply(R, arguments);
         };
     /**
