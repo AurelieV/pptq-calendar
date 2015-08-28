@@ -61,6 +61,13 @@
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "findByRole"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
     }
   ],
   "methods": []

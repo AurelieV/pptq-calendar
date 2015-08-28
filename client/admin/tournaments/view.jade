@@ -22,10 +22,10 @@
       input(type="text" ng-model="tournament.phoneContact")
     md-input-container
       label Contact inscription (Mail)
-      input(type="text" required ng-model="tournament.emailContact")
+      input(type="text" ng-model="tournament.emailContact")
     md-input-container
       label Adresse
-      input(type="text" required ng-model="tournament.adress")
+      input(type="text" ng-model="tournament.adress")
 
     .md-action(layout="row" layout-align="center")
       md-button.md-primary(ng-click="create(tournament)" flex ng-disabled="!createForm.$valid") Créer
