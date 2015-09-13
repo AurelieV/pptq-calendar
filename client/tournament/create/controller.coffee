@@ -1,5 +1,5 @@
 angular.module 'pptq-calendar'
-.controller 'adminTournamentsController', ($scope, Tournament, $mdToast, $state) ->
+.controller 'createTournamentController', ($scope, Tournament, $mdToast, $state) ->
   $scope.create = (tournament) ->
     Tournament.create tournament
     , ->

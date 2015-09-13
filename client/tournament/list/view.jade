@@ -29,13 +29,16 @@
               span.value {{ tournament.organizer }}
             .judging
               .judge(ng-if="isJudgeTwo() || isAdmin()")
-                span(ng-if="tournament.headJudge") HJ: {{ tournament.headJudge.lastname | uppercase }} {{ tournament.headJudge.firstname }}
+                span(ng-if="tournament.headJudge") HJ: {{ tournament.headJudge.firstname }}.{{ tournament.headJudge.lastname[0] | uppercase }}
               .availabilities(ng-if="isJudgeTwo()")
                 span(ng-if="tournament.availabilities[0]") {{ tournament.availabilities[0].value }}
                 span(ng-if="!tournament.availabilities[0]") Dispo non renseignée
 
           .information(layout-align="center center" layout="column")
             md-icon.material-icons.warning(md-font-icon="icon-warning" ng-if="!tournament.isDateConfirmed")
+            md-button.md-icon-button(ng-click="toggleIsDateOnCalendar($event, tournament)")
+              md-icon.material-icons.danger(md-font-icon="icon-event_busy" ng-if="!tournament.isDateOnCalendar")
+              md-icon.material-icons.success(md-font-icon="icon-event_available" ng-if="tournament.isDateOnCalendar")
             md-icon.material-icons(md-font-icon="icon-person" ng-class="{'success': tournament.headJudge, 'danger': !tournament.headJudge}")
 
 md-button.md-fab.main-button(aria-label="Add" layout="column" layout-align="center center" ng-if="isAdmin()")

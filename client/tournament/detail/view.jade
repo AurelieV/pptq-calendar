@@ -74,13 +74,13 @@
       h3 Staffing
       .block
         span.title Head-Judge:
-        span.value(ng-if="tournament.headJudge")  {{ tournament.headJudge.lastname | uppercase }} {{ tournament.headJudge.firstname }}
+        span.value(ng-if="tournament.headJudge")  {{ tournament.headJudge.firstname }}.{{ tournament.headJudge.lastname[0] | uppercase }}
         span.value(ng-if="!tournament.headJudge")  Pas encore de HJ
       .block
         span.title Disponibilités
         ul(ng-if="notMyAvailabilies.length > 0")
-          li(ng-repeat="availability in notMyAvailabilies")
-            span.title {{ availability.judge.lastname | uppercase }} {{ availability.judge.firstname }}
+          li(ng-repeat="availability in notMyAvailabilies | orderBy:['value', 'judge.firstname']")
+            span.title {{ availability.judge.firstname }}.{{ availability.judge.lastname[0] | uppercase }}
             span.value {{ availability.value }}
         span.value(ng-if="notMyAvailabilies.length === 0")  Aucune dispo renseignée
       .block(ng-if="isJudgeTwo()")
@@ -107,7 +107,7 @@
         form.horizontal-form(name="nominateHeadJudgeForm" layout="row")
           md-input-container
             md-select(ng-model="judge" required)
-              md-option(ng-repeat="judge in judges" value="{{ judge.id }}") {{ judge.lastname | uppercase }} {{ judge.firstname }}
+              md-option(ng-repeat="judge in judges | orderBy:'firstname'" value="{{ judge.id }}") {{ judge.firstname }}.{{ judge.lastname[0] | uppercase }}
           md-button.md-primary(ng-click="nominateHeadJudge(judge)" ng-disabled="!nominateHeadJudgeForm.$valid") Nommer
 
 

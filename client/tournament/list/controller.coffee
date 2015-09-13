@@ -32,5 +32,16 @@ angular.module 'pptq-calendar'
     $scope.weeks = weeks
 
 
+  $scope.toggleIsDateOnCalendar = (event, tournament) ->
+    event.stopPropagation()
+    Tournament.prototype$updateAttributes {id: tournament.id}
+    , {isDateOnCalendar: not tournament.isDateOnCalendar}
+    , (tournamentUpdated) ->
+      tournament.isDateOnCalendar = not tournament.isDateOnCalendar
+      $mdToast.showSimple 'Donnée modifiée !'
+    , (err) ->
+      $mdToast.showSimple 'Impossible de modifier la donnée'
+
+
 
 
