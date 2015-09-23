@@ -68,6 +68,13 @@
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "deleteById"
     }
   ],
   "methods": []

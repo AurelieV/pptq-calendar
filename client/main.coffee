@@ -9,7 +9,7 @@ angular.module('pptq-calendar', [
 
   'pptq-calendar.templates'
 ])
-.run ($mdSidenav, $rootScope, $state, MyUser, loginFactory, $mdToast) ->
+.run ($mdSidenav, $rootScope, $state, MyUser, loginFactory, $mdToast, $localStorage) ->
   moment.locale 'fr'
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
@@ -35,7 +35,17 @@ angular.module('pptq-calendar', [
   $rootScope.loginFactory = loginFactory
 
   #Check Authentication
-  MyUser.getCurrent() if MyUser.isAuthenticated()
+  if MyUser.isAuthenticated()
+    console.log 'poeut'
+    MyUser.getCurrent()
+    MyUser.findById
+      id: MyUser.getUserId()
+      filter:
+        include:
+          relation: "roles"
+    , (user) ->
+      console.log 'pouet', user
+      $localStorage.roles = _.map user.roles, 'name'
 
 .config ($httpProvider) ->
   $httpProvider.interceptors.push 'authInterceptor'
