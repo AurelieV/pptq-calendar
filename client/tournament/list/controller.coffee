@@ -29,8 +29,10 @@ angular.module 'pptq-calendar'
         tournaments: tournaments
         start: tournaments[0].moment.clone().startOf('week').format('DD MMM')
         end: tournaments[0].moment.clone().endOf('week').format('DD MMM')
-    $scope.weeks = weeks
-
+        endMoment: tournaments[0].moment.clone().endOf('week')
+    now = moment()
+    $scope.nextWeeks = _.filter weeks, (w) -> now.isBefore(w.endMoment)
+    $scope.displayedWeeks = $scope.nextWeeks
 
   $scope.toggleIsDateOnCalendar = (event, tournament) ->
     event.stopPropagation()

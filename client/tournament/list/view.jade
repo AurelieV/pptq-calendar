@@ -9,7 +9,7 @@
   )
     md-list(flex-gt-sm="50" flex-sm="100")
 
-      .week(ng-repeat="week in weeks")
+      .week(ng-repeat="week in displayedWeeks")
         h3 Semaine du {{ week.start }} au {{ week.end }}
         md-list-item.tournament.md-whiteframe-z1(
           ng-repeat="tournament in week.tournaments | orderBy:['date']"
