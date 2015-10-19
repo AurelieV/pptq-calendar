@@ -1,5 +1,5 @@
 angular.module 'pptq-calendar'
-.controller 'tournamentListController', ($scope, loginFactory, Tournament, Availability, $mdToast, $state) ->
+.controller 'tournamentListController', ($scope, loginFactory, Tournament, Availability, $mdToast, $state, $location, $anchorScroll) ->
   $scope.isJudgeTwo = ->
     loginFactory.isGranted 'judgeTwo'
   $scope.isAdmin = ->
@@ -33,6 +33,13 @@ angular.module 'pptq-calendar'
     now = moment()
     $scope.nextWeeks = _.filter weeks, (w) -> now.isBefore(w.endMoment)
     $scope.displayedWeeks = $scope.nextWeeks
+
+    # Go to anchor.
+    # TODO: move it on routing, and more generally
+    console.log $state.params
+    if $state.params.anchorId?
+      $location.hash('tournament-' + $state.params.anchorId)
+      $anchorScroll()
 
   $scope.toggleIsDateOnCalendar = (event, tournament) ->
     event.stopPropagation()

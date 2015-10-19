@@ -1,6 +1,6 @@
 #tournament-detail(layout="column" layout-align="start center")
   div(style="padding-bottom:20px;")
-    a.button.button-raised.md-primary(ui-sref="tournamentList") Retour à la liste
+    a.button.button-raised.md-primary(ui-sref="tournamentList({anchorId:tournament.id})") Retour à la liste
   md-content.md-whiteframe-z1
     h2(ng-if="!editMode")
       span {{ tournament.town }} -

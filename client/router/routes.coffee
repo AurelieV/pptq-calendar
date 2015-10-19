@@ -8,7 +8,7 @@ angular.module 'pptq-calendar'
 
   $stateProvider
   .state 'tournamentList',
-    url: '/'
+    url: '/?anchorId'
     controller: 'tournamentListController'
     templateUrl: 'tournament/list/view.html'
   .state 'tournamentDetail',
