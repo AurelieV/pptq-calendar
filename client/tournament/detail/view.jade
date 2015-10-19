@@ -1,4 +1,6 @@
 #tournament-detail(layout="column" layout-align="start center")
+  div(style="padding-bottom:20px;")
+    a.button.button-raised.md-primary(ui-sref="tournamentList") Retour à la liste
   md-content.md-whiteframe-z1
     h2(ng-if="!editMode")
       span {{ tournament.town }} -
@@ -109,8 +111,6 @@
             md-select(ng-model="judge" required)
               md-option(ng-repeat="judge in judges | orderBy:'firstname'" value="{{ judge.id }}") {{ judge.firstname }}.{{ judge.lastname[0] | uppercase }}
           md-button.md-primary(ng-click="nominateHeadJudge(judge)" ng-disabled="!nominateHeadJudgeForm.$valid") Nommer
-
-
 md-button.md-fab.main-button(aria-label="Edit" layout="column" layout-align="center center" ng-if="isAdmin() && !editMode" ng-click="edit()")
   md-icon.material-icons(md-font-icon="icon-create")
 md-button.md-fab.main-button(aria-label="Save" layout="column" layout-align="center center" ng-if="isAdmin() && editMode" ng-click="saveInfo()")
