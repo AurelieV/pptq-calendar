@@ -22,7 +22,9 @@
     "angular-resource": "~1.4.0",
     "angular-animate": "~1.4.0",
     "angular-material": "~0.10.0",
-    "ngstorage": "~0.3.7"
+    "ngstorage": "~0.3.7",
+    "file-saver.js": "~1.20150507.2",
+    "blueimp-canvas-to-blob": "~2.2.0"
   },
   "resolutions": {
     "angular": "1.4.3",
