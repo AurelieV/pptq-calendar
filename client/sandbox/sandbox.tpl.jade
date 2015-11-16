@@ -3,9 +3,9 @@ div
 div
   a(href="/img/avatar.png" download="mon_fichier") Télécharger l'image avec un attribut download
 
-div
-  canvas#canvas()
-  button.btn.btn-primary(ng-click="save()") Télécharger le canvas
+div(layout="column" layout-align="start center" style="margin-bottom: 30px;margin-top:30px")
+  canvas#canvas(flex)
+  button.btn.btn-primary(ng-click="save()" flex) Télécharger le canvas
 
 div
   canvas#canvas1
