@@ -1,7 +1,6 @@
-connect     = require 'gulp-connect'
 gulp        = require 'gulp'
 parameters  = require './parameters.coffee'
-requireDir = require 'require-dir'
+requireDir  = require 'require-dir'
 runSequence = require 'run-sequence'
 watch       = require 'gulp-watch'
 
@@ -12,13 +11,7 @@ gulp.task 'build', (done) ->
   runSequence ['copy', 'compile'], done
 
 gulp.task 'build-production', (done) ->
-  runSequence 'clean', ['build', 'minify'], 'lb-services', done
-
-# Serve task
-gulp.task 'webserver', ->
-  connect.server
-    livereload: true
-    root: ['.', 'www']
+  runSequence 'clean', ['build', 'minify'], done
 
 gulp.task 'watch', ->
   gulp.watch "#{parameters.app_path}/**/*.coffee", ['coffee']
@@ -30,9 +23,4 @@ gulp.task 'watch', ->
   gulp.watch "bower_components/**/*.js", ['vendors']
   gulp.watch parameters.fonts.input_paths, ['fonts']
 
-gulp.task 'livereload', ->
-  gulp.src ["#{parameters.web_path}/*.css", "#{parameters.web_path}/*.js"]
-  .pipe watch(["#{parameters.web_path}/*.css", "#{parameters.web_path}/*.js"])
-  .pipe connect.reload()
-
-gulp.task 'default', ['build', 'webserver', 'livereload', 'watch']
+gulp.task 'default', ['build', 'watch']
