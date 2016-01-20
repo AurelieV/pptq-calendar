@@ -1,0 +1,74 @@
+@bower-components: '../bower_components';
+
+/* Angular material */
+@import (less) '@{bower-components}/angular-material/angular-material.css';
+@import (less) '@{bower-components}/angular-hero/angular-hero.css';
+
+/* Some fix for have no href */
+.nav, .pagination, .carousel, .panel-title a, [ng-click] {
+  cursor: pointer;
+}
+
+@sm-screen: 600px;
+@background-color: #E0E0E0;
+@mainbar-height: 64px;
+@hover-background: #f5f5f5;
+
+body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background-color: @background-color;
+  a.no-style {
+    text-decoration: none;
+    color: inherit;
+  }
+  .body-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    background-color: @background-color;
+    padding: 16px 16px;
+    padding-top: 75px;
+    @media (max-width: @sm-screen) {
+      padding: 8px 0;
+      padding-top: 75px;
+    }
+    .main-button {
+      position: fixed;
+      //todo: 16px on mobile
+      right: 24px;
+      bottom: 16px;
+    }
+    form {
+      .info {
+        margin-top: 16px;
+        font-style: italic;
+      }
+    }
+    .multiline {
+      white-space: pre-wrap;
+    }
+  }
+}
+
+@media (max-width: @sm-screen) {
+  md-dialog {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+//App less
+@import 'admin/styles';
+@import 'header/styles';
+@import 'tournament/styles';
+@import 'login/styles';
+@import 'menu/styles';
+@import 'utils/styles';

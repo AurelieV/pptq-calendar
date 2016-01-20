@@ -1,0 +1,60 @@
+#tournament-list(layout="column" flex)
+  md-content.tournaments(ng-if="!hasTournament" flex)
+    |  Aucun tournoi programmé pour la saison en cours
+  md-content.tournaments(
+    ng-if="hasTournament"
+    layout="row"
+    layout-align="center"
+    flex
+  )
+    md-list(flex-gt-sm="50" flex-sm="100")
+
+      .week(ng-repeat="week in displayedWeeks")
+        h3 Semaine du {{ week.start }} au {{ week.end }}
+        md-list-item.tournament.md-whiteframe-z1(
+          ng-repeat="tournament in week.tournaments | orderBy:['date']"
+          ng-class="{'first': $first, 'last': $last}"
+          ng-click="goToTournament(tournament)"
+          id="tournament-{{ tournament.id }}"
+        )
+          .md-list-item-text(flex)
+            .title
+              span {{ tournament.town }} -
+              span(ng-if="tournament.format")  {{ tournament.format }}
+              span(ng-if="!tournament.format") ?
+            .info-with-icon
+              md-icon.material-icons(md-font-icon="icon-today")
+              span.value {{ tournament.moment.format('ddd DD MMM') }}
+            .info-with-icon
+              md-icon.material-icons(md-font-icon="icon-group")
+              span.value {{ tournament.organizer }}
+            .judging
+              .judge(ng-if="isJudgeTwo() || isAdmin()")
+                span(ng-if="tournament.headJudge") HJ: {{ tournament.headJudge.firstname }}.{{ tournament.headJudge.lastname[0] | uppercase }}
+              .availabilities(ng-if="isJudgeTwo()")
+                span(ng-if="tournament.availabilities[0]") {{ tournament.availabilities[0].value }}
+                span(ng-if="!tournament.availabilities[0]") Dispo non renseignée
+
+          .information(layout-align="center center" layout="column")
+            md-icon.material-icons.warning(md-font-icon="icon-warning" ng-if="!tournament.isDateConfirmed")
+            md-button.md-icon-button(ng-click="toggleIsDateOnCalendar($event, tournament)")
+              md-icon.material-icons.danger(md-font-icon="icon-event_busy" ng-if="!tournament.isDateOnCalendar")
+              md-icon.material-icons.success(md-font-icon="icon-event_available" ng-if="tournament.isDateOnCalendar")
+            md-icon.material-icons(md-font-icon="icon-person" ng-class="{'success': tournament.headJudge, 'danger': !tournament.headJudge}")
+
+md-button.md-fab.main-button(aria-label="Add" layout="column" layout-align="center center" ng-if="isAdmin()")
+  a(ui-sref="admin.tournaments")
+    md-icon.material-icons(md-font-icon="icon-add")
+
+
+
+
+
+
+
+
+
+
+
+
+

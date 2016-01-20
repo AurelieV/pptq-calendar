@@ -1,0 +1,22 @@
+#login(layout="row" layout-align="center")
+  md-content.md-whiteframe-z1(ng-if="!loginFactory.isAuthenticated()")
+    h3 Connexion
+    form(name="connectForm")
+      md-input-container
+        label Login
+        input(type="text" required ng-model="credentials.username")
+      md-input-container
+        label Mot de passe
+        input(type="password" required ng-model="credentials.password")
+      .md-action(layout="row" layout-align="center")
+        md-button.md-primary(ng-click="loginFactory.connect(credentials)" flex ng-disabled="!connectForm.$valid") Se connecter
+    a(ui-sref="create-login") Pas enregistré? Je crée un compte !
+
+  md-content.md-whiteframe-z1(ng-if="loginFactory.isAuthenticated()")
+    span.message Vous êtes déjà connecté en tant que
+    span.login {{ loginFactory.getUser() }}
+    .md-action(layout="row" layout-align="center")
+      md-button.md-primary(ng-click="loginFactory.disconnect()" flex) Se déconnecter
+
+
+

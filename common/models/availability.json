@@ -1,0 +1,29 @@
+{
+  "name": "Availability",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "value": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "judge": {
+      "type": "belongsTo",
+      "model": "MyUser",
+      "foreignKey": ""
+    },
+    "tournament": {
+      "type": "belongsTo",
+      "model": "Tournament",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

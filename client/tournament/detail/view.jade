@@ -1,0 +1,130 @@
+#tournament-detail(layout="column" layout-align="start center")
+  div(style="padding-bottom:20px;")
+    a.button.button-raised.md-primary(ui-sref="tournamentList({anchorId:tournament.id})") Retour à la liste
+  md-content.md-whiteframe-z1
+    h2(ng-if="!editMode")
+      span {{ tournament.town }} -
+      span(ng-if="tournament.format")  {{ tournament.format }}
+      span(ng-if="!tournament.format") ?
+
+    div(ng-if="editMode")
+      md-input-container
+        label Ville
+        input(type="text" required ng-model="tournamentEdited.town")
+      md-input-container
+        md-select(ng-model="tournamentEdited.format" placeholder="Format")
+          md-option Standard
+          md-option Scellé
+          md-option Modern
+      md-checkbox(ng-model="tournamentEdited.isDateConfirmed" aria-label="Date confirmée?") Date confirmée?
+
+    .notice(ng-if="!tournament.isDateConfirmed && !editMode")
+      md-icon.material-icons.warning(md-font-icon="icon-warning")
+      | La date n'a pas été confirmée par l'organisateur. Merci de vous rapprocher de lui pour plus d'informations
+
+    div(ng-if="!editMode")
+      .block
+        md-icon.material-icons(md-font-icon="icon-group")
+        span.value {{ tournament.organizer }}
+      .block
+        md-icon.material-icons(md-font-icon="icon-today")
+        span.value {{ tournament.date | date:'EEEE dd MMMM yyyy' }}
+      .block
+        md-icon.material-icons(md-font-icon="icon-place")
+        span.value(ng-if="tournament.adress") {{ tournament.adress }}
+        span.value(ng-if="!tournament.adress") Non renseigné
+
+    div(ng-if="editMode")
+      md-input-container
+        label Organisateur
+        input(type="text" required ng-model="tournamentEdited.organizer")
+      mdc-date-picker(flex model="tournamentEdited.date" label="Date")
+      md-input-container
+        label Adresse
+        input(type="text" ng-model="tournamentEdited.adress")
+
+    div(ng-if="!editMode")
+      h3 Contacts pour les inscriptions
+      .block
+        md-icon.material-icons(md-font-icon="icon-phone")
+        span.value(ng-if="tournament.phoneContact") {{ tournament.phoneContact }}
+        span.value(ng-if="!tournament.phoneContact") Non renseigné
+      .block
+        md-icon.material-icons(md-font-icon="icon-email")
+        span.value(ng-if="tournament.emailContact") {{ tournament.emailContact }}
+        span.value(ng-if="!tournament.emailContact") Non renseigné
+
+    div(ng-if="editMode")
+      md-input-container
+        label Contact inscription (Tél)
+        input(type="text" ng-model="tournamentEdited.phoneContact")
+      md-input-container
+        label Contact inscription (Mail)
+        input(type="text" ng-model="tournamentEdited.emailContact")
+
+    div(ng-if="!editMode")
+      h3 Information
+      .block.multiline(ng-if="tournament.information") {{ tournament.information }}
+      .block(ng-if="!tournament.information") Pas d'information supplémentaire
+
+    div(ng-if="editMode")
+      md-input-container
+        label Informations
+        textarea(ng-model="tournamentEdited.information")
+
+    div(ng-if="isAdmin() || isJudgeTwo()")
+      h3 Staffing
+      .block
+        span.title Head-Judge:
+        span.value(ng-if="tournament.headJudge")  {{ tournament.headJudge.firstname }}.{{ tournament.headJudge.lastname[0] | uppercase }}
+        span.value(ng-if="!tournament.headJudge")  Pas encore de HJ
+      .block
+        span.title Disponibilités
+        ul(ng-if="notMyAvailabilies.length > 0")
+          li(ng-repeat="availability in notMyAvailabilies | orderBy:['value', 'judge.firstname']")
+            span.title {{ availability.judge.firstname }}.{{ availability.judge.lastname[0] | uppercase }}
+            span.value {{ availability.value }}
+        span.value(ng-if="notMyAvailabilies.length === 0")  Aucune dispo renseignée
+      .block(ng-if="isJudgeTwo()")
+        span.title Ma dispo:
+        span.value(ng-if="myAvailability")  {{ myAvailability.value }}
+        span.value(ng-if="!myAvailability")  Non renseigné
+      .block(ng-if="isJudgeTwo()" layout="row" layout-align="start center")
+        span.title Modifier ma dispo
+        form.value.horizontal-form(name="editAvailability" layout="row" layout-align="start center")
+          md-input-container
+            md-select(ng-model="value" required)
+              md-option Dispo/intéressé
+              md-option Dispo/pas motivé
+              md-option Pas dispo
+          md-button.md-primary(ng-click="changeMyAvailability(value)" ng-disabled="!editAvailability.$valid") Modifier
+
+    div(ng-if="isAdmin()")
+      h3 Administration
+      .block(layout="row" layout-align="start")
+        md-button.md-icon-button(ng-click="toggleIsDateOnCalendar()")
+          md-icon.material-icons.danger(md-font-icon="icon-event_busy" ng-if="!tournament.isDateOnCalendar")
+          md-icon.material-icons.success(md-font-icon="icon-event_available" ng-if="tournament.isDateOnCalendar")
+      .block
+        form.horizontal-form(name="nominateHeadJudgeForm" layout="row")
+          md-input-container
+            md-select(ng-model="judge" required)
+              md-option(ng-repeat="judge in judges | orderBy:'firstname'" value="{{ judge.id }}") {{ judge.firstname }}.{{ judge.lastname[0] | uppercase }}
+          md-button.md-primary(ng-click="nominateHeadJudge(judge)" ng-disabled="!nominateHeadJudgeForm.$valid") Nommer
+md-button.md-fab.main-button(aria-label="Edit" layout="column" layout-align="center center" ng-if="isAdmin() && !editMode" ng-click="edit()")
+  md-icon.material-icons(md-font-icon="icon-create")
+md-button.md-fab.main-button(aria-label="Save" layout="column" layout-align="center center" ng-if="isAdmin() && editMode" ng-click="saveInfo()")
+  md-icon.material-icons(md-font-icon="icon-check")
+
+
+
+
+
+
+
+
+
+
+
+
+

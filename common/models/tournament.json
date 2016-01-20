@@ -1,0 +1,64 @@
+{
+  "name": "Tournament",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "town": {
+      "type": "string",
+      "required": true
+    },
+    "format": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "isDateConfirmed": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isDateOnCalendar": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "organizer": {
+      "type": "string",
+      "required": true
+    },
+    "information": {
+      "type": "string"
+    },
+    "phoneContact": {
+      "type": "string"
+    },
+    "emailContact": {
+      "type": "string"
+    },
+    "adress": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "creator": {
+      "type": "belongsTo",
+      "model": "MyUser"
+    },
+    "headJudge": {
+      "type": "belongsTo",
+      "model": "MyUser"
+    },
+    "availabilities": {
+      "type": "hasMany",
+      "model": "Availability"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

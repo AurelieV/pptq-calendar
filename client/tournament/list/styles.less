@@ -1,0 +1,45 @@
+#tournament-list {
+  height: 100%;
+  @media (max-width: @sm-screen) {
+    font-size: 12px;
+  }
+  .tournaments {
+    min-height: 100px;
+    padding: 4px 8px;
+    background: @background-color;
+    md-list {
+      padding-bottom: 74px;
+      @media (min-width: @sm-screen) {
+        padding-right: 10px;
+      }
+      .tournament {
+        background: white;
+        margin-bottom: 2px;
+        cursor: pointer;
+        .information {
+          padding: 8px 8px;
+          md-icon {
+            margin: 8px 0;
+          }
+        }
+        .md-list-item-text {
+          padding: 8px 0;
+          .info-with-icon {
+            .value {
+              margin-left: 4px;
+            }
+          }
+          .title {
+            font-size: larger;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+          }
+          .judging {
+            margin-top: 8px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "db": {
+      "host": "localhost",
+      "port": 27017,
+      "database": "pptq-calendar",
+      "name": "pptq-calendar",
+      "connector": "mongodb",
+      "username": "",
+      "password": ""
+    }
+}
+
