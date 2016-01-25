@@ -1,3 +1,7 @@
+//Require pmx http first of all
+var pmx = require('pmx').init();
+pmx.http();
+
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
@@ -23,5 +27,6 @@ boot(app, __dirname, function(err) {
 
   // start the server if `$ node server.js`
   if (require.main === module)
+    pmx.emit('app:start', {});
     app.start();
 });

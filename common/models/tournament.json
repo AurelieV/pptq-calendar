@@ -56,7 +56,8 @@
     },
     "availabilities": {
       "type": "hasMany",
-      "model": "Availability"
+      "model": "Availability",
+      "foreignKey": "tournamentId"
     }
   },
   "acls": [],

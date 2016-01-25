@@ -16,12 +16,12 @@
     "judge": {
       "type": "belongsTo",
       "model": "MyUser",
-      "foreignKey": ""
+      "foreignKey": "judgeId"
     },
     "tournament": {
       "type": "belongsTo",
       "model": "Tournament",
-      "foreignKey": ""
+      "foreignKey": "tournamentId"
     }
   },
   "acls": [],

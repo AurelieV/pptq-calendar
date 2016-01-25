@@ -20,62 +20,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "roles": {
-      "type": "hasMany",
-      "model": "Role",
-      "foreignKey": "principalId",
-      "through": "RoleMapping"
-    },
-    "roleMappings": {
-      "type": "hasMany",
-      "model": "RoleMapping",
-      "foreignKey": "principalId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "find"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "addRole"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "removeRole"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "findByRole"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "updateAttributes"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "deleteById"
-    }
-  ],
+  "relations": {},
+  "acls": [],
   "methods": []
 }

@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
-    "start": "node .",
-    "pretest": "jshint ."
+    "start": "node server/pptq-calendar.js",
+    "install": "node_modules/.bin/bower install"
   },
   "dependencies": {
     "async": "^1.5.2",
+    "bluebird": "^3.1.1",
     "bower": "^1.7.3",
     "coffee-script": "^1.10.0",
     "compression": "^1.0.3",
@@ -37,6 +38,7 @@
     "loopback-datasource-juggler": "^2.39.0",
     "main-bower-files": "^2.11.1",
     "moment": "^2.11.1",
+    "pmx": "^0.5.8",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "serve-favicon": "^2.0.1",

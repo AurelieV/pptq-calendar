@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -42,6 +43,6 @@
   },
   "Availability": {
     "dataSource": "db",
-    "public": true
+    "public": false
   }
 }
