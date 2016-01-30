@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var pmx = require('pmx');
+var path = require('path');
 
 module.exports = function(myUser) {
   myUser.afterRemote('create', function(context, user, next) {
@@ -12,7 +13,8 @@ module.exports = function(myUser) {
       subject: 'Merci de vous être inscrit sur PPTQ Calendar',
       text: 'Pour valider votre compte, veuillez vous rendre à cette adresse {href}',
       user: user,
-      host: 'pptq-calendar.com'
+      host: 'pptq-calendar.com',
+      template: path.resolve(path.join(__dirname, '..', '..', 'templates', 'verify.ejs'))
     };
 
     user.verify(options)
