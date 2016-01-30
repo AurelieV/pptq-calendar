@@ -35,7 +35,10 @@
   },
   "MyUser": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
   },
   "Tournament": {
     "dataSource": "db",
@@ -43,6 +46,10 @@
   },
   "Availability": {
     "dataSource": "db",
+    "public": false
+  },
+  "Email": {
+    "dataSource": "Gmail",
     "public": false
   }
 }

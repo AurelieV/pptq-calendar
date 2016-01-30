@@ -22,5 +22,6 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": [],
+  "hidden": ["verificationToken"]
 }

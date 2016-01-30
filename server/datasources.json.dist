@@ -8,5 +8,21 @@
       "username": "",
       "password": ""
     }
+    ,
+    "Gmail": {
+        "connector": "mail",
+        "transports": [
+          {
+            "type": "SMTP",
+            "host": "smtp.gmail.com",
+            "secure": true,
+            "port": 465,
+            "auth": {
+              "user": "user@gmail.com",
+              "pass": "pass"
+            }
+          }
+        ]
+      }
 }
 

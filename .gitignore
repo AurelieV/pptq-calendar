@@ -19,5 +19,6 @@ node_modules
 npm-debug.log
 www
 bower_components
-datasources.json
+server/datasources.json
 **/*~
+server/data/service-account-key.json

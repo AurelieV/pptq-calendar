@@ -1,6 +1,31 @@
 var _ = require('lodash');
+var pmx = require('pmx');
 
 module.exports = function(myUser) {
+  myUser.afterRemote('create', function(context, user, next) {
+    pmx.emit('user:create', user);
+
+    var options = {
+      type: 'email',
+      to: user.email,
+      from: 'noreply@pptq-calendar.com',
+      subject: 'Merci de vous être inscrit sur PPTQ Calendar',
+      text: 'Pour valider votre compte, veuillez vous rendre à cette adresse {href}',
+      user: user,
+      host: 'pptq-calendar.com'
+    };
+
+    user.verify(options)
+    .then(function (data) {
+      pmx.emit('user:verifySuccess', user);
+      next(null)
+    })
+    .catch(function (error) {
+      pmx.emit('user:verifyError', error);
+      next(error);
+    })
+  });
+
   //TODO: move this on a module? currently here if want to be visible in explorer
   myUser.remoteMethod('addRole', {
     accepts: [
