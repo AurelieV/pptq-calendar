@@ -13,7 +13,8 @@ module.exports = function(myUser) {
       subject: 'Merci de vous être inscrit sur PPTQ Calendar',
       text: 'Pour valider votre compte, veuillez vous rendre à cette adresse {href}',
       user: user,
-      host: 'pptq-calendar.com',
+      host: process.env.NODE_ENV === 'production' ? 'pptq-calendar.com' : 'localhost',
+      port: process.env.NODE_ENV === 'production' ? 80 : 3000,
       template: path.resolve(path.join(__dirname, '..', '..', 'templates', 'verify.ejs'))
     };
 

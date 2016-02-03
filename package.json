@@ -43,7 +43,8 @@
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "serve-favicon": "^2.0.1",
-    "vinyl-paths": "^2.1.0"
+    "vinyl-paths": "^2.1.0",
+    "xoauth2": "^1.1.0"
   },
   "devDependencies": {
     "jshint": "^2.5.6"
