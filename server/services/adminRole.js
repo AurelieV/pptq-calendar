@@ -120,7 +120,7 @@ module.exports = function init(app, options) {
     })
     , ACL.findOrCreate({
       model: 'MyUser',
-      accessType: ACL.EXECUTE,
+      accessType: ACL.ALL,
       principalType: ACL.ROLE,
       principalId: 'admin',
       permission: ACL.ALLOW,
@@ -151,7 +151,8 @@ module.exports = function init(app, options) {
     {
       username: 'admin',
       email: 'pptq.calendar@gmail.com',
-      password: 'admin'
+      password: 'admin',
+      emailVerified: true
     }).then(function (data) {return data[0]});
 
   // Add role admin to user admin

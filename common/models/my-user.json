@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "verificationToken"
+  ],
   "properties": {
     "username": {
       "type": "string",
@@ -22,5 +25,5 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": {}
 }
