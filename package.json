@@ -39,6 +39,7 @@
     "loopback-datasource-juggler": "^2.39.0",
     "main-bower-files": "^2.11.1",
     "moment": "^2.11.1",
+    "mongodb": "^2.1.5",
     "pmx": "^0.5.8",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",

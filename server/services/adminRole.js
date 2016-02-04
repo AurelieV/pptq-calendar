@@ -1,5 +1,6 @@
 var Promise = require('bluebird');
 var _ = require('lodash');
+var sendError = require('./utils').sendError;
 
 //@TODO: add option for user, admin
 module.exports = function init(app, options) {
@@ -9,6 +10,9 @@ module.exports = function init(app, options) {
   var Role = app.models.Role;
   var User = app.models.MyUser;
   var RoleMapping = app.models.RoleMapping;
+
+  // Ugly hack for mongo error wainting bug fix for connector
+  RoleMapping.defineProperty('principalId', { type: function(id) {return require('mongodb').ObjectId(id + '');} });
 
   // Add role to user
   User.hasMany(Role, {foreignKey: 'principalId', through: RoleMapping, keyThrough: 'roleId'});
@@ -23,10 +27,7 @@ module.exports = function init(app, options) {
   User.addRole = function(userId, role, next) {
     return Role.findOne({where: {name: role}})
       .then(function(role) {
-        if (!role) {
-          next(new Error('No role found'));
-          return Promise.reject('No role found');
-        }
+        if (!role) return sendError(next, 'No role found', 404);
         return RoleMapping.findOrCreate({principalType: RoleMapping.USER, principalId: userId, roleId: role.id});
       })
       .then(function (data) {
@@ -42,10 +43,7 @@ module.exports = function init(app, options) {
   User.removeRole = function(userId, role, next) {
     return Role.findOne({where: {name: role}})
       .then(function(role) {
-        if (!role) {
-          next(new Error('No role found'));
-          return Promise.reject('No role found');
-        }
+        if (!role) return sendError(next, 'No role found', 404);
         return RoleMapping.findOne({where:{principalType: RoleMapping.USER, principalId: userId, roleId: role.id}});
       })
       .then(function (roleMapping) {
@@ -65,10 +63,7 @@ module.exports = function init(app, options) {
   User.findByRole = function(role, next) {
     return Role.findOne({where: {name: role}})
       .then(function(role) {
-        if (!role) {
-          next(new Error('No role found'));
-          return Promise.reject('No role found');
-        }
+        if (!role) return sendError(next, 'No role found', 404);
         return RoleMapping.find({where: {roleId: role.id, principalType: 'USER'}});
       })
       .then(function (roleMappings) {
