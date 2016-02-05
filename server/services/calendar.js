@@ -6,17 +6,13 @@ var jwtClient = new google.auth.JWT(
   key.client_email,
   null,
   key.private_key,
-  ['https://mail.google.com/'],
+  ['https://www.googleapis.com/auth/calendar'],
   null
 );
 
 module.exports = Promise.promisify(jwtClient.authorize, {context: jwtClient})()
   .then(function(tokens) {
-    return jwtClient;
-  })
-  .catch(function(error) {
-    console.log('error jwt', error);
-    return null;
+    return google.calendar({version: 'v3', auth: jwtClient});
   });
 
 

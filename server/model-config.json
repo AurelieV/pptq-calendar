@@ -51,5 +51,9 @@
   "Email": {
     "dataSource": "Gmail",
     "public": false
+  },
+  "Region": {
+    "dataSource": "db",
+    "public": true
   }
 }
