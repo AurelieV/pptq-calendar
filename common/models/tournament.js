@@ -29,5 +29,6 @@ module.exports = function(Tournament) {
         });
     }
     //TODO: handle updateAll and multiple??
+    //TODO: handle calendarId change and region change
   });
 };
