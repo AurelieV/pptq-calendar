@@ -1,0 +1,15 @@
+md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left")
+  md-content
+    ul.menu(layout="column" layout-align="start center")
+      li.menu__item
+        a.no-style(ui-sref="tournamentList") Tournois
+      li.menu__item(ng-if="loginFactory.isAdmin()")
+        a.no-style(ui-sref="admin.users") Administration
+      li.menu__separator(flex)
+      li.menu__item(ng-if="!loginFactory.isAuthenticated()")
+        a.no-style(ui-sref="login") Se connecter
+      li.menu__item(ng-if="loginFactory.isAuthenticated()" ng-click="loginFactory.disconnect()")
+        span Se déconnecter
+      li.menu__item(ng-click="closeMenu()")
+        span Fermer
+

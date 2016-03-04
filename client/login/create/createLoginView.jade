@@ -11,7 +11,7 @@
       md-input-container
         label Email *
         input(type="email" required ng-model="user.email")
-      .info
+      .form__info
         | Si vous êtes arbitre ou orga, merci de remplir correctement vos noms et prénoms pour un meilleur suivi
       md-input-container
         label Prénom
@@ -21,4 +21,4 @@
         input(type="text" ng-model="user.lastname")
 
       .md-action(layout="row" layout-align="center")
-        md-button.md-primary(ng-click="loginFactory.createUser(user)" flex ng-disabled="!createLoginForm.$valid") Créer
+        md-button.md-primary(ng-click="ctl.createUser(user)" flex ng-disabled="!createLoginForm.$valid") Créer
