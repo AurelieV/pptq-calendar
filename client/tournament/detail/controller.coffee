@@ -1,12 +1,12 @@
 angular.module 'pptq-calendar'
-.controller 'tournamentDetailController', ($scope, Tournament, Availability, $mdToast, tournament, loginFactory, MyUser) ->
+.controller 'tournamentDetailController', ($scope, Tournament, Availability, $mdToast, tournament, authenticationService, MyUser) ->
   $scope.tournament = tournament
-  me = loginFactory.getUserId()
+  me = authenticationService.getUserId()
 
   $scope.isJudgeTwo = ->
-    loginFactory.isGranted 'judgeTwo'
+    authenticationService.isGranted 'judgeTwo'
   $scope.isAdmin = ->
-    loginFactory.isGranted 'admin'
+    authenticationService.isGranted 'admin'
 
   if $scope.isAdmin()
     MyUser.findByRole {role: 'judgeTwo'}

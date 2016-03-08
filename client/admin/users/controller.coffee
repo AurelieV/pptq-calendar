@@ -1,10 +1,10 @@
 angular.module 'pptq-calendar'
-.controller 'adminUsersController', ($scope, MyUser, loginFactory, $mdToast) ->
+.controller 'adminUsersController', ($scope, MyUser, authenticationService, $mdToast) ->
   $scope.users = MyUser.find
     filter:
       include: 'roles'
 
-  $scope.loginFactory = loginFactory
+  $scope.authenticationService = authenticationService
 
   $scope.isAdmin = (user) ->
     _.indexOf(_.map(user.roles, 'name'), 'admin') > -1

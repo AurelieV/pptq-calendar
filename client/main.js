@@ -43,10 +43,12 @@ app.run(function($mdSidenav, $rootScope, $state, MyUser, authenticationService, 
   $rootScope.$state = $state;
   $rootScope.authenticationService = authenticationService;
 });
+
 app.config(function($httpProvider) {
   moment.locale('fr');
   $httpProvider.interceptors.push('authInterceptor');
 });
+
 app.config(function($httpProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
   //@Todo: check if necessary
   delete $httpProvider.defaults.headers.common['X-Requested-With'];

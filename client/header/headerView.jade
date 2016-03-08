@@ -8,6 +8,6 @@ md-toolbar.mainbar
     .title(hide-sm) PPTQ Calendar
     .md-flex(flex)
     .connect-info(layout="row" layout-align="start center")
-      md-icon.material-icons.status(md-font-icon="icon-brightness_1" ng-class="{'connected': loginFactory.isAuthenticated()}")
-      span.login(ng-if="loginFactory.getUser()") {{ loginFactory.getUser() }}
+      md-icon.material-icons.status(md-font-icon="icon-brightness_1" ng-class="{'connected': authenticationService.isAuthenticated()}")
+      span.login(ng-if="authenticationService.user") {{ authenticationService.user.username }}
 

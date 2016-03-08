@@ -1,7 +1,8 @@
 #create-login(layout="row" layout-align="center")
-  md-content.md-whiteframe-z1
+  md-content.md-whiteframe-z1(ng-if="!ctl.showConfirmationMessage")
     h3 Création d'un compte
     form(name="createLoginForm")
+      .form__info.form__info--error(ng-if="ctl.errorMessage") {{ ctl.errorMessage }}
       md-input-container
         label Login *
         input(type="text" required ng-model="user.username")
@@ -22,3 +23,6 @@
 
       .md-action(layout="row" layout-align="center")
         md-button.md-primary(ng-click="ctl.createUser(user)" flex ng-disabled="!createLoginForm.$valid") Créer
+
+  md-content.md-whiteframe-z1(ng-if="ctl.showConfirmationMessage")
+    | Votre compte a été créé. Un email de confirmation a été envoyé à {{ ctl.email }} pour valider votre compte.

@@ -3,7 +3,7 @@ app.directive('headerBar', function($mdSidenav) {
     restrict: 'C',
     templateUrl: 'header/headerView.html',
     link: function (scope) {
-      scope.openMenu = () => $mdSidenav('left').toggle()
+      scope.openMenu = () => {$mdSidenav('left').toggle()};
     }
   }
 });

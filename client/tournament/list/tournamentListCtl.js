@@ -13,11 +13,11 @@ class tournamentListCtl {
 
 app.controller('tournamentListCtl', tournamentListCtl);
 
-//($scope, loginFactory, Tournament, Availability, $mdToast, $state, $location, $anchorScroll) ->
+//($scope, authenticationService, Tournament, Availability, $mdToast, $state, $location, $anchorScroll) ->
 //  $scope.isJudgeTwo = ->
-//    loginFactory.isGranted 'judgeTwo'
+//    authenticationService.isGranted 'judgeTwo'
 //  $scope.isAdmin = ->
-//    loginFactory.isGranted 'admin'
+//    authenticationService.isGranted 'admin'
 //
 //  $scope.goToTournament = (tournament) ->
 //    $state.go 'tournamentDetail', {id: tournament.id}
@@ -29,7 +29,7 @@ app.controller('tournamentListCtl', tournamentListCtl);
 //        relation: 'availabilities'
 //        scope:
 //          where:
-//            judgeId: loginFactory.getUserId()
+//            judgeId: authenticationService.getUserId()
 //      ]
 //  , (tournaments) ->
 //    for tournament in tournaments
