@@ -10,40 +10,21 @@ class authenticationService {
     this.user = null;
 
     if (MyUser.isAuthenticated()) {
-      MyUser.findById({
-        id: MyUser.getCurrentId(),
-        filter: {include: 'roles'}
-      }).$promise
-      .then((user) => {
-        this.user = user;
-        this.roles = _.map(user.roles, 'name');
-      })
-      .catch(() => {
-        this._LoopBackAuth.clearUser();
-        this._LoopBackAuth.clearStorage();
-      });
+      this._setUserAndRole(MyUser.getCurrentId());
     }
   }
 
   connect(credentials) {
     return this._MyUser.login(credentials).$promise
       .then((data) => {
-        return this._MyUser.findById({
-          id: data.userId,
-          filter: {include: 'roles'}
-        }).$promise
+        return this._setUserAndRole(data.userId);
       })
-      .then((user) => {
-        this.roles = _.map(user.roles, 'name');
-        this.user = user;
+      .then(() => {
         var next = this._$state.nextAfterLogin || 'tournamentList';
         this._$state.go(next);
         this._$mdToast.showSimple('Connexion réussie');
       })
       .catch(() => {
-        // In case successfull log, but unable to fetch user, "logout" locally
-        this._LoopBackAuth.clearUser();
-        this._LoopBackAuth.clearStorage();
         this._$mdToast.showSimple('Impossible de se connecter, veuillez réessayer');
       });
   }
@@ -71,6 +52,26 @@ class authenticationService {
 
   isAuthenticated () {
     return this._MyUser.isAuthenticated();
+  }
+
+  _setUserAndRole (id) {
+    return this._MyUser.findById({id: id})
+    .$promise
+    .then((user) => {
+      this.user = user;
+      return this._MyUser.getAllRoles().$promise
+    })
+    .then((data) => {
+      this.roles = data.roles;
+    })
+    .catch(() => {
+      this.user = null;
+      this.roles = [];
+      this._LoopBackAuth.clearUser();
+      this._LoopBackAuth.clearStorage();
+
+      return Promise.reject();
+    });
   }
 }
 

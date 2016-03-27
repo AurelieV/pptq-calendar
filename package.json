@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server/pptq-calendar.js",
     "postinstall": "node_modules/.bin/bower install",
-    "createDB": "node server/scripts/loadDB.js"
+    "createDB": "node server/scripts/loadDB.js",
+    "build-ng": "lb-ng server/pptq-calendar.js client/assets/js/lb-services.js"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -17,7 +18,7 @@
     "loopback": "^2.22.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^2.1.0",
-    "loopback-component-roles": "^0.1.2",
+    "loopback-component-roles": "^0.1.3",
     "loopback-connector-mysql": "^2.2.1",
     "loopback-datasource-juggler": "^2.39.0",
     "moment": "^2.11.1",
