@@ -26,9 +26,9 @@ app.run(function($mdSidenav, $rootScope, $state, MyUser, authenticationService, 
   // Check if the user is allowed to see this page
   $rootScope.$on('$stateChangeStart', function(event, toState) {
     if (! _.get(toState, 'data.roleRequired')) return;
-    if (! authenticationService.isGranted(toState.data.roleRequired)) return;
+    if (authenticationService.isGranted(toState.data.roleRequired)) return;
     event.preventDefault();
-    $mdToast('Vous n\'avez pas les droits nécessaire pour accéder à cette page');
+    $mdToast.showSimple('Vous n\'avez pas les droits nécessaire pour accéder à cette page');
   });
 
   // Handle authentication error

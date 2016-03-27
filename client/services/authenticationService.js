@@ -47,7 +47,7 @@ class authenticationService {
   }
 
   isAdmin () {
-    this.isGranted('admin');
+    return this.isGranted('admin');
   }
 
   isAuthenticated () {
