@@ -8,12 +8,17 @@ app.config(function($stateProvider) {
     })
     .state('tournamentDetail', {
       url: '/tournament/:id',
-      controller: 'tournamentDetailController',
-      templateUrl: 'tournament/detail/view.html',
+      controller: 'tournamentDetailCtl',
+      templateUrl: 'tournament/detail/tournamentDetailView.html',
       resolve: {
         tournament: function ($stateParams, tournamentService) {
           return tournamentService.getTournament($stateParams.id);
         }
       }
+    })
+    .state('tournamentCreate', {
+      url: '/tournament-create',
+      controller: 'tournamentCreateCtl',
+      templateUrl: 'tournament/create/tournamentCreateView.html'
     })
 });

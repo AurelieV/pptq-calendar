@@ -1,5 +1,6 @@
 class tournamentListCtl {
   constructor (tournamentService) {
+    console.log('caca');
     this.loading = true;
     tournamentService.getTournaments()
       .then((tournaments) => {

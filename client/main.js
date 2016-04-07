@@ -14,13 +14,21 @@ var app = angular.module('pptq-calendar', [
   // Templates
   'pptq-calendar.templates'
 ]);
-app.run(function($mdSidenav, $rootScope, $state, MyUser, authenticationService, $mdToast) {
+app.run(function($mdSidenav, $rootScope, $state, MyUser, authenticationService, $mdToast, scrollService) {
   // Debug
   $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => console.log(error));
 
   // Close the menu after navigation
   $rootScope.$on('$stateChangeSuccess', function(event) {
     $mdSidenav('left').close()
+  });
+
+  // Scroll after navigation
+  $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+    var anchorId = $state.params.anchorId;
+    if (anchorId) {
+      scrollService.scrollTo(anchorId)
+    }
   });
 
   // Check if the user is allowed to see this page

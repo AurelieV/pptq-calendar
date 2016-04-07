@@ -43,8 +43,8 @@
               md-icon.material-icons.success(md-font-icon="icon-event_available" ng-if="tournament.isDateOnCalendar")
             md-icon.material-icons(md-font-icon="icon-person" ng-class="{'success': tournament.headJudge, 'danger': !tournament.headJudge}")
 
-md-button.md-fab.main-button(aria-label="Add" layout="column" layout-align="center center" ng-if="isAdmin()")
-  a(ui-sref="admin.tournaments")
+md-button.md-fab.main-button(aria-label="Add" layout="column" layout-align="center center" ng-if="authenticationService.isAdmin()")
+  a(ui-sref="tournamentCreate")
     md-icon.material-icons(md-font-icon="icon-add")
 
 
