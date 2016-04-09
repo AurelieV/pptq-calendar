@@ -1,4 +1,5 @@
 # pptq-calendar
+[![bitHound Dependencies](https://www.bithound.io/github/AurelieV/pptq-calendar/badges/dependencies.svg)](https://www.bithound.io/github/AurelieV/pptq-calendar/master/dependencies/npm)
 
 ## Configuration
 * TODO
