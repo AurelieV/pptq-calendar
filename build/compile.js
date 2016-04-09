@@ -3,7 +3,7 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var gulp  = require('gulp');
 var jade  = require('gulp-jade');
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var path = require('path');
 var replace = require('gulp-replace');
 var templateCache = require('gulp-angular-templatecache');
@@ -48,14 +48,10 @@ gulp.task('templates', function() {
     .pipe(gulp.dest(`${parameters.web_path}/js`));
 });
 
-// Compile LESS files into CSS
-gulp.task('less', function() {
-  return gulp.src(parameters.less_main_file)
-    // hack for this issue https://github.com/angular/material/issues/6304
-    .pipe(replace('screen\\0','screen '))
-    .pipe(less({
-      path: [path.join(__dirname)]
-    }))
+// Compile scss files into CSS
+gulp.task('sass', function () {
+  return gulp.src(parameters.sass_main_file)
+    .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['last 2 versions', 'ie >= 8'],
       cascade: false
@@ -63,4 +59,4 @@ gulp.task('less', function() {
     .pipe(gulp.dest(`${parameters.web_path}/css`))
 });
 
-gulp.task('compile', ['babel', 'templates', 'jade', 'less']);
+gulp.task('compile', ['babel', 'templates', 'jade', 'sass']);

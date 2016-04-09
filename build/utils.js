@@ -8,7 +8,7 @@ var parameters = require('./parameters');
 gulp.task('watch', function() {
   gulp.watch(`${parameters.app_path}/*.jade`, ['jade']);
   gulp.watch(`${parameters.app_path}/*/**/*.jade`, ['templates']);
-  gulp.watch('**/*.less', ['less']);
+  gulp.watch('**/*.scss', ['sass']);
   gulp.watch(`${parameters.assets_path}/**/*`, ['assets']);
   gulp.watch('bower_components/**/*.js', ['vendors']);
   gulp.watch(`${parameters.app_path}/**/*.js`, ['babel']);

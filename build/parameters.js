@@ -15,7 +15,7 @@ var config = {
   app_main_file: 'app.js',
   css_main_file: 'app.css',
   css_files: [`${bower_path}/angular-material/angular-material.min.css`],
-  less_main_file: `${app_path}/app.less`,
+  sass_main_file: `${app_path}/app.scss`,
   templates_file: 'app.templates.js',
   templates_module: 'pptq-calendar.templates',
   vendor_main_file: 'vendor.js'
