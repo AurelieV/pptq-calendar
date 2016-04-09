@@ -48,11 +48,6 @@
       "type": "belongsTo",
       "model": "MyUser"
     },
-    "availabilities": {
-      "type": "hasMany",
-      "model": "Availability",
-      "foreignKey": "tournamentId"
-    },
     "region": {
       "type": "belongsTo",
       "model": "Region",
@@ -75,7 +70,7 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "judgeTwo",
       "permission": "ALLOW"
     }
   ],

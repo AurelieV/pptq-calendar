@@ -44,10 +44,6 @@
     "dataSource": "db",
     "public": true
   },
-  "Availability": {
-    "dataSource": "db",
-    "public": false
-  },
   "Email": {
     "dataSource": "Gmail",
     "public": false
