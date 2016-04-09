@@ -1,4 +1,7 @@
 {
+  "loopback-component-roles": {
+    "userModel": "MyUser"
+  },
   "loopback-component-explorer": {
     "mountPath": "/explorer"
   }
