@@ -1,9 +1,11 @@
-class tournamentCreateCtl {
-  constructor () {
-    console.log('pouet');
-  }
+class TournamentCreateComponent {
 }
-app.controller('tournamentCreateCtl', tournamentCreateCtl);
+
+app.component('tournamentCreate', {
+  templateUrl: 'tournaments/create/tournamentCreate.html',
+  controller: TournamentCreateComponent
+});
+
 //.controller 'createTournamentController', ($scope, Tournament, $mdToast, $state) ->
 //  $scope.create = (tournament) ->
 //    Tournament.create tournament

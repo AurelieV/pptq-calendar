@@ -1,13 +1,13 @@
 class authenticationService {
   /*@ngInject*/
-  constructor($state, MyUser, $mdToast, LoopBackAuth, $q) {
-    this._$state = $state;
+  constructor(MyUser, $mdToast, LoopBackAuth, $q, $rootRouter) {
     this._MyUser = MyUser;
     this._$mdToast = $mdToast;
     this._LoopBackAuth = LoopBackAuth;
     this._$q = $q;
     this.roles = [];
     this.user = null;
+    this._$rootRouter = $rootRouter;
 
     if (MyUser.isAuthenticated()) {
       this._setUserAndRole(MyUser.getCurrentId());
@@ -20,8 +20,8 @@ class authenticationService {
         return this._setUserAndRole(data.userId);
       })
       .then(() => {
-        var next = this._$state.nextAfterLogin || 'tournamentList';
-        this._$state.go(next);
+        var next = this._$rootRouter.nextAfterLogin || ['Tournaments', 'TournamentList'];
+        this._$rootRouter.navigate(next);
         this._$mdToast.showSimple('Connexion réussie');
       })
       .catch(() => {
@@ -32,7 +32,7 @@ class authenticationService {
   disconnect () {
     return this._MyUser.logout().$promise
       .then(() => {
-        this._$state.go('login');
+        this._$rootRouter.navigate(['Login', 'LoginConnect']);
         this._$mdToast.showSimple('Déconnexion réussie');
         this.roles = [];
         this.user = null;

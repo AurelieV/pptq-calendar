@@ -1,6 +1,5 @@
-class tournamentListCtl {
+class TournamentListComponent {
   constructor (tournamentService) {
-    console.log('caca');
     this.loading = true;
     tournamentService.getTournaments()
       .then((tournaments) => {
@@ -12,7 +11,10 @@ class tournamentListCtl {
   }
 }
 
-app.controller('tournamentListCtl', tournamentListCtl);
+app.component('tournamentList', {
+  templateUrl: 'tournaments/list/tournamentList.html',
+  controller: TournamentListComponent
+});
 
 //($scope, authenticationService, Tournament, Availability, $mdToast, $state, $location, $anchorScroll) ->
 //  $scope.isJudgeTwo = ->

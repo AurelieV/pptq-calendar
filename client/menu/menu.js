@@ -1,10 +1,19 @@
-app.directive('sideMenu', function($mdSidenav) {
-  return {
-    restrict: 'C',
-    templateUrl: 'menu/menuView.html',
-    link: function (scope) {
-      scope.closeMenu = () => $mdSidenav('left').close();
-    }
+class MenuComponent {
+  constructor($mdSidenav, authenticationService) {
+    this._$mdSidenav = $mdSidenav;
+    this._authenticationService = authenticationService;
   }
+
+  close() {
+    this._$mdSidenav('left').close();
+  }
+}
+
+app.component('sideMenu', {
+  templateUrl: 'menu/menu.html',
+  controller: MenuComponent,
+  bindings: { $router: '<' }
 });
+
+
 

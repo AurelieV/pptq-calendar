@@ -9,6 +9,8 @@ var config = {
   server_path: server_path,
   web_path: web_path,
 
+  dependencies: ['node_modules/@angular/router/angular1/angular_1_router.js'],
+
   backend_route: '/api',
   backend_main_file: `${server_path}/pptq-calendar.js`,
 

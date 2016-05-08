@@ -1,0 +1,14 @@
+md-toolbar.mainbar
+  .md-toolbar-tools
+    md-button.md-icon-button(ng-click="$ctrl.toggle()" aria-label="openMenu")
+      md-icon.material-icons(md-font-icon="icon-menu")
+    .title(hide-sm)
+      a.no-style(ng-link="['Tournaments']") PPTQ Calendar
+    .md-flex(flex)
+    .connect-info(layout="row" layout-align="start center")
+      md-icon.material-icons.status(
+        md-font-icon="icon-brightness_1"
+        ng-class="{'connected': $ctrl._authenticationService.isAuthenticated()}"
+      )
+      span.login {{ $ctrl._authenticationService.user.username }}
+

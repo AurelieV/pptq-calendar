@@ -1,0 +1,15 @@
+.multiline {
+  white-space: pre-wrap;
+}
+
+a.no-style {
+  text-decoration: none;
+  color: inherit;
+  &:visited, &:active, &:hover {
+    color: inherit;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}

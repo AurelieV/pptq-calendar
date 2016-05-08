@@ -1,6 +1,7 @@
 doctype html
 html(lang="fr", xmlns:ng="http://angularjs.org", id="ng-app", ng-app="pptq-calendar")
   head
+    base(href="/")
     meta(charset="utf-8")
     title PPTQ Calendar
     link(href="css/app.css", rel="stylesheet")
@@ -11,9 +12,7 @@ html(lang="fr", xmlns:ng="http://angularjs.org", id="ng-app", ng-app="pptq-calen
     meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
 
   body
-    .side-menu
-    .header-bar
-    md-content.body-content(ui-view)
+    app
 
     script(src="js/vendor.js")
     script(src="js/angular-local_fr-fr.js")

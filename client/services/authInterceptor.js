@@ -24,7 +24,7 @@ class authInterceptor extends HttpInterceptor {
       this._LoopBackAuth.clearStorage();
       this._$rootScope.$broadcast('auth-failed');
     }
-    this._$q.reject(rejection);
+    return this._$q.reject(rejection);
   }
 }
 app.service('authInterceptor', authInterceptor);

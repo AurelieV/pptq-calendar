@@ -1,10 +1,16 @@
-app.directive('headerBar', function($mdSidenav) {
-  return {
-    restrict: 'C',
-    templateUrl: 'header/headerView.html',
-    link: function (scope) {
-      scope.openMenu = () => {$mdSidenav('left').toggle()};
-    }
+class HeaderComponent {
+  constructor ($mdSidenav, authenticationService) {
+    this._$mdSidenav = $mdSidenav;
+    this._authenticationService = authenticationService;
   }
+
+  toggle() {
+    this._$mdSidenav('left').toggle();
+  }
+}
+
+app.component('header', {
+  templateUrl: 'header/header.html',
+  controller: HeaderComponent
 });
 

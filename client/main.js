@@ -1,12 +1,12 @@
 'use strict';
 var app = angular.module('pptq-calendar', [
   // Vendors
-  'ui.router',
-  'ngMaterial',
   'ngAnimate',
+  'ngComponentRouter',
+  'ngMaterial',
+  'ngMessages',
   'ngStorage',
   'ngSanitize',
-  'ngMessages',
 
   // API
   'lbServices',
@@ -14,42 +14,40 @@ var app = angular.module('pptq-calendar', [
   // Templates
   'pptq-calendar.templates'
 ]);
-app.run(function($mdSidenav, $rootScope, $state, MyUser, authenticationService, $mdToast, scrollService) {
-  // Debug
-  $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => console.log(error));
+app.run(function($rootScope, authenticationService, $rootRouter) {
+  // // Debug
+  // $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => console.log(error));
+  //
+  // // Close the menu after navigation
+  // $rootScope.$on('$stateChangeSuccess', function(event) {
+  //   $mdSidenav('left').close()
+  // });
+  //
+  // // Scroll after navigation
+  // $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+  //   var anchorId = $state.params.anchorId;
+  //   if (anchorId) {
+  //     scrollService.scrollTo(anchorId)
+  //   }
+  // });
+  //
+  // // Check if the user is allowed to see this page
+  // $rootScope.$on('$stateChangeStart', function(event, toState) {
+  //   if (! _.get(toState, 'data.roleRequired')) return;
+  //   if (authenticationService.isGranted(toState.data.roleRequired)) return;
+  //   event.preventDefault();
+  //   $mdToast.showSimple('Vous n\'avez pas les droits nécessaire pour accéder à cette page');
+  // });
 
-  // Close the menu after navigation
-  $rootScope.$on('$stateChangeSuccess', function(event) {
-    $mdSidenav('left').close()
-  });
-
-  // Scroll after navigation
-  $rootScope.$on('$stateChangeSuccess', function(event, toState) {
-    var anchorId = $state.params.anchorId;
-    if (anchorId) {
-      scrollService.scrollTo(anchorId)
-    }
-  });
-
-  // Check if the user is allowed to see this page
-  $rootScope.$on('$stateChangeStart', function(event, toState) {
-    if (! _.get(toState, 'data.roleRequired')) return;
-    if (authenticationService.isGranted(toState.data.roleRequired)) return;
-    event.preventDefault();
-    $mdToast.showSimple('Vous n\'avez pas les droits nécessaire pour accéder à cette page');
-  });
 
   // Handle authentication error
+  //TODO: check this work ok
   $rootScope.$on('auth-failed', function(event) {
     event.preventDefault();
-    if ($state.current.name !== 'login')
-      $state.nextAfterLogin = $state.current.name;
-    $state.go('login');
+    if ($rootRouter.isActive(['Login', 'LoginConnect']))
+      $rootRouter.nextAfterLogin = $rootRouter.current.name;
+    $rootRouter.navigate(['Login', 'LoginConnect']);
   });
-
-  // Expose some var for everybody
-  $rootScope.$state = $state;
-  $rootScope.authenticationService = authenticationService;
 });
 
 app.config(function($httpProvider) {
@@ -57,9 +55,8 @@ app.config(function($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 });
 
-app.config(function($httpProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+app.config(function($httpProvider) {
   //@Todo: check if necessary
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  $urlRouterProvider.otherwise('/');
-  $urlMatcherFactoryProvider.strictMode(false)
 });
+

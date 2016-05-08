@@ -2,6 +2,7 @@ var concat = require('gulp-concat');
 var filter = require('gulp-filter');
 var gulp   = require('gulp');
 var mainBowerFiles = require('gulp-main-bower-files');
+var addsrc = require('gulp-add-src');
 
 var parameters = require('./parameters');
 
@@ -10,6 +11,7 @@ gulp.task('vendors', function() {
   var filterJS = filter('**/*.js', {restore: true});
   return gulp.src('./bower.json')
     .pipe(mainBowerFiles())
+    .pipe(addsrc(parameters.dependencies))
     .pipe(filterJS)
     .pipe(concat(parameters.vendor_main_file))
     .pipe(gulp.dest(`${parameters.web_path}/js`))

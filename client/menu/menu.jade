@@ -1,0 +1,16 @@
+md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left")
+  md-content
+    md-list
+      a.no-style(ng-link="['Tournaments']")
+        md-list-item(ng-click="$ctrl.close()") Tournois
+      a.no-style(ng-link="['Admin']" ng-if="$ctrl._authenticationService.isAdmin()")
+        md-list-item(ng-click="$ctrl.close()") Administration
+      md-divider
+      a.no-style(ng-link="['Login']" ng-if="!$ctrl._authenticationService.isAuthenticated()")
+        md-list-item(ng-click="$ctrl.close()") Se connecter
+      md-list-item(ng-if="$ctrl._authenticationService.isAuthenticated()" ng-click="$ctrl._authenticationService.disconnect() && $ctrl.close()")
+        p Se déconnecter
+      md-divider
+      md-list-item(ng-click="$ctrl.close()")
+        p Fermer
+

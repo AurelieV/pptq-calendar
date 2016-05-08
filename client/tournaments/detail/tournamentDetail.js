@@ -1,8 +1,11 @@
-class tournamentDetailCtl {
+class TournamentDetailComponent {
    
 }
 
-app.controller('tournamentDetailCtl', tournamentDetailCtl);
+app.component('tournamentDetail', {
+  templateUrl: 'tournaments/detail/tournamentDetail.html',
+  controller: TournamentDetailComponent
+});
 
 
 // if $scope.isAdmin()
