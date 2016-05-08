@@ -3,6 +3,10 @@ var pmx = require('pmx');
 var path = require('path');
 
 module.exports = function(myUser) {
+  myUser.validatesLengthOf('username', {min: 5, max: 20, message: {min: 'Username is too short', max: 'Username is too short'}});
+  myUser.validatesLengthOf('firstname', {max: 50, message: {max: 'Firstname is too short'}});
+  myUser.validatesLengthOf('lastname', {max: 50, message: {max: 'Lastname is too short'}});
+
   myUser.afterRemote('create', function(context, user, next) {
    pmx.emit('user:create', user);
 

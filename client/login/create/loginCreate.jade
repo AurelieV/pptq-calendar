@@ -5,7 +5,9 @@ md-content.md-whiteframe-z1(ng-if="!$ctrl.showConfirmationMessage" layout-paddin
     div(layout="column")
       md-input-container
         label Login *
-        input(type="text" required ng-model="user.username")
+        input(name="username" type="text" required ng-model="user.username" ng-minlength="5" ng-maxlength="20")
+        div(ng-messages="createLoginForm.username.$error")
+          div(ng-message-exp="['minlength', 'maxlength']") Votre login doit comporter entre 5 et 20 caractères
       md-input-container
         label Mot de passe *
         input(type="password" required ng-model="user.password")
@@ -16,10 +18,14 @@ md-content.md-whiteframe-z1(ng-if="!$ctrl.showConfirmationMessage" layout-paddin
         | Si vous êtes arbitre ou orga, merci de remplir correctement vos noms et prénoms pour un meilleur suivi
       md-input-container
         label Prénom
-        input(type="text" ng-model="user.firstname")
+        input(name="firstname" type="text" ng-model="user.firstname" ng-maxlength="50")
+        div(ng-messages="createLoginForm.firstname.$error")
+          div(ng-message-exp="['maxlength']") Votre prénom doit comporter moins de 50 caractères
       md-input-container
         label Nom
-        input(type="text" ng-model="user.lastname")
+        input(name="lastname" type="text" ng-model="user.lastname" ng-maxlength="50")
+        div(ng-messages="createLoginForm.lastname.$error")
+          div(ng-message-exp="['maxlength']") Votre nom doit comporter moins de 50 caractères
     .md-action(layout="row" layout-align="center")
       md-button.md-primary.md-raised(ng-click="$ctrl.createUser(user)" ng-disabled="!createLoginForm.$valid") Créer
 
