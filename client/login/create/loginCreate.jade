@@ -1,6 +1,6 @@
 md-content.md-whiteframe-z1(ng-if="!$ctrl.showConfirmationMessage" layout-padding)
-  h3 Création d'un compte
-  form(name="createLoginForm")
+  form(name="createLoginForm" ng-hide="$ctrl.loading")
+    h3 Création d'un compte
     .form__info.form__info--error(ng-if="$ctrl.errorMessage") {{ $ctrl.errorMessage }}
     div(layout="column")
       md-input-container
@@ -28,6 +28,11 @@ md-content.md-whiteframe-z1(ng-if="!$ctrl.showConfirmationMessage" layout-paddin
           div(ng-message-exp="['maxlength']") Votre nom doit comporter moins de 50 caractères
     .md-action(layout="row" layout-align="center")
       md-button.md-primary.md-raised(ng-click="$ctrl.createUser(user)" ng-disabled="!createLoginForm.$valid") Créer
+
+  div(ng-show="$ctrl.loading")
+    h3 Création en cours
+    div(layout="row" layout-sm="column" layout-align="space-around")
+      md-progress-circular(md-mode="indeterminate")
 
 md-content.md-whiteframe-z1(ng-if="$ctrl.showConfirmationMessage" layout-padding)
   |Votre compte a été créé.

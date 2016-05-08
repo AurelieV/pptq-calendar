@@ -5,9 +5,11 @@ class LoginCreateComponent {
     this.errorMessage = null;
     this.email = null;
     this._authenticationService = authenticationService;
+    this.loading = false;
   }
 
   createUser (user) {
+    this.loading = true;
     this._MyUser.create(user).$promise
       .then(() => {
         this.showConfirmationMessage = true;
@@ -20,6 +22,9 @@ class LoginCreateComponent {
         } else {
           this.errorMessage = 'Impossible de créer l\'utilisateur';
         }
+      })
+      .finally(() => {
+        this.loading = false;
       })
   }
 }

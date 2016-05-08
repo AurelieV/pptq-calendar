@@ -7,7 +7,8 @@ app.component('login', {
   controller: LoginComponent,
   $routeConfig: [
     {path: '/connect', name: 'LoginConnect', component: 'loginConnect', useAsDefault: true},
-    {path: '/create', name: 'LoginCreate', component: 'loginCreate'}
+    {path: '/create', name: 'LoginCreate', component: 'loginCreate'},
+    {path: '/verified', name: 'LoginVerified', component: 'loginVerified'}
   ]
 });
 
