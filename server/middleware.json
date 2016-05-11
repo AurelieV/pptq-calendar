@@ -23,9 +23,13 @@
     }
   },
   "files": {
-    "loopback#static": {
-      "params": "$!../www"
-    }
+    "loopback#static": [
+      {
+        "paths": ["/static"],
+        "params": "$!../www"
+      }
+    ],
+    "./middleware/serveIndex": {}
   },
   "final": {
     "loopback#urlNotFound": {}
