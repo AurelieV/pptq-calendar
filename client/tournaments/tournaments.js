@@ -6,9 +6,9 @@ app.component('tournaments', {
   template: '<ng-outlet></ng-outlet>',
   controller: TournamentsComponent,
   $routeConfig: [
-    {path: '/', name: 'TournamentList', component: 'tournamentList', useAsDefault: true},
-    {path: '/detail/:id', name: 'TournamentDetail', component: 'tournamentDetail'},
-    {path: '/create', name: 'TournamentCreate', component: 'tournamentCreate'},
-    {path: '/edit/:id', name: 'TournamentEdit', component: 'tournamentEdit'}
+    {path: '/', name: 'List', component: 'tournamentList', useAsDefault: true},
+    {path: '/detail/:id', name: 'Detail', component: 'tournamentDetail'},
+    {path: '/create', name: 'Create', component: 'tournamentCreate'},
+    {path: '/edit/:id', name: 'Edit', component: 'tournamentEdit'}
   ]
 });

@@ -1,7 +1,7 @@
 .tabs(layout="row")
-  .tab
-    a.no-style(ng-link="['AdminUsers']") Utilisateurs
-  .tab
-    a.no-style(ng-link="['AdminRegions']") Régions
+  .tab(ng-class="{active: $ctrl.active === 'users'}")
+    a.no-style(ng-link="['Users']") Utilisateurs
+  .tab(ng-class="{active: $ctrl.active === 'regions'}")
+    a.no-style(ng-link="['Regions']") Régions
 md-content.md-whiteframe-z1
   ng-outlet(layout="row" layout-align="center start").md-whiteframe-z1

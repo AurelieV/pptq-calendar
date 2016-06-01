@@ -5,6 +5,10 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left")
         md-list-item(ng-click="$ctrl.close()") Tournois
       a.no-style(ng-link="['Admin']" ng-if="$ctrl._authenticationService.isAdmin()")
         md-list-item(ng-click="$ctrl.close()") Administration
+      a.no-style(ng-link="['Account']" ng-if="$ctrl._authenticationService.isAuthenticated()")
+        md-list-item(ng-click="$ctrl.close()") Mon profil
+      a.no-style(ng-link="['Faq']")
+        md-list-item(ng-click="$ctrl.close()") FAQ
       md-divider
       a.no-style(ng-link="['Login']" ng-if="!$ctrl._authenticationService.isAuthenticated()")
         md-list-item(ng-click="$ctrl.close()") Se connecter

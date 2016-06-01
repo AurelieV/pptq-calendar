@@ -1,16 +1,17 @@
 class authenticationService {
   /*@ngInject*/
-  constructor(MyUser, $mdToast, LoopBackAuth, $q, $rootRouter) {
+  constructor(MyUser, $mdToast, LoopBackAuth, $q, $rootRouter, $timeout) {
     this._MyUser = MyUser;
     this._$mdToast = $mdToast;
     this._LoopBackAuth = LoopBackAuth;
     this._$q = $q;
+    this._$timeout = $timeout;
     this.roles = [];
     this.user = null;
     this._$rootRouter = $rootRouter;
-
+    this.initialFetch = this._$q.defer().resolve();
     if (MyUser.isAuthenticated()) {
-      this._setUserAndRole(MyUser.getCurrentId());
+      this.initialFetch = this._setUserAndRole(MyUser.getCurrentId());
     }
   }
 
@@ -20,7 +21,7 @@ class authenticationService {
         return this._setUserAndRole(data.userId);
       })
       .then(() => {
-        var next = this._$rootRouter.nextAfterLogin || ['Tournaments', 'TournamentList'];
+        var next = this._$rootRouter.nextAfterLogin || ['Tournaments', 'List'];
         this._$rootRouter.navigate(next);
         this._$mdToast.showSimple('Connexion réussie');
       })
@@ -43,6 +44,10 @@ class authenticationService {
   }
 
   isGranted (role) {
+    if (!role) {
+      return true;
+    }
+
     return _.indexOf(this.roles, role) > -1;
   }
 
@@ -64,13 +69,13 @@ class authenticationService {
     .then((data) => {
       this.roles = data.roles;
     })
-    .catch(() => {
+    .catch((e) => {
       this.user = null;
       this.roles = [];
       this._LoopBackAuth.clearUser();
       this._LoopBackAuth.clearStorage();
 
-      return Promise.reject();
+      return this._$q.defer().reject(e);
     });
   }
 }

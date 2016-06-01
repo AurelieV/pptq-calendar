@@ -1,8 +1,5 @@
-@import 'users/styles';
-
-#admin {
+admin {
   .tabs {
-    min-height: 50px;
     padding: 8px 4px;
     .tab {
       padding: 4px 8px;
@@ -15,9 +12,5 @@
         border-bottom: 1px solid blue;
       }
     }
-  }
-  md-content {
-    min-height: 100px;
-    padding: 4px 16px;
   }
 }
