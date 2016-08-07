@@ -59,7 +59,7 @@ module.exports = webpackMerge(commonConfig, {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-path
      */
-    path: helpers.root('dist'),
+    path: helpers.root('dist', 'static'),
 
     /**
      * Specifies the name of each output file on disk.
@@ -84,7 +84,6 @@ module.exports = webpackMerge(commonConfig, {
      * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
      */
     chunkFilename: '[id].[chunkhash].chunk.js'
-
   },
 
   /**
@@ -128,7 +127,7 @@ module.exports = webpackMerge(commonConfig, {
       'process.env': {
         'ENV': JSON.stringify(METADATA.ENV),
         'NODE_ENV': JSON.stringify(METADATA.ENV),
-        'HMR': METADATA.HMR,
+        'HMR': METADATA.HMR
       }
     }),
 
@@ -172,7 +171,7 @@ module.exports = webpackMerge(commonConfig, {
     new NormalModuleReplacementPlugin(
       /angular2-hmr/,
       helpers.root('config/modules/angular2-hmr-prod.js')
-    ),
+    )
 
     /**
      * Plugin: IgnorePlugin

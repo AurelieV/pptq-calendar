@@ -64,7 +64,7 @@ module.exports = webpackMerge(commonConfig, {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-path
      */
-    path: helpers.root('dist'),
+    path: helpers.root('dist', 'static'),
 
     /**
      * Specifies the name of each output file on disk.
@@ -90,7 +90,7 @@ module.exports = webpackMerge(commonConfig, {
     chunkFilename: '[id].chunk.js',
 
     library: 'ac_[name]',
-    libraryTarget: 'var',
+    libraryTarget: 'var'
   },
 
   plugins: [
@@ -111,9 +111,9 @@ module.exports = webpackMerge(commonConfig, {
       'process.env': {
         'ENV': JSON.stringify(METADATA.ENV),
         'NODE_ENV': JSON.stringify(METADATA.ENV),
-        'HMR': METADATA.HMR,
+        'HMR': METADATA.HMR
       }
-    }),
+    })
   ],
 
   /**
@@ -144,7 +144,7 @@ module.exports = webpackMerge(commonConfig, {
       aggregateTimeout: 300,
       poll: 1000
     },
-    outputPath: helpers.root('dist'),
+    outputPath: helpers.root('dist', 'static'),
     proxy: {
       '/api*': {
         target: 'http://localhost:3001',

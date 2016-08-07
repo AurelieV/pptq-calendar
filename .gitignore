@@ -17,7 +17,7 @@
 coverage
 node_modules
 npm-debug.log
-www
+dist
 bower_components
 **/*~
 server/data/service-account-key.json
