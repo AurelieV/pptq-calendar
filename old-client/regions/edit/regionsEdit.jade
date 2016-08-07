@@ -1,0 +1,16 @@
+md-content
+  h2 Nouvelle Région
+  form(name="createRegion" layout="column" layout-align="start start")
+    md-input-container
+      label Nom
+      input(type="text" required ng-model="region.name")
+    md-input-container
+      label Capitaine
+      md-select(ng-model="region.captainId" )
+        md-option(ng-value="judge.id" ng-repeat="judge in $ctrl.judges") {{judge.firstname}} {{judge.lastname}}
+    md-input-container
+      label Id Calendar
+      input(type="text" ng-model="region.googleId")
+    md-button.md-raised.md-primary(ng-click="$ctrl.add(region)") Ajouter
+
+

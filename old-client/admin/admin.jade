@@ -1,0 +1,7 @@
+.tabs(layout="row")
+  .tab(ui-sref-active="active")
+    a.no-style(ui-sref=".users") Utilisateurs
+  .tab(ui-sref-active="active")
+    a.no-style(ui-sref=".regions") Régions
+md-content.md-whiteframe-z1
+  ui-view.md-whiteframe-z1(layout="row" layout-align="center start")

@@ -1,0 +1,8 @@
+md-content
+  ul(ng-if="$ctrl.regions.length > 0")
+    li(ng-repeat="region in $ctrl.regions") {{region.name}}
+  span(ng-if="$ctrl.regions.length === 0") Aucune région créé
+
+md-button.md-fab.main-button(aria-label="Add" layout="column" layout-align="center center")
+  a(ui-sref="^.regions-new")
+    md-icon.material-icons(md-font-icon="icon-add")

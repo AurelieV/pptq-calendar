@@ -16,10 +16,9 @@
   },
   "validations": [],
   "relations": {
-    "capitain": {
+    "captain": {
       "type": "belongsTo",
-      "model": "MyUser",
-      "foreignKey": ""
+      "model": "MyUser"
     }
   },
   "acls": [

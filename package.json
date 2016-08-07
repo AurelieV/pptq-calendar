@@ -5,11 +5,10 @@
   "scripts": {
     "start": "node server/pptq-calendar.js",
     "postinstall": "node_modules/.bin/bower install",
-    "createDB": "node server/scripts/loadDB.js",
-    "build-ng": "lb-ng server/pptq-calendar.js client/assets/js/lb-services.js"
+    "createDB": "node server/scripts/loadDB.js"
   },
   "dependencies": {
-    "@angular/router": "^0.2.0",
+    "angular-ui-router": "^1.0.0-beta.1",
     "async": "^1.5.2",
     "bluebird": "^3.1.1",
     "compression": "^1.0.3",
