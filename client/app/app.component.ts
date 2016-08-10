@@ -9,7 +9,8 @@ import { LoginService } from './login/loginService';
   ],
   providers: [ LoginService ],
   template: `
-    Login: <button (click)="login()">Clic</button>
+    <button (click)="login()">Connexion</button>
+    <button (click)="logout()">Deconnexion</button>
     <ng-outlet></ng-outlet>
   `
 })
@@ -20,6 +21,13 @@ export class App {
     this.logger.login({username: "admin", password: "admin"})
       .subscribe((user) => {
         console.log("user", user);
+      })
+  }
+
+  logout() {
+    this.logger.logout()
+      .subscribe((data) => {
+        console.log("data", data);
       })
   }
 }

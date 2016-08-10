@@ -56,4 +56,13 @@ module.exports = function(myUser) {
     }
     return next();
   });
+
+  myUser.afterRemote('logout', function(context, result, next) {
+    var res = context.res;
+    var req = context.req;
+    if (req.signedCookies && req.signedCookies['access_token']) {
+      res.clearCookie('access_token');
+    }
+    return next();
+  });
 };
