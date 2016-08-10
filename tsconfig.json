@@ -18,6 +18,7 @@
       "jasmine",
       "node",
       "protractor",
+      "rx",
       "selenium-webdriver",
       "source-map",
       "uglify-js",

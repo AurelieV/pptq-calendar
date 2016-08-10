@@ -4,8 +4,22 @@ pmx.http();
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var cookieParser = require('cookie-parser');
 
 var app = module.exports = loopback();
+
+app.use(cookieParser("test"));
+// use loopback.token middleware on all routes
+// setup gear for authentication using cookie (access_token)
+// Note: requires cookie-parser (defined in middleware.json)
+app.use(loopback.token({
+  model: app.models.accessToken,
+  currentUserLiteral: 'me',
+  searchDefaultTokenKeys: false,
+  cookies: ['access_token'],
+  headers: ['access_token', 'X-Access-Token'],
+  params: ['access_token']
+}));
 
 app.start = function() {
   // start the web server
@@ -20,8 +34,6 @@ app.start = function() {
   });
 };
 
-// Activate cookie authentication
-app.use(loopback.token({ model: app.models.accessToken }));
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.

@@ -42,4 +42,18 @@ module.exports = function(myUser) {
      next(error);
    })
   });
+
+  // on login set access_token cookie with same ttl as loopback's accessToken
+  myUser.afterRemote('login', function setLoginCookie(context, accessToken, next) {
+    var res = context.res;
+    if (accessToken != null) {
+      if (accessToken.id != null) {
+        res.cookie('access_token', accessToken.id, {
+          signed: true,
+          maxAge: 1000 * accessToken.ttl
+        });
+      }
+    }
+    return next();
+  });
 };
