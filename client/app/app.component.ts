@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { LoginService } from './login/loginService';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import { SidenavComponent } from './sidenav';
 
 @Component({
   selector: 'app',
@@ -9,16 +10,21 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     './app.style.css'
   ],
   providers: [ LoginService ],
-  directives: [ ROUTER_DIRECTIVES ],
-  template: `
-    <button class="button" (click)="login()">Connexion</button>
-    <button (click)="logout()">Deconnexion</button>
-    <router-outlet></router-outlet>
-  `
+  directives: [ ROUTER_DIRECTIVES, SidenavComponent ],
+  templateUrl: './app.template.html'
 })
 export class App {
+  private isSidenavOpen: boolean = false;
   constructor(private logger: LoginService) {}
 
+  closeSidenav() {
+    this.isSidenavOpen = false;
+  }
+
+  openSidenav() {
+    this.isSidenavOpen = true;
+  }
+  
   login() {
     this.logger.login({username: "admin", password: "admin"})
       .subscribe((user) => {

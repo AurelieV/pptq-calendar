@@ -1,0 +1,20 @@
+<nav class="nav has-shadow">
+  <div class="nav-left">
+  <span class="hamburger" (click)="openSidenav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+    <a class="nav-item is-brand" href="#">
+      <img src="assets/icon/android-icon-36x36.png" alt="Logo">
+    </a>
+  </div>
+</nav>
+<sidenav [isOpen]="isSidenavOpen" (close)="closeSidenav()"></sidenav>
+<div>
+  <button class="button" (click)="login()">Connexion</button>
+  <button (click)="logout()">Deconnexion</button>
+  <router-outlet></router-outlet>
+</div>
+
+
