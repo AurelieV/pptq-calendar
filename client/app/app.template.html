@@ -10,7 +10,31 @@
     </a>
   </div>
 </nav>
-<sidenav [isOpen]="isSidenavOpen" (close)="closeSidenav()"></sidenav>
+<div *ngIf="isSidenavOpen" (click)="closeSidenav()">
+  <div class="background"></div>
+  <aside @flyInOut="in" class="menu" id="sidenav">
+    <p class="menu-label">
+      Général
+    </p>
+    <ul class="menu-list">
+      <li><a href="#">Tournois</a></li>
+    </ul>
+    <p class="menu-label">
+      Administration
+    </p>
+    <ul class="menu-list">
+      <li><a href="#">Utilisateurs</a></li>
+      <li><a href="#">Tournois</a></li>
+    </ul>
+    <p class="menu-label">
+      Compte
+    </p>
+    <ul class="menu-list">
+      <li><a href="#">Mon profil</a></li>
+      <li><a href="#">Connexion</a></li>
+    </ul>
+  </aside>
+</div>
 <div>
   <button class="button" (click)="login()">Connexion</button>
   <button (click)="logout()">Deconnexion</button>

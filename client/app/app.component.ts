@@ -1,17 +1,32 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  keyframes
+} from '@angular/core';
 import { LoginService } from './login/loginService';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { SidenavComponent } from './sidenav';
 
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.style.css'
+  styles: [
+    require('./app.style.scss')
   ],
   providers: [ LoginService ],
-  directives: [ ROUTER_DIRECTIVES, SidenavComponent ],
-  templateUrl: './app.template.html'
+  directives: [ ROUTER_DIRECTIVES ],
+  templateUrl: './app.template.html',
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      state('void', style({transform: 'translateX(-100%)'})),
+      transition('void <=> *', [animate(200)])
+    ])
+  ]
 })
 export class App {
   private isSidenavOpen: boolean = false;
@@ -24,7 +39,7 @@ export class App {
   openSidenav() {
     this.isSidenavOpen = true;
   }
-  
+
   login() {
     this.logger.login({username: "admin", password: "admin"})
       .subscribe((user) => {
