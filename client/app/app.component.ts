@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { LoginService } from './login/loginService';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   selector: 'app',
@@ -8,10 +9,11 @@ import { LoginService } from './login/loginService';
     './app.style.css'
   ],
   providers: [ LoginService ],
+  directives: [ ROUTER_DIRECTIVES ],
   template: `
-    <button (click)="login()">Connexion</button>
+    <button class="button" (click)="login()">Connexion</button>
     <button (click)="logout()">Deconnexion</button>
-    <ng-outlet></ng-outlet>
+    <router-outlet></router-outlet>
   `
 })
 export class App {
