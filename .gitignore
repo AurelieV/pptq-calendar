@@ -21,5 +21,4 @@ dist
 bower_components
 **/*~
 server/data/service-account-key.json
-server/data/xoauthGmailKey.json
 server/datasources.local.js

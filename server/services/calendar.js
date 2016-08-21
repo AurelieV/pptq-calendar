@@ -14,6 +14,3 @@ module.exports = Promise.promisify(jwtClient.authorize, {context: jwtClient})()
   .then(function(tokens) {
     return google.calendar({version: 'v3', auth: jwtClient});
   });
-
-
-

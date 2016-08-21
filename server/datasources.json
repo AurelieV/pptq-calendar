@@ -3,8 +3,8 @@
     "name": "db",
     "connector": "mysql",
     "host": "localhost",
-    "password": "password",
-    "username": "usr",
+    "password": null,
+    "username": "root",
     "database": "pptqCalendar"
   },
   "Gmail": {
