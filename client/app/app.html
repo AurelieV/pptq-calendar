@@ -5,7 +5,7 @@
     <span></span>
     <span></span>
   </span>
-    <a class="nav-item is-brand" href="#">
+    <a class="nav-item is-brand" routerLink="/">
       <img src="static/assets/icons/android-icon-36x36.png" alt="Logo">
     </a>
   </div>
@@ -17,7 +17,13 @@
       Général
     </p>
     <ul class="menu-list">
-      <li><a href="#">Tournois</a></li>
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{exact: true}">Tournois
+        </a>
+      </li>
     </ul>
     <p class="menu-label">
       Administration
@@ -31,7 +37,10 @@
     </p>
     <ul class="menu-list">
       <li><a href="#">Mon profil</a></li>
-      <li><a href="#">Connexion</a></li>
+      <li><a routerLink="/login" routerLinkActive="is-active">Connexion</a></li>
     </ul>
   </aside>
+</div>
+<div class=content>
+  <router-outlet></router-outlet>
 </div>

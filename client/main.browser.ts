@@ -1,6 +1,7 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { App } from './app/app';
 import appModule from './app';
@@ -15,6 +16,7 @@ import appModule from './app';
   imports: [
     // Angular 2
     BrowserModule,
+    RouterModule.forRoot([]),
     // app
     appModule
     // vendors
