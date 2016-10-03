@@ -1,37 +1,10 @@
-import {
-  Component,
-  ViewEncapsulation,
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  keyframes
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: "app",
+  selector: "app-root",
   template: require("./app.html"),
-  encapsulation: ViewEncapsulation.None,
-  styles: [
-    require('./app.style.scss')
-  ],
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({transform: 'translateX(0)'})),
-      state('void', style({transform: 'translateX(-100%)'})),
-      transition('void <=> *', [animate(200)])
-    ])
-  ]
+  encapsulation: ViewEncapsulation.None
 })
-export class App {
+export class AppComponent {
   private isSidenavOpen: boolean = false;
-
-  closeSidenav() {
-    this.isSidenavOpen = false;
-  }
-
-  openSidenav() {
-    this.isSidenavOpen = true;
-  }
 }

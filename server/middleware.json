@@ -23,13 +23,12 @@
     }
   },
   "files": {
-    "loopback#static": [
-      {
-        "paths": ["/static"],
-        "params": "$!../dist/static"
-      }
-    ],
-    "./middleware/serveIndex": {}
+    "loopback#static": [{
+      "params": "$!../dist"
+    }]
+  },
+  "files:after": {
+    "./middleware/serveIndex.js": {}
   },
   "final": {
     "loopback#urlNotFound": {}

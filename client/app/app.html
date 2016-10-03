@@ -1,46 +1,16 @@
 <nav class="nav has-shadow">
   <div class="nav-left">
-  <span class="hamburger" (click)="openSidenav()">
+  <span class="hamburger" (click)="isSidenavOpen = true">
     <span></span>
     <span></span>
     <span></span>
   </span>
     <a class="nav-item is-brand" routerLink="/">
-      <img src="static/assets/icons/android-icon-36x36.png" alt="Logo">
+      <img src="assets/icons/android-icon-36x36.png" alt="Logo">
     </a>
   </div>
 </nav>
-<div *ngIf="isSidenavOpen" (click)="closeSidenav()">
-  <div class="background"></div>
-  <aside [@flyInOut]="in" class="menu" id="sidenav">
-    <p class="menu-label">
-      Général
-    </p>
-    <ul class="menu-list">
-      <li>
-        <a
-          routerLink="/"
-          routerLinkActive="is-active"
-          [routerLinkActiveOptions]="{exact: true}">Tournois
-        </a>
-      </li>
-    </ul>
-    <p class="menu-label">
-      Administration
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Utilisateurs</a></li>
-      <li><a href="#">Tournois</a></li>
-    </ul>
-    <p class="menu-label">
-      Compte
-    </p>
-    <ul class="menu-list">
-      <li><a href="#">Mon profil</a></li>
-      <li><a routerLink="/login" routerLinkActive="is-active">Connexion</a></li>
-    </ul>
-  </aside>
-</div>
+<menu [open]="isSidenavOpen" (close)="isSidenavOpen = false"></menu>
 <div class=content>
   <router-outlet></router-outlet>
 </div>

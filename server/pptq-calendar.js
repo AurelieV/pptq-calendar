@@ -22,7 +22,6 @@ app.use(loopback.token({
 }));
 
 app.start = function() {
-  console.log("coucou");
   // start the web server
   return app.listen(function() {
     app.emit('started');
@@ -39,7 +38,6 @@ app.start = function() {
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {
-  console.log("pouet");
   if (err) throw err;
 
   // start the server if `$ node server.js`

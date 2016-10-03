@@ -1,0 +1,31 @@
+<div (click)="close.emit({})">
+  <div *ngIf="open" class="background"></div>
+  <aside *ngIf="open" [@flyInOut]="state" class="menu" id="sidenav">
+    <p class="menu-label">
+      Général
+    </p>
+    <ul class="menu-list">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{exact: true}">Tournois
+        </a>
+      </li>
+    </ul>
+    <p class="menu-label">
+      Administration
+    </p>
+    <ul class="menu-list">
+      <li><a href="#">Utilisateurs</a></li>
+      <li><a href="#">Tournois</a></li>
+    </ul>
+    <p class="menu-label">
+      Compte
+    </p>
+    <ul class="menu-list">
+      <li><a href="#">Mon profil</a></li>
+      <li><a routerLink="/login" routerLinkActive="is-active">Connexion</a></li>
+    </ul>
+  </aside>
+</div>
