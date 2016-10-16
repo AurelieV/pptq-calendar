@@ -8,14 +8,14 @@
     "build": "ng build"
   },
   "dependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/core": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "@angular/router": "3.0.0",
+    "@angular/common": "~2.1.0",
+    "@angular/compiler": "~2.1.0",
+    "@angular/core": "~2.1.0",
+    "@angular/forms": "~2.1.0",
+    "@angular/http": "~2.1.0",
+    "@angular/platform-browser": "~2.1.0",
+    "@angular/platform-browser-dynamic": "~2.1.0",
+    "@angular/router": "~3.1.0",
     "async": "^1.5.2",
     "bluebird": "3.1.1",
     "bulma": "0.1.2",
@@ -34,15 +34,20 @@
     "loopback-connector-mysql": "^2.2.1",
     "loopback-datasource-juggler": "^2.39.0",
     "moment": "2.11.1",
+    "ng2-redux": "^4.0.0-beta.0",
     "pmx": "0.5.9",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.0",
+    "redux-observable": "^0.12.1",
     "rxjs": "5.0.0-beta.12",
     "serve-favicon": "2.0.1",
+    "systemjs": "0.19.39",
     "web-animations-js": "2.2.2",
-    "zone.js": "0.6.23"
+    "zone.js": "^0.6.25"
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
-    "angular-cli": "1.0.0-beta.16",
+    "angular-cli": "^1.0.0-beta.17",
     "codelyzer": "~0.0.26",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
@@ -54,7 +59,7 @@
     "protractor": "4.0.5",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
-    "typescript": "2.0.2"
+    "typescript": "2.0.3"
   },
   "repository": {
     "type": "git",

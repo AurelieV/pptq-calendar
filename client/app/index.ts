@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgReduxModule } from 'ng2-redux';
+import { HttpModule } from '@angular/http';
 
 import { routing } from './app.routing';
 
@@ -8,12 +10,13 @@ import { LoginComponent } from './login';
 import { PageNotFoundComponent } from './utils/404';
 import { AppComponent } from './app';
 import { MenuComponent } from './menu';
+import { SessionActions } from './actions';
 
 require("!style!css!font-awesome/css/font-awesome.min.css");
 require("!style!css!sass!./utils/bulma.scss");
 
 @NgModule({
-  providers: [],
+  providers: [ SessionActions ],
   declarations: [
     AppComponent,
     TournamentListComponent,
@@ -23,6 +26,8 @@ require("!style!css!sass!./utils/bulma.scss");
   ],
   imports: [
     BrowserModule,
+    NgReduxModule,
+    HttpModule,
     routing
   ],
   bootstrap: [ AppComponent ]

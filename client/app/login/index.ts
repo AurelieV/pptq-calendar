@@ -1,2 +1,2 @@
-export * from './loginComponent';
-export * from './loginService';
+export * from './login.component';
+export * from './session.epic';

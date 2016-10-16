@@ -12,18 +12,8 @@ import '@angular/common';
 import '@angular/core';
 import '@angular/http';
 
-import '@angularclass/form-validators';
-
 // RxJS
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
-
-if ('production' === ENV) {
-  // Production
-
-
-} else {
-  // Development
-
-}
-
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
