@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { IAppState, rootReducer } from './store';
 import { NgRedux, DevToolsExtension } from 'ng2-redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import { LoopBackConfig } from './sdk';
 import { SessionEpics } from './login';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
@@ -35,6 +36,9 @@ export class AppComponent {
       {},
       [ createLogger(), createEpicMiddleware(rootEpic) ],
       [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+
+      LoopBackConfig.setBaseURL('');
+      LoopBackConfig.setApiVersion('api');
   }
 
   ngOnInit() {

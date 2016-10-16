@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgReduxModule } from 'ng2-redux';
 import { HttpModule } from '@angular/http';
+import { SDKModule } from './sdk';
 
 import { routing } from './app.routing';
 
@@ -28,6 +29,7 @@ require("!style!css!sass!./utils/bulma.scss");
     BrowserModule,
     NgReduxModule,
     HttpModule,
+    SDKModule.forRoot(),
     routing
   ],
   bootstrap: [ AppComponent ]

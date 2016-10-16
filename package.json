@@ -5,7 +5,8 @@
   "scripts": {
     "createDB": "node server/scripts/loadDB.js",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build"
+    "build": "ng build",
+    "build:sdk": "lb-sdk server/pptq-calendar.js client/app/sdk -i disabled -w enabled"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
@@ -46,6 +47,7 @@
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
+    "@mean-expert/loopback-sdk-builder": "^2.1.0-beta.10",
     "@types/jasmine": "^2.2.30",
     "angular-cli": "^1.0.0-beta.17",
     "codelyzer": "~0.0.26",

@@ -22,3 +22,4 @@ bower_components
 **/*~
 server/data/service-account-key.json
 server/datasources.local.js
+client/app/sdk
