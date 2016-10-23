@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { SessionActions } from '../actions/session';
 
 @Component({
-  template: require('./login.html')
+  template: require('./login.html'),
+  styles: [require('./login.scss')]
 })
 export class LoginComponent {
   @select()
