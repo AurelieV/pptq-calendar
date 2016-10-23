@@ -1,6 +1,9 @@
 <div (click)="close.emit({})">
   <div *ngIf="open" class="background"></div>
   <aside *ngIf="open" [@flyInOut]="state" class="menu" id="sidenav">
+    <div class="user" *ngIf="user">
+      <span class="icon"><i class="fa fa-circle"></i></span> {{ user.username }}
+    </div>
     <p class="menu-label">
       Général
     </p>
@@ -13,10 +16,10 @@
         </a>
       </li>
     </ul>
-    <p class="menu-label">
+    <p class="menu-label" *ngIf="isAdmin()">
       Administration
     </p>
-    <ul class="menu-list">
+    <ul class="menu-list" *ngIf="isAdmin()">
       <li><a href="#">Utilisateurs</a></li>
       <li><a href="#">Tournois</a></li>
     </ul>
@@ -24,8 +27,9 @@
       Compte
     </p>
     <ul class="menu-list">
-      <li><a href="#">Mon profil</a></li>
-      <li><a routerLink="/login" routerLinkActive="is-active">Connexion</a></li>
+      <li *ngIf="user"><a href="#">Mon profil</a></li>
+      <li *ngIf="!user"><a routerLink="/login" routerLinkActive="is-active">Connexion</a></li>
+      <li *ngIf="user"><a (click)="logout()">Déconnexion</a></li>
     </ul>
   </aside>
 </div>

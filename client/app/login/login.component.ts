@@ -14,7 +14,6 @@ export class LoginComponent {
   constructor(private sessionActions: SessionActions) {}
 
     login(credentials) {
-      console.log("credentials", credentials);
       this.sessionActions.login(credentials);
     }
 

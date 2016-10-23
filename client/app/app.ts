@@ -4,10 +4,11 @@ import { NgRedux, DevToolsExtension } from 'ng2-redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { LoopBackConfig } from './sdk';
 import { SessionEpics } from './login';
-import { select } from 'ng2-redux';
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 const createLogger = require('redux-logger');
+import { readCookie } from './utils/cookie';
+
+import { SessionActions } from './actions';
 
 @Component({
   selector: "app-root",
@@ -17,15 +18,12 @@ const createLogger = require('redux-logger');
 })
 export class AppComponent {
   private isSidenavOpen: boolean = false;
-  @select()
-  private session$: Observable<any>;
-  private username: any = null;
-  private subscriptions: Subscription[] = [];
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private devTool: DevToolsExtension,
-    private sessionEpics: SessionEpics) {
+    private sessionEpics: SessionEpics,
+    private sessionActions: SessionActions) {
 
     const rootEpic = combineEpics(
       ...this.sessionEpics.getEpics()
@@ -42,12 +40,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.session$.subscribe((s) => {
-      this.username = s.user ? s.user.username : null;
-    }));
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((s) => { s.unsubscribe(); })
+    const accessToken = readCookie('access_token');
+    if (accessToken) {
+      this.sessionActions.fetchUser();
+      this.sessionActions.fetchRoles();
+    }
   }
 }
