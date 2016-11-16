@@ -21,13 +21,24 @@
     </p>
     <ul class="menu-list" *ngIf="isAdmin()">
       <li><a href="#">Utilisateurs</a></li>
-      <li><a href="#">Tournois</a></li>
+      <li>
+        <a
+          routerLink="/admin"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{exact: true}">Tournois
+        </a>
+      </li>
     </ul>
     <p class="menu-label">
       Compte
     </p>
     <ul class="menu-list">
-      <li *ngIf="user"><a href="#">Mon profil</a></li>
+      <li *ngIf="user">
+        <a
+          routerLink="/my-profile"
+          routerLinkActive="is-active">Mon profil
+        </a>
+      </li>
       <li *ngIf="!user"><a routerLink="/login" routerLinkActive="is-active">Connexion</a></li>
       <li *ngIf="user"><a (click)="logout()">Déconnexion</a></li>
     </ul>

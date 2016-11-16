@@ -7,24 +7,33 @@ import { SDKModule } from './sdk';
 
 import { routing } from './app.routing';
 
+// Components
 import { TournamentListComponent } from './tournament';
 import { LoginComponent } from './login';
 import { PageNotFoundComponent } from './utils/404';
 import { AppComponent } from './app';
 import { MenuComponent } from './menu';
 import { SessionActions } from './actions';
+import { MyProfileComponent } from './myProfile';
+
+// Modules
+import { AdminModule } from './admin';
+
+// Guards
+import { AuthGuard } from './guards';
 
 require("!style!css!font-awesome/css/font-awesome.min.css");
-require("!style!css!sass!./utils/bulma.scss");
+require("!style!css!sass!./utils/bulma.sass");
 
 @NgModule({
-  providers: [ SessionActions ],
+  providers: [ SessionActions, AuthGuard ],
   declarations: [
     AppComponent,
     TournamentListComponent,
     LoginComponent,
     PageNotFoundComponent,
-    MenuComponent
+    MenuComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,8 @@ require("!style!css!sass!./utils/bulma.scss");
     HttpModule,
     SDKModule.forRoot(),
     FormsModule,
-    routing
+    routing,
+    AdminModule
   ],
   bootstrap: [ AppComponent ]
 })

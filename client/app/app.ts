@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { IAppState, rootReducer } from './store';
 import { NgRedux, DevToolsExtension } from 'ng2-redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
@@ -23,7 +24,9 @@ export class AppComponent {
     private ngRedux: NgRedux<IAppState>,
     private devTool: DevToolsExtension,
     private sessionEpics: SessionEpics,
-    private sessionActions: SessionActions) {
+    private sessionActions: SessionActions,
+    // needed for angulary
+    private router: Router) {
 
     const rootEpic = combineEpics(
       ...this.sessionEpics.getEpics()

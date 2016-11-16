@@ -9,10 +9,10 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
   OnInit,
   OnDestroy
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { MyUser }  from '../sdk/models';
 import { SessionActions } from '../actions';
 import { Session } from '../store';
@@ -32,17 +32,16 @@ import { Subscription } from 'rxjs/Subscription';
     ])
   ]
 })
-export class MenuComponent implements OnChanges, OnInit, OnDestroy {
+export class MenuComponent implements OnInit, OnDestroy {
   @Input() public open: boolean;
   @select() private session$: Observable<any>;
   @Output() public close = new EventEmitter();
 
-  private state: string = 'open';
   private subscriptions: Subscription[] = [];
   private user: MyUser = null;
   private roles: string[] = [];
 
-  constructor(private sessionAction: SessionActions) {}
+  constructor(private sessionAction: SessionActions, private router: Router) {}
 
   ngOnInit() {
     this.subscriptions.push(this.session$.subscribe((s) => {
@@ -53,18 +52,15 @@ export class MenuComponent implements OnChanges, OnInit, OnDestroy {
 
   logout() {
     this.sessionAction.logout();
+    this.router.navigate(['./login']);
   }
 
   isAdmin() {
     return this.roles.indexOf('admin') > -1;
   }
 
-  ngOnChanges(changes) {
-    if (changes.open) {
-      this.state = 'open';
-    } else {
-      this.state = 'close';
-    }
+  get state() {
+    return this.open ? 'open' : 'close';
   }
 
   ngOnDestroy() {

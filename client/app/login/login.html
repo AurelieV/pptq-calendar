@@ -1,5 +1,6 @@
 <form class="box"
-  (submit)="login({username: username.value, password: password.value})">
+  (submit)="login({username: username.value, password: password.value})"
+  *ngIf="!user">
   <label class="label"> Login </label>
   <p class="control">
     <input class="input" type="text" #username>
@@ -12,3 +13,8 @@
     <button class="button is-primary"> Login </button>
   </p>
 </form>
+
+<div *ngIf="user">
+  <p>Vous êtes connecté en tant que {{ user.username }}</p>
+  <p><button class="button is-primary" (click)="logout()"> Deconnexion </button></p>
+</div>
