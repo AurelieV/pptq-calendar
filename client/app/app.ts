@@ -47,6 +47,8 @@ export class AppComponent {
     if (accessToken) {
       this.sessionActions.fetchUser();
       this.sessionActions.fetchRoles();
+    } else {
+      this.sessionActions.setNoUser();
     }
   }
 }

@@ -18,6 +18,7 @@ export class SessionActions {
   static FETCH_ROLES = 'FETCH_ROLES';
   static FETCH_ROLES_SUCCESS = 'FETCH_ROLES_SUCCESS';
   static FETCH_ROLES_ERROR = 'FETCH_ROLES_ERROR';
+  static SET_NO_USER = 'SET_NO_USER';
 
   login(credentials) {
     this.ngRedux.dispatch({
@@ -36,5 +37,9 @@ export class SessionActions {
 
   fetchRoles() {
     this.ngRedux.dispatch({ type: SessionActions.FETCH_ROLES });
+  }
+
+  setNoUser() {
+    this.ngRedux.dispatch({ type: SessionActions.SET_NO_USER });
   }
 }

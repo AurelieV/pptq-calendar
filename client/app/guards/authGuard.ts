@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
   canActivate() {
     return this.ngRedux
       .select<Session>('session')
+      .filter((s) => s.user !== undefined)
       .map((s) => {
         if (s.user) {
           return true;
