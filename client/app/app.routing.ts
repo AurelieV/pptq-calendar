@@ -12,11 +12,26 @@ import { AuthGuard } from './guards';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/tournaments', pathMatch: 'full' },
-  { path: 'tournaments', component: TournamentListComponent },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'tournaments',
+    component: TournamentListComponent,
+    data: {
+      title: 'Tournois'
+    }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Connexion'
+    }
+  },
   {
     path: 'my-profile',
     component: MyProfileComponent,
+    data: {
+      title: 'Profil'
+    },
     canActivate: [AuthGuard]
   },
   { path: '**', component: PageNotFoundComponent }

@@ -1,2 +1,20 @@
-<h1> Administration </h1>
-<router-outlet></router-outlet>
+<div class="section">
+  <div class=container>
+    <div class="tabs is-medium is-fullwidth">
+      <ul class="is-center">
+        <li routerLink="./create-tournament" routerLinkActive="is-active">
+          <a>Tournaments</a>
+        </li>
+        <li routerLink="./seasons" routerLinkActive="is-active">
+          <a>Saisons</a>
+        </li>
+        <li routerLink="./regions" routerLinkActive="is-active">
+          <a>Régions</a>
+        </li>
+      </ul>
+    </div>
+    <div class="view">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

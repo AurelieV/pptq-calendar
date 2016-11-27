@@ -8,9 +8,10 @@
     <a class="nav-item is-brand" routerLink="/">
       <img src="assets/icons/android-icon-36x36.png" alt="Logo">
     </a>
+    <span class="nav-item">{{title}}</span>
   </div>
 </nav>
 <menu [open]="isSidenavOpen" (close)="isSidenavOpen = false"></menu>
-<div class=content>
+<div class="">
   <router-outlet></router-outlet>
 </div>

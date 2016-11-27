@@ -23,7 +23,7 @@ import { AdminModule } from './admin';
 import { AuthGuard } from './guards';
 
 require("!style!css!font-awesome/css/font-awesome.min.css");
-require("!style!css!sass!./utils/bulma.sass");
+require("!style!css!sass!./utils/styles/bulma.sass");
 
 @NgModule({
   providers: [ SessionActions, AuthGuard ],
