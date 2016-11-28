@@ -4,22 +4,25 @@ import {
   NavigationEnd,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { IAppState, rootReducer } from './store';
-import { NgRedux, DevToolsExtension } from 'ng2-redux';
-import { createEpicMiddleware, combineEpics } from 'redux-observable';
-import { LoopBackConfig } from './sdk';
-import { SessionEpics } from './login';
 import { Subscription } from 'rxjs/Subscription';
 const createLogger = require('redux-logger');
-import { readCookie } from './utils/cookie';
+import { NgRedux, DevToolsExtension } from 'ng2-redux';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
 
+import { LoopBackConfig } from './sdk';
+import { readCookie } from './utils/cookie';
+import { IAppState, rootReducer } from './store';
 import { SessionActions } from './actions';
+
+// Epics
+import { SessionEpics } from './login';
+import { RegionsEpics } from './store/epics/regions.epic';
 
 @Component({
   selector: "app-root",
   template: require("./app.html"),
   encapsulation: ViewEncapsulation.None,
-  providers: [ SessionEpics ]
+  providers: [ SessionEpics,  RegionsEpics ]
 })
 export class AppComponent {
   private isSidenavOpen: boolean = false;
@@ -29,13 +32,15 @@ export class AppComponent {
     private ngRedux: NgRedux<IAppState>,
     private devTool: DevToolsExtension,
     private sessionEpics: SessionEpics,
+    private regionsEpics: RegionsEpics,
     private sessionActions: SessionActions,
 
     // needed for angulary
     private router: Router) {
 
     const rootEpic = combineEpics(
-      ...this.sessionEpics.getEpics()
+      ...this.sessionEpics.getEpics(),
+      ...this.regionsEpics.getEpics()
     );
 
     this.ngRedux.configureStore(

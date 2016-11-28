@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule }   from '@angular/forms';
 
 import { routing } from './admin.routing';
 import { AdminComponent } from './admin.component';
@@ -14,7 +16,9 @@ import { SeasonsComponent } from './seasons';
     SeasonsComponent
   ],
   imports: [
-    routing
+    routing,
+    CommonModule,
+    FormsModule
   ],
   bootstrap: [ AdminComponent ]
 })

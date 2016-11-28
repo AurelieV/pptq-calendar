@@ -1,1 +1,63 @@
-<h4> Regions </h4>
+<div class="columns">
+  <div class="column menu">
+    <h5 class="title is-5">
+      <span>Liste des régions</span>
+    </h5>
+    <ul class="menu-list">
+      <li
+        *ngFor="let r of regions"
+        (click)="onRegionClick(r)"> <a [class.is-active]="region.id === r.id">{{r.name}}</a></li>
+    </ul>
+    <span *ngIf="!regions.length"> Pas de région </span>
+  </div>
+  <div class="column">
+    <h5 class="title is-5">
+      <span *ngIf="!region.id">Nouvelle région</span>
+      <span *ngIf="region.id">Edition d'une région</span>
+    </h5>
+    <form (ngSubmit)="onSubmit()" #regionForm="ngForm">
+      <label class="label" for="name">Name</label>
+      <p class="control">
+        <input
+          required
+          name="name"
+          class="input"
+          type="text"
+          [(ngModel)]="region.name"
+          placeholder="Name">
+      </p>
+      <label class="label" for="googleId">Google calendar id</label>
+      <p class="control">
+        <input
+          name="googleId"
+          class="input"
+          type="text"
+          [(ngModel)]="region.googleId"
+          placeholder="Google Id">
+      </p>
+      <label class="label" for="captainId">Capitaine</label>
+      <p class="control">
+        <span class="select">
+          <select name="captainId" [(ngModel)]="region.captainId">
+            <option [value]="null">---</option>
+            <option value="1">Moi</option>
+          </select>
+        </span>
+      </p>
+      <p class="control">
+        <button
+          type="submit"
+          class="button is-primary"
+          [disabled]="!regionForm.form.valid">
+          <span *ngIf="!region.id">Créer</span>
+          <span *ngIf="region.id">Editer</span>
+        </button>
+        <button
+          type="submit"
+          *ngIf="region.id"
+          (click)="resetForm()"
+          class="button is-link">Annuler</button>
+      </p>
+    </form>
+  </div>
+</div>

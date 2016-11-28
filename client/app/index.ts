@@ -13,7 +13,7 @@ import { LoginComponent } from './login';
 import { PageNotFoundComponent } from './utils/404';
 import { AppComponent } from './app';
 import { MenuComponent } from './menu';
-import { SessionActions } from './actions';
+import { SessionActions, RegionsActions } from './actions';
 import { MyProfileComponent } from './myProfile';
 
 // Modules
@@ -26,7 +26,7 @@ require("!style!css!font-awesome/css/font-awesome.min.css");
 require("!style!css!sass!./utils/styles/bulma.sass");
 
 @NgModule({
-  providers: [ SessionActions, AuthGuard ],
+  providers: [ SessionActions, RegionsActions, AuthGuard ],
   declarations: [
     AppComponent,
     TournamentListComponent,

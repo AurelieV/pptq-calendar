@@ -1,9 +1,11 @@
-import { sessionReducer } from "./reducers/session";
+import { sessionReducer } from './reducers/session';
+import { regionsReducer } from './reducers/regions';
 import { combineReducers } from 'redux';
-import { MyUser }  from '../sdk/models';
+import { MyUser, Region }  from '../sdk/models';
 
 export const rootReducer = combineReducers<IAppState>({
-  session: sessionReducer
+  session: sessionReducer,
+  regions: regionsReducer
 });
 
 export interface Session {
@@ -13,4 +15,5 @@ export interface Session {
 
 export interface IAppState {
   session?: Session;
+  regions?: Region[];
 };
