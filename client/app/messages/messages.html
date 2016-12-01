@@ -1,0 +1,7 @@
+<div
+  [@easeIn]="in"
+  *ngFor="let message of messages | async"
+  [class]="'is-' + message.type + ' notification'">
+  <button class="delete" (click)="delete(message)"></button>
+  {{message.content}}
+</div>

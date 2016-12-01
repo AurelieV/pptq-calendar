@@ -20,6 +20,7 @@ import { SessionEpics } from './login';
 @Component({
   selector: "app-root",
   template: require("./app.html"),
+  styles: [ require("./app.scss") ],
   encapsulation: ViewEncapsulation.None,
   providers: [ SessionEpics ]
 })

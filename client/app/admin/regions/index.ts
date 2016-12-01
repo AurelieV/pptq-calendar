@@ -4,7 +4,7 @@ import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { RegionsActions } from '../../actions';
+import { RegionsActions, MessagesActions } from '../../actions';
 import { Region, RegionInterface } from '../../sdk/models';
 
 @Component({
@@ -23,7 +23,10 @@ export class RegionsComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   private isErrored: boolean = false;
 
-  constructor(private regionsActions: RegionsActions) {}
+  constructor(
+    private regionsActions: RegionsActions,
+    private messagesActions: MessagesActions
+  ) {}
 
   ngOnInit() {
     this.regions$.subscribe((regions) => this.regions = regions);
@@ -49,16 +52,20 @@ export class RegionsComponent implements OnInit {
     this.isErrored = false;
     if (this.region.id) {
       this.regionsActions.updateRegion(this.region)
-        .subscribe(() => {
+        .subscribe((r) => {
           this.resetForm();
+          const content = `La région ${r.name} a bien été mise à jour`;
+          this.messagesActions.addMessage(content, 'success');
         }, (err) => {
           this.isErrored = true;
         })
       ;
     } else {
       this.regionsActions.addRegion(this.region)
-        .subscribe(() => {
+        .subscribe((r) => {
           this.resetForm();
+          const content = `La région ${r.name} a bien été créée`;
+          this.messagesActions.addMessage(content, 'success');
         }, (err) => {
           this.isErrored = true;
         })
