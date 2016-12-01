@@ -16,13 +16,12 @@ import { SessionActions } from './actions';
 
 // Epics
 import { SessionEpics } from './login';
-import { RegionsEpics } from './store/epics/regions.epic';
 
 @Component({
   selector: "app-root",
   template: require("./app.html"),
   encapsulation: ViewEncapsulation.None,
-  providers: [ SessionEpics,  RegionsEpics ]
+  providers: [ SessionEpics ]
 })
 export class AppComponent {
   private isSidenavOpen: boolean = false;
@@ -32,15 +31,13 @@ export class AppComponent {
     private ngRedux: NgRedux<IAppState>,
     private devTool: DevToolsExtension,
     private sessionEpics: SessionEpics,
-    private regionsEpics: RegionsEpics,
     private sessionActions: SessionActions,
 
     // needed for angulary
     private router: Router) {
 
     const rootEpic = combineEpics(
-      ...this.sessionEpics.getEpics(),
-      ...this.regionsEpics.getEpics()
+      ...this.sessionEpics.getEpics()
     );
 
     this.ngRedux.configureStore(

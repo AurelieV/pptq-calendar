@@ -16,6 +16,10 @@
       <span *ngIf="region.id">Edition d'une région</span>
     </h5>
     <form (ngSubmit)="onSubmit()" #regionForm="ngForm">
+      <article class="message is-danger" *ngIf="isErrored">
+        <div class="message-header">Erreur</div>
+        <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
+      </article>
       <label class="label" for="name">Name</label>
       <p class="control">
         <input

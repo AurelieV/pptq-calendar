@@ -17,9 +17,11 @@ export class RegionsComponent implements OnInit {
   private form: NgForm;
   private regions: Region[];
   private region: RegionInterface = {
-    name: ""
+    name: "",
+    captainId: null
   };
   private subscriptions: Subscription[] = [];
+  private isErrored: boolean = false;
 
   constructor(private regionsActions: RegionsActions) {}
 
@@ -35,18 +37,32 @@ export class RegionsComponent implements OnInit {
   }
 
   resetForm() {
+    this.isErrored = false;
     this.form.reset();
     this.region = {
-      name: ""
+      name: "",
+      captainId: null
     }
   }
 
   onSubmit() {
+    this.isErrored = false;
     if (this.region.id) {
       this.regionsActions.updateRegion(this.region)
+        .subscribe(() => {
+          this.resetForm();
+        }, (err) => {
+          this.isErrored = true;
+        })
+      ;
     } else {
-      this.regionsActions.addRegion(this.region);
+      this.regionsActions.addRegion(this.region)
+        .subscribe(() => {
+          this.resetForm();
+        }, (err) => {
+          this.isErrored = true;
+        })
+      ;
     }
-    this.resetForm();
   }
 }
