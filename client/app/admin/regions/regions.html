@@ -44,7 +44,11 @@
         <span class="select">
           <select name="captainId" [(ngModel)]="region.captainId">
             <option [value]="null">---</option>
-            <option value="1">Moi</option>
+            <option
+              *ngFor="let user of users$ | async"
+              [value]="user.id">
+              {{user.username}} ({{user.firstname}} - {{user.lastname}})
+            </option>
           </select>
         </span>
       </p>

@@ -4,8 +4,8 @@ import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { RegionsActions, MessagesActions } from '../../actions';
-import { Region, RegionInterface } from '../../sdk/models';
+import { RegionsActions, MessagesActions, UsersActions } from '../../actions';
+import { Region, RegionInterface, MyUser } from '../../sdk/models';
 
 @Component({
   template: require('./regions.html')
@@ -13,6 +13,8 @@ import { Region, RegionInterface } from '../../sdk/models';
 export class RegionsComponent implements OnInit {
   @select()
   private regions$: Observable<Region[]>;
+  @select()
+  private users$: Observable<MyUser[]>;
   @ViewChild('regionForm')
   private form: NgForm;
   private regions: Region[];
@@ -25,12 +27,14 @@ export class RegionsComponent implements OnInit {
 
   constructor(
     private regionsActions: RegionsActions,
-    private messagesActions: MessagesActions
+    private messagesActions: MessagesActions,
+    private usersActions: UsersActions
   ) {}
 
   ngOnInit() {
     this.regions$.subscribe((regions) => this.regions = regions);
     this.regionsActions.fetchRegions();
+    this.usersActions.fetchUsers();
   }
 
   onRegionClick(region) {

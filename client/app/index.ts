@@ -17,7 +17,12 @@ import { MyProfileComponent } from './myProfile';
 import { MessagesComponent } from './messages';
 
 // Services
-import { SessionActions, RegionsActions, MessagesActions } from './actions';
+import {
+  SessionActions,
+  RegionsActions,
+  MessagesActions,
+  UsersActions
+} from './actions';
 
 // Modules
 import { AdminModule } from './admin';
@@ -29,7 +34,13 @@ require("!style!css!font-awesome/css/font-awesome.min.css");
 require("!style!css!sass!./utils/styles/bulma.sass");
 
 @NgModule({
-  providers: [ SessionActions, RegionsActions, MessagesActions, AuthGuard ],
+  providers: [
+    SessionActions,
+    RegionsActions,
+    MessagesActions,
+    UsersActions,
+    AuthGuard
+  ],
   declarations: [
     AppComponent,
     TournamentListComponent,
