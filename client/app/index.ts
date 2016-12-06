@@ -21,7 +21,9 @@ import {
   SessionActions,
   RegionsActions,
   MessagesActions,
-  UsersActions
+  UsersActions,
+  SeasonsActions,
+  TournamentsActions
 } from './actions';
 
 // Modules
@@ -39,6 +41,8 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     RegionsActions,
     MessagesActions,
     UsersActions,
+    SeasonsActions,
+    TournamentsActions,
     AuthGuard
   ],
   declarations: [

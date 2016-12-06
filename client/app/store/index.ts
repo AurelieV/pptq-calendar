@@ -2,14 +2,18 @@ import { sessionReducer } from './reducers/session';
 import { regionsReducer } from './reducers/regions';
 import { messagesReducer } from './reducers/messages';
 import { usersReducer } from './reducers/users';
+import { seasonsReducer } from './reducers/seasons';
+import { tournamentsReducer } from './reducers/tournaments';
 import { combineReducers } from 'redux';
-import { MyUser, Region }  from '../sdk/models';
+import { MyUser, Region, Season, Tournament }  from '../sdk/models';
 
 export const rootReducer = combineReducers<IAppState>({
   session: sessionReducer,
   regions: regionsReducer,
   messages: messagesReducer,
-  users: usersReducer
+  users: usersReducer,
+  seasons: seasonsReducer,
+  tournaments: tournamentsReducer
 });
 
 export interface Session {
@@ -29,4 +33,6 @@ export interface IAppState {
   regions?: Region[];
   messages?: Message[];
   users?: MyUser[];
+  seasons?: Season[];
+  tournaments?: Tournament[];
 };

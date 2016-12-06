@@ -1,62 +1,33 @@
 {
-  "name": "Tournament",
+  "name": "Season",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "town": {
+    "name": {
       "type": "string",
       "required": true
     },
     "format": {
-      "type": "string"
-    },
-    "date": {
-      "type": "date",
-      "required": true
-    },
-    "isDateConfirmed": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
-    "organizer": {
       "type": "string",
       "required": true
     },
-    "information": {
-      "type": "string"
+    "startDate": {
+      "type": "date",
+      "required": true
     },
-    "phoneContact": {
-      "type": "string"
-    },
-    "emailContact": {
-      "type": "string"
-    },
-    "adress": {
-      "type": "string"
-    },
-    "googleId": {
-      "type": "string"
+    "endDate": {
+      "type": "date",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "headJudge": {
-      "type": "belongsTo",
-      "model": "MyUser"
-    },
-    "region": {
-      "type": "belongsTo",
-      "model": "Region",
-      "foreignKey": ""
-    },
-    "season": {
-      "type": "belongsTo",
-      "model": "Season",
-      "foreignKey": ""
+    "tournaments": {
+      "type": "hasMany",
+      "model": "Tournament"
     }
   },
   "acls": [

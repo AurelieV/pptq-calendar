@@ -14,6 +14,7 @@ module.exports = function(Tournament) {
         })
         .catch(function (error) {
           pmx.emit('tournament:updateGoogleError', error);
+          console.log("error", error);
           next();
         });
     } else if (ctx.currentInstance) {
@@ -21,10 +22,12 @@ module.exports = function(Tournament) {
         .then(function(googleEvent) {
           ctx.data.googleId = googleEvent.id;
           pmx.emit('tournament:updateGoogle', googleEvent);
+          console.log("success")
           next();
         })
         .catch(function (error) {
           pmx.emit('tournament:updateGoogleError', error);
+          console.log("error", error);
           next();
         });
     }

@@ -1,1 +1,79 @@
-<h4> Saisons </h4>
+<div class="columns">
+  <div class="column menu">
+    <h5 class="title is-5">
+      <span>Liste des saisons</span>
+    </h5>
+    <ul class="menu-list">
+      <li
+        *ngFor="let s of seasons"
+        (click)="onSeasonClick(s)"> <a [class.is-active]="season.id === s.id">{{s.name}}</a></li>
+    </ul>
+    <span *ngIf="!seasons.length"> Pas de saison </span>
+  </div>
+  <div class="column">
+    <h5 class="title is-5">
+      <span *ngIf="!season.id">Nouvelle saison</span>
+      <span *ngIf="season.id">Edition d'une saison</span>
+    </h5>
+    <form (ngSubmit)="onSubmit()" #seasonForm="ngForm">
+      <article class="message is-danger" *ngIf="isErrored">
+        <div class="message-header">Erreur</div>
+        <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
+      </article>
+      <label class="label" for="name">Name</label>
+      <p class="control">
+        <input
+          required
+          name="name"
+          class="input"
+          type="text"
+          [(ngModel)]="season.name"
+          placeholder="Name">
+      </p>
+      <label class="label" for="format">Format</label>
+      <p class="control">
+        <span class="select">
+          <select name="format" [(ngModel)]="season.format">
+            <option
+              *ngFor="let f of formats"
+              [ngValue]="f.key"> {{f.name}} </option>
+          </select>
+        </span>
+      </p>
+      <label class="label" for="startDate">Date de début</label>
+      <p class="control">
+        <input
+          required
+          name="startDate"
+          class="input"
+          type="date"
+          [(ngModel)]="season.startDate"
+          placeholder="Date de début">
+      </p>
+      <label class="label" for="endDate">Date de fin</label>
+      <p class="control">
+        <input
+          required
+          name="endDate"
+          class="input"
+          type="date"
+          [(ngModel)]="season.endDate"
+          placeholder="Date de fin">
+      </p>
+      <p class="control">
+        <button
+          type="submit"
+          class="button is-primary"
+          [disabled]="!seasonForm.form.valid">
+          <span *ngIf="!season.id">Créer</span>
+          <span *ngIf="season.id">Editer</span>
+        </button>
+        <button
+          type="submit"
+          *ngIf="season.id"
+          (click)="resetForm()"
+          class="button is-link">Annuler</button>
+      </p>
+    </form>
+  </div>
+</div>

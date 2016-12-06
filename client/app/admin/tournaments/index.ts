@@ -1,1 +1,1 @@
-export { CreateTournamentComponent } from './createTournament/createTournament.component';
+export { CreateTournamentComponent } from './createTournament';

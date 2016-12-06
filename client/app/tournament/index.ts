@@ -1,1 +1,1 @@
-export * from './tournamentListComponent';
+export * from './list';

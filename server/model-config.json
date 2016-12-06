@@ -51,5 +51,9 @@
   "Region": {
     "dataSource": "db",
     "public": true
+  },
+  "Season": {
+    "dataSource": "db",
+    "public": true
   }
 }

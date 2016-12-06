@@ -1,1 +1,100 @@
-<h4> Create tournament </h4>
+<div class="columns">
+  <div class="column menu">
+    <h5 class="title is-5">
+      <span>Liste des tournois</span>
+    </h5>
+    <ul class="menu-list">
+      <li
+        *ngFor="let t of tournaments"
+        (click)="onTournamentClick(t)">
+        <a [class.is-active]="tournament.id === t.id">{{t.town}} - {{t.format}} - {{t.organizer}}</a>
+      </li>
+    </ul>
+    <span *ngIf="!tournaments.length"> Pas de tournois </span>
+  </div>
+  <div class="column">
+    <h5 class="title is-5">
+      <span *ngIf="!tournament.id">Nouveau tournoi</span>
+      <span *ngIf="tournament.id">Edition d'un tournoi</span>
+    </h5>
+    <form (ngSubmit)="onSubmit()" #tournamentForm="ngForm">
+      <article class="message is-danger" *ngIf="isErrored">
+        <div class="message-header">Erreur</div>
+        <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
+      </article>
+      <label class="label" for="town">Ville</label>
+      <p class="control">
+        <input
+          required
+          name="town"
+          class="input"
+          type="text"
+          [(ngModel)]="tournament.town"
+          placeholder="Ville">
+      </p>
+      <label class="label" for="organizer">Organisateur</label>
+      <p class="control">
+        <input
+          required
+          name="organizer"
+          class="input"
+          type="text"
+          [(ngModel)]="tournament.organizer"
+          placeholder="Organisateur">
+      </p>
+      <label class="label" for="season">Saison</label>
+      <p class="control">
+        <span class="select">
+          <select name="season" [(ngModel)]="tournament.seasonId" required>
+            <option
+              *ngFor="let s of seasons$ | async"
+              [ngValue]="s.id"> {{s.name}} </option>
+          </select>
+        </span>
+      </p>
+      <label class="label" for="region">Région</label>
+      <p class="control">
+        <span class="select">
+          <select name="region" [(ngModel)]="tournament.regionId" required>
+            <option
+              *ngFor="let r of regions$ | async"
+              [ngValue]="r.id"> {{r.name}} </option>
+          </select>
+        </span>
+      </p>
+      <label class="label" for="format">Format</label>
+      <p class="control">
+        <span class="select">
+          <select name="format" [(ngModel)]="tournament.format">
+            <option
+              *ngFor="let f of formats"
+              [ngValue]="f.key"> {{f.name}} </option>
+          </select>
+        </span>
+      </p>
+      <label class="label" for="date">Date</label>
+      <p class="control">
+        <input
+          name="date"
+          class="input"
+          type="date"
+          [(ngModel)]="tournament.date"
+          placeholder="Date de début">
+      </p>
+      <p class="control">
+        <button
+          type="submit"
+          class="button is-primary"
+          [disabled]="!tournamentForm.form.valid">
+          <span *ngIf="!tournament.id">Créer</span>
+          <span *ngIf="tournament.id">Editer</span>
+        </button>
+        <button
+          type="submit"
+          *ngIf="tournament.id"
+          (click)="resetForm()"
+          class="button is-link">Annuler</button>
+      </p>
+    </form>
+  </div>
+</div>
