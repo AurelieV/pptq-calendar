@@ -1,1 +1,15 @@
-<h1>Tournament List</h1>
+<div class="tournaments">
+  <div class="week columns">
+    <div class="day column">
+      <div class="tournament box" *ngFor="let tournament of tournaments">
+        <p class="title is-4">{{tournament.town}}-{{tournament.organizer}}</p>
+        <p class="subtitle is-6 uppercase">{{tournament.format}}</p>
+      </div>
+    </div>
+    <div class="day column">
+      <div class="tournament box" *ngFor="let tournament of tournaments">
+        <p class="title is-4">{{tournament.town}}-{{tournament.organizer}}</p>
+        <p class="subtitle is-6 uppercase">{{tournament.format}}</p>
+      </div>
+    </div>
+  </div>

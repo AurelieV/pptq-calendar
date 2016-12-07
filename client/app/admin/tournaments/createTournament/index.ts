@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +27,7 @@ const defaultTournament = {
   selector: 'create-tournament',
   template: require('./createTournament.html')
 })
-export class CreateTournamentComponent implements OnInit {
+export class CreateTournamentComponent implements OnInit, OnDestroy {
   @select()
   private tournaments$: Observable<Tournament[]>;
   @select()
@@ -54,7 +54,9 @@ export class CreateTournamentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.tournaments$.subscribe((tournaments) => this.tournaments = tournaments);
+    this.subscriptions.push(this.tournaments$.subscribe((tournaments) =>
+      this.tournaments = tournaments
+    ));
     this.tournamentsActions.fetchTournaments();
     this.regionsActions.fetchRegions();
     this.seasonsActions.fetchSeasons();
@@ -95,5 +97,9 @@ export class CreateTournamentComponent implements OnInit {
         })
       ;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 }
