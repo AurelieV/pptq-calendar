@@ -24,3 +24,5 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/publishLast';
 
 import 'moment';
+import 'moment/locale/fr';
+import 'lodash';

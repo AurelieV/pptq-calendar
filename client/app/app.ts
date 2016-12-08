@@ -17,6 +17,8 @@ import { SessionActions } from './actions';
 // Epics
 import { SessionEpics } from './login';
 
+const moment = require('moment');
+
 @Component({
   selector: "app-root",
   template: require("./app.html"),
@@ -52,6 +54,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    moment.locale('fr');
     const accessToken = readCookie('access_token');
     if (accessToken) {
       this.sessionActions.fetchUser();
