@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SessionActions } from '../actions/session';
-import { MyUser } from '../sdk/Models';
+import { MyUser } from '../sdk/models';
 
 @Component({
   template: require('./login.html'),
