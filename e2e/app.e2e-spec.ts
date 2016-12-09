@@ -1,10 +1,10 @@
-import { PptqBisPage } from './app.po';
+import { PptqCalendarPage } from './app.po';
 
-describe('pptq-bis App', function() {
-  let page: PptqBisPage;
+describe('pptq-calendar App', function() {
+  let page: PptqCalendarPage;
 
   beforeEach(() => {
-    page = new PptqBisPage();
+    page = new PptqCalendarPage();
   });
 
   it('should display message saying app works', () => {

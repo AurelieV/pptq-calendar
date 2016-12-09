@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { NgReduxModule } from 'ng2-redux';
+const createLogger = require('redux-logger');
+import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { HttpModule } from '@angular/http';
-import { SDKModule } from './sdk';
+import { SDKBrowserModule } from './sdk/index';
+import { LoopBackConfig } from './sdk';
 
 import { routing } from './app.routing';
+import { IAppState, rootReducer } from './store';
 
 // Components
 import { TournamentListComponent } from './tournament';
@@ -15,6 +19,9 @@ import { AppComponent } from './app';
 import { MenuComponent } from './menu';
 import { MyProfileComponent } from './myProfile';
 import { MessagesComponent } from './messages';
+
+// Epics
+import { SessionEpics } from './login';
 
 // Services
 import {
@@ -36,6 +43,15 @@ require("!style!css!font-awesome/css/font-awesome.min.css");
 require("!style!css!sass!./utils/styles/bulma.sass");
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    NgReduxModule.forRoot(),
+    HttpModule,
+    SDKBrowserModule.forRoot(),
+    FormsModule,
+    routing,
+    AdminModule
+  ],
   providers: [
     SessionActions,
     RegionsActions,
@@ -43,7 +59,8 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     UsersActions,
     SeasonsActions,
     TournamentsActions,
-    AuthGuard
+    AuthGuard,
+    SessionEpics
   ],
   declarations: [
     AppComponent,
@@ -54,15 +71,25 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     MyProfileComponent,
     MessagesComponent
   ],
-  imports: [
-    BrowserModule,
-    NgReduxModule,
-    HttpModule,
-    SDKModule.forRoot(),
-    FormsModule,
-    routing,
-    AdminModule
-  ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private devTool: DevToolsExtension,
+    private sessionEpics: SessionEpics) {
+
+    const rootEpic = combineEpics(
+      ...this.sessionEpics.getEpics()
+    );
+
+    this.ngRedux.configureStore(
+      rootReducer,
+      {},
+      [ createLogger(), createEpicMiddleware(rootEpic) ],
+      [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+
+      LoopBackConfig.setBaseURL('');
+      LoopBackConfig.setApiVersion('api');
+  }
+}

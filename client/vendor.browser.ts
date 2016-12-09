@@ -23,6 +23,9 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/publishLast';
 
+import 'ng2-redux';
+import 'redux-observable';
+
 import 'moment';
 import 'moment/locale/fr';
 import 'lodash';

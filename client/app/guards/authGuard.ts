@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { NgRedux } from 'ng2-redux';
+import { Observable } from 'rxjs/Observable';
 
 import { IAppState, Session } from '../store';
 

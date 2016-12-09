@@ -4,7 +4,7 @@ import { messagesReducer } from './reducers/messages';
 import { usersReducer } from './reducers/users';
 import { seasonsReducer } from './reducers/seasons';
 import { tournamentsReducer } from './reducers/tournaments';
-import { combineReducers } from 'redux';
+import { combineReducers, Action } from 'redux';
 import { MyUser, Region, Season, Tournament }  from '../sdk/models';
 
 export const rootReducer = combineReducers<IAppState>({
