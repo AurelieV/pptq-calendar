@@ -7,7 +7,7 @@
       <li
         *ngFor="let t of tournaments"
         (click)="onTournamentClick(t)">
-        <a [class.is-active]="tournament.id === t.id">{{t.town}} - {{t.format}} - {{t.organizer}}</a>
+        <a [class.is-active]="tournament.id === t.id">{{t.town}} - {{t.format || '?'}} - {{t.organizer}}</a>
       </li>
     </ul>
     <span *ngIf="!tournaments.length"> Pas de tournois </span>
@@ -66,6 +66,7 @@
       <p class="control">
         <span class="select">
           <select name="format" [(ngModel)]="tournament.format">
+            <option [ngValue]="null"> - </option>
             <option
               *ngFor="let f of formats"
               [ngValue]="f.key"> {{f.name}} </option>
