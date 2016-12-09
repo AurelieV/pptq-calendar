@@ -1,13 +1,16 @@
 <div class="tournaments">
   <div class="week" *ngFor="let week of weeks">
-    <h1>{{week.week.start}}-{{week.week.end}}</h1>
     <div class="columns">
       <div class="day column" *ngFor="let day of week.days">
-        <h2>{{day.day}}</h2>
+        <h2 class="title is-5">{{day.day}}</h2>
         <div class="tournament box" *ngFor="let tournament of day.tournaments">
           <p class="title is-4">{{tournament.town}}-{{tournament.organizer}}</p>
           <p class="subtitle is-6 uppercase">{{tournament.format}}</p>
         </div>
+        <div class="empty"*ngIf="day.tournaments.length === 0">
+          <p class="title is-4">Pas de tournoi</p>
+        </div>
       </div>
     </div>
+    <div class="divider"></div>
   </div>
