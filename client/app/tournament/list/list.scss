@@ -11,8 +11,15 @@
   margin: 5px;
 }
 .tournament {
+  width: auto;
   .uppercase {
     text-transform: uppercase;
+  }
+  .content {
+    display: flex;
+    .data {
+      flex: 1;
+    }
   }
 }
 .empty {

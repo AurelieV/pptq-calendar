@@ -3,19 +3,28 @@
     <div class="columns">
       <div class="day column" *ngFor="let day of week.days">
         <h2 class="title is-5">{{day.day}}</h2>
-        <div class="tournament box" *ngFor="let tournament of day.tournaments">
-          <p>
-            <span class="title is-4">{{tournament.town}}-{{tournament.organizer}}</span>
-            <span class="icon pull-right not-confirmed" *ngIf="!tournament.isDateConfirmed">
-              <i class="fa fa-exclamation-triangle"></i>
-            </span>
-          </p>
-          <p class="subtitle is-6 uppercase">{{tournament.format || '?'}}</p>
+        <div class="card tournament" *ngFor="let tournament of day.tournaments">
+          <div class="card-content">
+            <div class="content">
+              <div class="data">
+                <p class="title is-4">{{tournament.town}}-{{tournament.organizer}}</p>
+                <p class="subtitle is-6 uppercase">{{tournament.format || '?'}}</p>
+              </div>
+              <div class="info" *ngIf="!tournament.isDateConfirmed">
+                <span class="icon not-confirmed">
+                  <i class="fa fa-exclamation-triangle"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer" *ngIf="isAdmin">
+            <a [routerLink]="['/admin/tournaments', {id: tournament.id}]" class="card-footer-item">Edit</a>
+          </footer>
         </div>
         <div class="empty"*ngIf="day.tournaments.length === 0">
           <p class="title is-4">Pas de tournoi</p>
         </div>
       </div>
-    </div>
-    <div class="divider"></div>
   </div>
+  <div class="divider"></div>
+</div>

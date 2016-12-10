@@ -15,10 +15,10 @@ const adminRoutes: Routes = [
     },
     component: AdminComponent,
     children: [
-      { path: 'create-tournament', component: AdminTournamentsComponent },
+      { path: 'tournaments', component: AdminTournamentsComponent },
       { path: 'regions', component: AdminRegionsComponent },
       { path: 'seasons', component: AdminSeasonsComponent },
-      { path: '', redirectTo: 'create-tournament', pathMatch: 'full' }
+      { path: '', redirectTo: 'tournaments', pathMatch: 'full' }
     ]
   }
 ];

@@ -26,6 +26,8 @@ export class TournamentListComponent implements OnInit, OnDestroy {
   private tournaments$: Observable<Tournament[]>;
   private weeks: Week[] = [];
   private subscriptions: Subscription[] = [];
+  private isAdmin: boolean = false;
+  @select() private session$: Observable<any>;
 
   constructor(private tournamentsActions: TournamentsActions) {}
 
@@ -44,6 +46,11 @@ export class TournamentListComponent implements OnInit, OnDestroy {
         });
       });
       this.weeks = byWeek;
+    }));
+    this.subscriptions.push(this.session$.subscribe((s) => {
+      const roles = s.roles;
+      if (!roles) return;
+      this.isAdmin = roles.indexOf('admin') > -1;
     }));
     this.tournamentsActions.fetchTournaments();
   }
