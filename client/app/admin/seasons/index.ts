@@ -16,7 +16,7 @@ const defaultSeason = {
 @Component({
   template: require('./seasons.html')
 })
-export class SeasonsComponent implements OnInit {
+export class AdminSeasonsComponent implements OnInit {
   @select()
   private seasons$: Observable<Season[]>;
   @ViewChild('seasonForm')

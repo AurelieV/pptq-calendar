@@ -2,9 +2,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 // Components
-import { CreateTournamentComponent } from './tournaments';
-import { RegionsComponent } from "./regions";
-import { SeasonsComponent } from "./seasons";
+import { AdminTournamentsComponent } from './tournaments';
+import { AdminRegionsComponent } from "./regions";
+import { AdminSeasonsComponent } from "./seasons";
 import { AdminComponent } from './admin.component';
 
 const adminRoutes: Routes = [
@@ -15,9 +15,9 @@ const adminRoutes: Routes = [
     },
     component: AdminComponent,
     children: [
-      { path: 'create-tournament', component: CreateTournamentComponent },
-      { path: 'regions', component: RegionsComponent },
-      { path: 'seasons', component: SeasonsComponent },
+      { path: 'create-tournament', component: AdminTournamentsComponent },
+      { path: 'regions', component: AdminRegionsComponent },
+      { path: 'seasons', component: AdminSeasonsComponent },
       { path: '', redirectTo: 'create-tournament', pathMatch: 'full' }
     ]
   }

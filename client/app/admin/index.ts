@@ -4,16 +4,16 @@ import { FormsModule }   from '@angular/forms';
 
 import { routing } from './admin.routing';
 import { AdminComponent } from './admin.component';
-import { CreateTournamentComponent } from './tournaments';
-import { RegionsComponent } from './regions';
-import { SeasonsComponent } from './seasons';
+import { AdminTournamentsComponent } from './tournaments';
+import { AdminRegionsComponent } from './regions';
+import { AdminSeasonsComponent } from './seasons';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    CreateTournamentComponent,
-    RegionsComponent,
-    SeasonsComponent
+    AdminTournamentsComponent,
+    AdminRegionsComponent,
+    AdminSeasonsComponent
   ],
   imports: [
     routing,

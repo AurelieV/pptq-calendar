@@ -16,7 +16,7 @@ const defaultRegion = {
 @Component({
   template: require('./regions.html')
 })
-export class RegionsComponent implements OnInit {
+export class AdminRegionsComponent implements OnInit {
   @select()
   private regions$: Observable<Region[]>;
   @select()
