@@ -15,7 +15,7 @@
       <span *ngIf="!region.id">Nouvelle région</span>
       <span *ngIf="region.id">Edition d'une région</span>
     </h5>
-    <form (ngSubmit)="onSubmit()" #regionForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #regionForm="ngForm" *ngIf="showForm">
       <article class="message is-danger" *ngIf="isErrored">
         <div class="message-header">Erreur</div>
         <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
@@ -43,10 +43,10 @@
       <p class="control">
         <span class="select">
           <select name="captainId" [(ngModel)]="region.captainId">
-            <option [value]="null">---</option>
+            <option [ngValue]="null">-</option>
             <option
               *ngFor="let user of users$ | async"
-              [value]="user.id">
+              [ngValue]="user.id">
               {{user.username}} ({{user.firstname}} - {{user.lastname}})
             </option>
           </select>
@@ -63,7 +63,7 @@
         <button
           type="submit"
           *ngIf="region.id"
-          (click)="resetForm()"
+          (click)="cancel()"
           class="button is-link">Annuler</button>
       </p>
     </form>

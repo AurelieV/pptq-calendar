@@ -8,8 +8,8 @@ import { SeasonsActions, MessagesActions } from '../../actions';
 import { Season, SeasonInterface } from '../../sdk/models';
 
 const defaultSeason = {
-  name: "",
-  format: 'standard',
+  name: '',
+  format: '',
   startDate: null,
   endDate: null
 };
@@ -29,6 +29,7 @@ export class SeasonsComponent implements OnInit {
     {key: 'standard', name: "Standard"},
     {key: 'modern', name: "Modern"}
   ]
+  private showForm: boolean = true;
 
   constructor(
     private seasonsActions: SeasonsActions,
@@ -40,16 +41,17 @@ export class SeasonsComponent implements OnInit {
     this.seasonsActions.fetchSeasons();
   }
 
-  onSeasonClick(season) {
+  onSeasonClick(season: Season) {
     if (season.id === this.season.id) return;
-    this.resetForm();
-    this.season = Object.assign({}, season);
+    this.resetForm(season);
   }
 
-  resetForm() {
+  resetForm(season: SeasonInterface) {
     this.isErrored = false;
     this.form.reset();
-    this.season = Object.assign({}, defaultSeason);
+    this.season = Object.assign({}, season);
+    this.showForm = false;
+    setTimeout(() => this.showForm = true, 0);
   }
 
   onSubmit() {
@@ -57,7 +59,7 @@ export class SeasonsComponent implements OnInit {
     if (this.season.id) {
       this.seasonsActions.updateSeason(this.season)
         .subscribe((s) => {
-          this.resetForm();
+          this.resetForm(defaultSeason);
           const content = `La saison ${s.name} a bien été mise à jour`;
           this.messagesActions.addMessage(content, 'success');
         }, (err) => {
@@ -67,7 +69,7 @@ export class SeasonsComponent implements OnInit {
     } else {
       this.seasonsActions.addSeason(this.season)
         .subscribe((s) => {
-          this.resetForm();
+          this.resetForm(defaultSeason);
           const content = `La saison ${s.name} a bien été créée`;
           this.messagesActions.addMessage(content, 'success');
         }, (err) => {
@@ -75,5 +77,9 @@ export class SeasonsComponent implements OnInit {
         })
       ;
     }
+  }
+
+  cancel() {
+    this.resetForm(defaultSeason);
   }
 }

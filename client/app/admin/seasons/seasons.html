@@ -15,7 +15,7 @@
       <span *ngIf="!season.id">Nouvelle saison</span>
       <span *ngIf="season.id">Edition d'une saison</span>
     </h5>
-    <form (ngSubmit)="onSubmit()" #seasonForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #seasonForm="ngForm" *ngIf="showForm">
       <article class="message is-danger" *ngIf="isErrored">
         <div class="message-header">Erreur</div>
         <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
@@ -34,9 +34,10 @@
       <p class="control">
         <span class="select">
           <select name="format" [(ngModel)]="season.format">
+            <option value=""> - </option>
             <option
               *ngFor="let f of formats"
-              [ngValue]="f.key"> {{f.name}} </option>
+              [value]="f.key"> {{f.name}} </option>
           </select>
         </span>
       </p>
@@ -71,7 +72,7 @@
         <button
           type="submit"
           *ngIf="season.id"
-          (click)="resetForm()"
+          (click)="cancel()"
           class="button is-link">Annuler</button>
       </p>
     </form>

@@ -17,7 +17,7 @@
       <span *ngIf="!tournament.id">Nouveau tournoi</span>
       <span *ngIf="tournament.id">Edition d'un tournoi</span>
     </h5>
-    <form (ngSubmit)="onSubmit()" #tournamentForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #tournamentForm="ngForm" *ngIf="showForm">
       <article class="message is-danger" *ngIf="isErrored">
         <div class="message-header">Erreur</div>
         <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
@@ -46,6 +46,7 @@
       <p class="control">
         <span class="select">
           <select name="season" [(ngModel)]="tournament.seasonId" required>
+            <option [ngValue]="null"> - </option>
             <option
               *ngFor="let s of seasons$ | async"
               [ngValue]="s.id"> {{s.name}} </option>
@@ -56,6 +57,7 @@
       <p class="control">
         <span class="select">
           <select name="region" [(ngModel)]="tournament.regionId" required>
+            <option [ngValue]="null"> - </option>
             <option
               *ngFor="let r of regions$ | async"
               [ngValue]="r.id"> {{r.name}} </option>
@@ -66,10 +68,10 @@
       <p class="control">
         <span class="select">
           <select name="format" [(ngModel)]="tournament.format">
-            <option [ngValue]="null"> - </option>
+            <option value=""> - </option>
             <option
               *ngFor="let f of formats"
-              [ngValue]="f.key"> {{f.name}} </option>
+              [value]="f.key">{{f.name}}</option>
           </select>
         </span>
       </p>
@@ -93,7 +95,7 @@
         <button
           type="submit"
           *ngIf="tournament.id"
-          (click)="resetForm()"
+          (click)="cancel()"
           class="button is-link">Annuler</button>
       </p>
     </form>

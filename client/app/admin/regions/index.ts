@@ -7,6 +7,12 @@ import { Subscription } from 'rxjs/Subscription';
 import { RegionsActions, MessagesActions, UsersActions } from '../../actions';
 import { Region, RegionInterface, MyUser } from '../../sdk/models';
 
+const defaultRegion = {
+  id: null,
+  name: '',
+  captainId: null
+};
+
 @Component({
   template: require('./regions.html')
 })
@@ -18,12 +24,10 @@ export class RegionsComponent implements OnInit {
   @ViewChild('regionForm')
   private form: NgForm;
   private regions: Region[];
-  private region: RegionInterface = {
-    name: "",
-    captainId: null
-  };
+  private region: RegionInterface = Object.assign({}, defaultRegion);
   private subscriptions: Subscription[] = [];
   private isErrored: boolean = false;
+  private showForm: boolean = true;
 
   constructor(
     private regionsActions: RegionsActions,
@@ -37,19 +41,17 @@ export class RegionsComponent implements OnInit {
     this.usersActions.fetchUsers();
   }
 
-  onRegionClick(region) {
+  onRegionClick(region: Region) {
     if (region.id === this.region.id) return;
-    this.resetForm();
-    this.region = Object.assign({}, region);
+    this.resetForm(region);
   }
 
-  resetForm() {
+  resetForm(region: RegionInterface) {
     this.isErrored = false;
     this.form.reset();
-    this.region = {
-      name: "",
-      captainId: null
-    }
+    this.region = Object.assign({}, region);
+    this.showForm = false;
+    setTimeout(() => this.showForm = true, 0);
   }
 
   onSubmit() {
@@ -57,7 +59,7 @@ export class RegionsComponent implements OnInit {
     if (this.region.id) {
       this.regionsActions.updateRegion(this.region)
         .subscribe((r) => {
-          this.resetForm();
+          this.resetForm(defaultRegion);
           const content = `La région ${r.name} a bien été mise à jour`;
           this.messagesActions.addMessage(content, 'success');
         }, (err) => {
@@ -67,7 +69,7 @@ export class RegionsComponent implements OnInit {
     } else {
       this.regionsActions.addRegion(this.region)
         .subscribe((r) => {
-          this.resetForm();
+          this.resetForm(defaultRegion);
           const content = `La région ${r.name} a bien été créée`;
           this.messagesActions.addMessage(content, 'success');
         }, (err) => {
@@ -75,5 +77,9 @@ export class RegionsComponent implements OnInit {
         })
       ;
     }
+  }
+
+  cancel() {
+    this.resetForm(defaultRegion);
   }
 }

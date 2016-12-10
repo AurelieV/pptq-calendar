@@ -9,7 +9,7 @@ import { Tournament, TournamentInterface, Region, Season } from '../../../sdk/mo
 
 const defaultTournament = {
   town: '',
-  format: 'standard',
+  format: '',
   date: null,
   isDateConfirmed: false,
   organizer: '',
@@ -45,6 +45,7 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     {key: 'modern', name: "Modern"},
     {key: 'sealed', name: "Scellé"}
   ]
+  private showForm: boolean = true;
 
   constructor(
     private tournamentsActions: TournamentsActions,
@@ -62,16 +63,17 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     this.seasonsActions.fetchSeasons();
   }
 
-  onTournamentClick(tournament) {
+  onTournamentClick(tournament: Tournament): void {
     if (tournament.id === this.tournament.id) return;
-    this.resetForm();
-    this.tournament = Object.assign({}, tournament);
+    this.resetForm(tournament);
   }
 
-  resetForm() {
+  resetForm(tournament: TournamentInterface) : void {
     this.isErrored = false;
     this.form.reset();
-    this.tournament = Object.assign({}, defaultTournament);
+    this.tournament = Object.assign({}, tournament);
+    this.showForm = false;
+    setTimeout(() => this.showForm = true, 0);
   }
 
   onSubmit() {
@@ -79,7 +81,7 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     if (this.tournament.id) {
       this.tournamentsActions.updateTournament(this.tournament)
         .subscribe((s) => {
-          this.resetForm();
+          this.resetForm(defaultTournament);
           const content = `Le tournoi a bien été mis à jour`;
           this.messagesActions.addMessage(content, 'success');
         }, (err) => {
@@ -89,7 +91,7 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
     } else {
       this.tournamentsActions.addTournament(this.tournament)
         .subscribe((s) => {
-          this.resetForm();
+          this.resetForm(defaultTournament);
           const content = `Le tournoi a bien été créé`;
           this.messagesActions.addMessage(content, 'success');
         }, (err) => {
@@ -97,6 +99,10 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
         })
       ;
     }
+  }
+
+  cancel() {
+    this.resetForm(defaultTournament);
   }
 
   ngOnDestroy() {
