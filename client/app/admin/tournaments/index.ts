@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
@@ -46,31 +47,48 @@ export class AdminTournamentsComponent implements OnInit, OnDestroy {
     {key: 'sealed', name: "Scellé"}
   ]
   private showForm: boolean = true;
+  private id: number = null;
 
   constructor(
     private tournamentsActions: TournamentsActions,
     private regionsActions: RegionsActions,
     private seasonsActions: SeasonsActions,
-    private messagesActions: MessagesActions
+    private messagesActions: MessagesActions,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.subscriptions.push(this.tournaments$.subscribe((tournaments) =>
-      this.tournaments = tournaments
-    ));
+    this.subscriptions.push(this.tournaments$.subscribe((tournaments) => {
+      this.tournaments = tournaments;
+      this.updateForm();
+    }));
+    this.subscriptions.push(this.route.params.subscribe((p) => {
+      this.id = +p['id'] || null;
+      this.updateForm();
+    }));
     this.tournamentsActions.fetchTournaments();
     this.regionsActions.fetchRegions();
     this.seasonsActions.fetchSeasons();
   }
 
-  onTournamentClick(tournament: Tournament): void {
-    if (tournament.id === this.tournament.id) return;
+  updateForm() {
+    if (!this.id && !this.tournament.id) return;
+    if (!this.id) {
+      this.resetForm(defaultTournament);
+      return;
+    }
+    if (this.id === this.tournament.id) return;
+    const tournament = this.tournaments.find((t) => t.id === this.id);
+    if (!tournament) {
+      this.resetForm(defaultTournament);
+    }
     this.resetForm(tournament);
   }
 
   resetForm(tournament: TournamentInterface) : void {
     this.isErrored = false;
-    this.form.reset();
+    if (this.form) this.form.reset();
     this.tournament = Object.assign({}, tournament);
     this.showForm = false;
     setTimeout(() => this.showForm = true, 0);
@@ -102,7 +120,7 @@ export class AdminTournamentsComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.resetForm(defaultTournament);
+    this.router.navigate(['./', {}], { relativeTo: this.route })
   }
 
   ngOnDestroy() {

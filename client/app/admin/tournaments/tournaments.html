@@ -5,9 +5,11 @@
     </h5>
     <ul class="menu-list">
       <li
-        *ngFor="let t of tournaments"
-        (click)="onTournamentClick(t)">
-        <a [class.is-active]="tournament.id === t.id">{{t.town}} - {{t.format || '?'}} - {{t.organizer}}</a>
+        *ngFor="let t of tournaments">
+        <a
+          [class.is-active]="tournament.id === t.id"
+          [routerLink]="['./', {id: t.id}]">{{t.town}} - {{t.format || '?'}} - {{t.organizer}}
+        </a>
       </li>
     </ul>
     <span *ngIf="!tournaments.length"> Pas de tournois </span>
