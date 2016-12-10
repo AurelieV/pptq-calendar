@@ -1,4 +1,4 @@
-<nav class="nav has-shadow">
+<nav class="nav has-shadow fixed">
   <div class="nav-left">
     <span class="hamburger" (click)="isSidenavOpen = true">
       <span></span>
@@ -12,7 +12,7 @@
   </div>
 </nav>
 <menu [open]="isSidenavOpen" (close)="isSidenavOpen = false"></menu>
-<div>
+<div class="router-content">
   <messages></messages>
   <router-outlet></router-outlet>
 </div>

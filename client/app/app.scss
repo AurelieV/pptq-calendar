@@ -3,3 +3,14 @@ messages {
   bottom: 0;
   left: 0; right: 0;
 }
+
+nav {
+  &.fixed {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+.router-content {
+  padding-top: 50px;
+}
