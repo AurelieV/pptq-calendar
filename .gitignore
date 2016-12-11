@@ -34,5 +34,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-server/data/service-account-key.json
-server/datasources.local.js
+/server/data/service-account-key.json
+/server/datasources.local.json

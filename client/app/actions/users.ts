@@ -14,6 +14,10 @@ export class UsersActions {
   static FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
   static FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
 
+  static CREATE_USER = 'CREATE_USER';
+  static CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+  static CREATE_USER_ERROR = 'CREATE_USER_ERROR';
+
   fetchUsers(): Observable<MyUser[]> {
     this.ngRedux.dispatch({ type: UsersActions.FETCH_USERS });
     const obs = this.user.find()
@@ -25,6 +29,27 @@ export class UsersActions {
       }, (err) => {
         this.ngRedux.dispatch({
           type: UsersActions.FETCH_USERS_ERROR,
+          payload: err
+        });
+      })
+      .publishLast()
+    ;
+    obs.connect();
+
+    return obs;
+  }
+
+  createUser(user: MyUserInterface): Observable<MyUser> {
+    this.ngRedux.dispatch({ type: UsersActions.CREATE_USER });
+    const obs = this.user.create(user)
+      .do((result) => {
+        this.ngRedux.dispatch({
+          type: UsersActions.CREATE_USER_SUCCESS,
+          payload: result
+        });
+      }, (err) => {
+        this.ngRedux.dispatch({
+          type: UsersActions.CREATE_USER_ERROR,
           payload: err
         });
       })

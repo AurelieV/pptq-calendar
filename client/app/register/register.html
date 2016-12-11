@@ -1,16 +1,28 @@
-<div class="box">
-  <form>
+<article class="message is-info" *ngIf="submited">
+  <div class="message-header">Compte créé</div>
+  <div class="message-body">
+    Votre compte a bien été créé mais n'est pas encore actif.
+    <br>
+    Un email vous a été envoyé avec un lien d'activation à l'adresse {{user.email}}
+  </div>
+</article>
+<div class="box" *ngIf="!submited">
+  <article class="message is-danger" *ngIf="isErrored">
+    <div class="message-header">Erreur</div>
+    <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
+  </article>
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
     <label class="label">Login</label>
     <p class="control">
-      <input class="input" type="text">
+      <input class="input" name="username" [(ngModel)]="user.username" type="text" required>
     </p>
     <label class="label">Email</label>
     <p class="control">
-      <input class="input" type="email">
+      <input class="input" name="email" [(ngModel)]="user.email" type="email" required>
     </p>
     <label class="label">Mot de passe</label>
     <p class="control">
-      <input class="input" type="password">
+      <input class="input" name="password" type="password" [(ngModel)]="user.password" required>
     </p>
     <label class="label">Confirmation du mot de passe</label>
     <p class="control">
@@ -20,18 +32,22 @@
     <div class="control is-grouped">
       <p class="control">
         <label class="label">Prénom</label>
-        <input class="input" type="text">
+        <input class="input" name="firstname" [(ngModel)]="user.firstname" type="text">
       </p>
       <p class="control">
         <label class="label">Nom</label>
-        <input class="input" type="text">
+        <input class="input" name="lastname" [(ngModel)]="user.lastname" type="text">
       </p>
     </div>
     <p class="control">
       <span class="help">Ces informations sont obligatoires pour les arbitres</span>
     </p>
     <p class="has-text-centered">
-      <button class="button is-primary">Créer</button>
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        [class.is-loading]="isLoading"
+        class="button is-primary">Créer</button>
     </p>
   </form>
 </div>
