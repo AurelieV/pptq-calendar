@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.divider {
+  margin: 20px auto;
+  border-bottom: 1px solid grey;
+  width: 50px;
+}
