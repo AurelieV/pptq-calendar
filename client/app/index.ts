@@ -19,6 +19,7 @@ import { AppComponent } from './app';
 import { MenuComponent } from './menu';
 import { MyProfileComponent } from './myProfile';
 import { MessagesComponent } from './messages';
+import { RegisterComponent } from './register';
 
 // Epics
 import { SessionEpics } from './login';
@@ -69,7 +70,8 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     PageNotFoundComponent,
     MenuComponent,
     MyProfileComponent,
-    MessagesComponent
+    MessagesComponent,
+    RegisterComponent
   ],
   bootstrap: [ AppComponent ]
 })
