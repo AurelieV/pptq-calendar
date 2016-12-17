@@ -10,7 +10,7 @@ module.exports = {
     var update = Promise.promisify(app.googleCalendar.events.update, {context: app.googleCalendar});
     var date = moment(tournament.date).format('YYYY-MM-DD');
     let summary = tournament.isDateConfirmed ? '' : '/!\\ ';
-    summary += `${tournament.town} - ${tournament.format || ?} - ${tournament.organizer}`;
+    summary += `${tournament.town} - ${tournament.format || '?'} - ${tournament.organizer}`;
     var options = {
       resource: {
         summary,
