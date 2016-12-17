@@ -24,59 +24,70 @@
         <div class="message-header">Erreur</div>
         <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
       </article>
-      <label class="label" for="town">Ville</label>
-      <p class="control">
-        <input
-          required
-          name="town"
-          class="input"
-          type="text"
-          [(ngModel)]="tournament.town"
-          placeholder="Ville">
-      </p>
-      <label class="label" for="organizer">Organisateur</label>
-      <p class="control">
-        <input
-          required
-          name="organizer"
-          class="input"
-          type="text"
-          [(ngModel)]="tournament.organizer"
-          placeholder="Organisateur">
-      </p>
-      <label class="label" for="season">Saison</label>
-      <p class="control">
-        <span class="select">
-          <select name="season" [(ngModel)]="tournament.seasonId" required>
-            <option [ngValue]="null"> - </option>
-            <option
-              *ngFor="let s of seasons$ | async"
-              [ngValue]="s.id"> {{s.name}} </option>
-          </select>
-        </span>
-      </p>
-      <label class="label" for="region">Région</label>
-      <p class="control">
-        <span class="select">
-          <select name="region" [(ngModel)]="tournament.regionId" required>
-            <option [ngValue]="null"> - </option>
-            <option
-              *ngFor="let r of regions$ | async"
-              [ngValue]="r.id"> {{r.name}} </option>
-          </select>
-        </span>
-      </p>
-      <label class="label" for="format">Format</label>
-      <p class="control">
-        <span class="select">
-          <select name="format" [(ngModel)]="tournament.format">
-            <option value=""> - </option>
-            <option
-              *ngFor="let f of formats"
-              [value]="f.key">{{f.name}}</option>
-          </select>
-        </span>
-      </p>
+      <div class="control is-grouped">
+        <p class="control">
+          <label class="label" for="town">Ville</label>
+          <input
+            required
+            name="town"
+            class="input"
+            type="text"
+            [(ngModel)]="tournament.town">
+        </p>
+        <p class="control">
+          <label class="label" for="organizer">Organisateur</label>
+          <input
+            required
+            name="organizer"
+            class="input"
+            type="text"
+            [(ngModel)]="tournament.organizer">
+        </p>
+      </div>
+      <div class="control is-grouped">
+        <p class="control">
+          <label class="label" for="season">Saison</label>
+          <span class="select">
+            <select name="season" [(ngModel)]="tournament.seasonId" required>
+              <option [ngValue]="null"> - </option>
+              <option
+                *ngFor="let s of seasons$ | async"
+                [ngValue]="s.id"> {{s.name}} </option>
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          <label class="label" for="region">Région</label>
+          <span class="select">
+            <select name="region" [(ngModel)]="tournament.regionId" required>
+              <option [ngValue]="null"> - </option>
+              <option
+                *ngFor="let r of regions$ | async"
+                [ngValue]="r.id"> {{r.name}} </option>
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          <label class="label" for="format">Format</label>
+          <span class="select">
+            <select name="format" [(ngModel)]="tournament.format">
+              <option value=""> - </option>
+              <option
+                *ngFor="let f of formats"
+                [value]="f.key">{{f.name}}</option>
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          <label class="label" for="date">Date</label>
+          <input
+            name="date"
+            class="input"
+            type="date"
+            [(ngModel)]="tournament.date"
+            placeholder="Date de début">
+        </p>
+      </div>
       <p class="control">
         <label class="checkbox">
           <input
@@ -85,14 +96,39 @@
             type="checkbox"> Le tournoi est confirmé ?
         </label>
       </p>
-      <label class="label" for="date">Date</label>
       <p class="control">
+        <label class="label">Lieu du tournoi</label>
         <input
-          name="date"
+          name="adress"
+          [(ngModel)]="tournament.adress"
           class="input"
-          type="date"
-          [(ngModel)]="tournament.date"
-          placeholder="Date de début">
+          type="text">
+      </p>
+      <div class="control is-grouped">
+        <p class="control">
+          <label class="label">Contact mail</label>
+          <input
+            type="email"
+            name="emailContact"
+            class="input"
+            [(ngModel)]="tournament.emailContact">
+        </p>
+        <p class="control">
+          <label class="label">Contact téléphonique</label>
+          <input
+            type="phone"
+            name="phoneContact"
+            class="input"
+            [(ngModel)]="tournament.phoneContact">
+        </p>
+      </div>
+      <p class="control">
+        <label class="label">Informations</label>
+        <textarea
+          class="textarea"
+          name="information"
+          [(ngModel)]="tournament.information">
+        </textarea>
       </p>
       <p class="control">
         <button
