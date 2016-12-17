@@ -1,7 +1,5 @@
-<div class="box">
-  <form
-    (submit)="login({username: username.value, password: password.value})"
-    *ngIf="!user">
+<div class="box" *ngIf="!user">
+  <form (submit)="login({username: username.value, password: password.value})">
     <label class="label"> Login </label>
     <p class="control">
       <input class="input" type="text" #username>
@@ -18,7 +16,6 @@
     <a [routerLink]="['/register']">Pas encore inscrit? Je créé un compte</a>
   </div>
 </div>
-
 
 <div *ngIf="user">
   <p>Vous êtes connecté en tant que {{ user.username }}</p>

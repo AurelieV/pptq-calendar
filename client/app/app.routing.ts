@@ -6,6 +6,7 @@ import { TournamentListComponent } from './tournament';
 import { LoginComponent } from './login';
 import { MyProfileComponent } from './myProfile';
 import { RegisterComponent } from './register';
+import { VerificationComponent } from './register/verification';
 import { PageNotFoundComponent } from './utils/404';
 
 // Guards
@@ -34,6 +35,13 @@ const appRoutes: Routes = [
       title: 'Profil'
     },
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'verification',
+    component: VerificationComponent,
+    data: {
+      title: 'Compte activé'
+    }
   },
   {
     path: 'register',
