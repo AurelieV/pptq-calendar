@@ -6,3 +6,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+a.no-style {
+  color: inherit;
+  text-decoration: inherit;
+}

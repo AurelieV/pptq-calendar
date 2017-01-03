@@ -19,6 +19,9 @@ export class TournamentsActions {
   static UPDATE_TOURNAMENT = 'UPDATE_TOURNAMENT';
   static UPDATE_TOURNAMENT_SUCCESS = 'UPDATE_TOURNAMENT_SUCCESS';
   static UPDATE_TOURNAMENT_ERROR = 'UPDATE_TOURNAMENT_ERROR';
+  static GET_TOURNAMENT = 'GET_TOURNAMENT';
+  static GET_TOURNAMENT_SUCCESS = 'GET_TOURNAMENT_SUCCESS';
+  static GET_TOURNAMENT_ERROR = 'GET_TOURNAMENTS_ERROR';
 
   fetchTournaments(): Observable<Tournament[]> {
     this.ngRedux.dispatch({ type: TournamentsActions.FETCH_TOURNAMENTS });
@@ -46,6 +49,42 @@ export class TournamentsActions {
       }, (err) => {
         this.ngRedux.dispatch({
           type: TournamentsActions.FETCH_TOURNAMENTS_ERROR,
+          payload: err
+        });
+      })
+      .publishLast()
+    ;
+    obs.connect();
+
+    return obs;
+  }
+
+  getTournament(id: number): Observable<Tournament> {
+    this.ngRedux.dispatch({ type: TournamentsActions.GET_TOURNAMENT });
+    const obs = this.tournament.findById(id, {
+      include: [
+        {
+          relation: 'headJudge',
+          fields: ['id', 'username', 'firstname', 'lastname']
+        },
+        {
+          relation: 'region',
+          fields: ['id', 'name']
+        },
+        {
+          relation: 'season',
+          fields: ['id', 'name']
+        }
+      ]
+    })
+      .do((tournaments) => {
+        this.ngRedux.dispatch({
+          type: TournamentsActions.GET_TOURNAMENT_SUCCESS,
+          payload: tournaments
+        });
+      }, (err) => {
+        this.ngRedux.dispatch({
+          type: TournamentsActions.GET_TOURNAMENT_ERROR,
           payload: err
         });
       })

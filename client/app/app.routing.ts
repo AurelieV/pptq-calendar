@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 // Components
-import { TournamentListComponent } from './tournament';
+import { TournamentListComponent, TournamentDetailComponent } from './tournament';
 import { LoginComponent } from './login';
 import { MyProfileComponent } from './myProfile';
 import { RegisterComponent } from './register';
@@ -19,6 +19,13 @@ const appRoutes: Routes = [
     component: TournamentListComponent,
     data: {
       title: 'Tournois'
+    }
+  },
+  {
+    path: 'tournament/:id',
+    component: TournamentDetailComponent,
+    data: {
+      title: 'Tournoi'
     }
   },
   {

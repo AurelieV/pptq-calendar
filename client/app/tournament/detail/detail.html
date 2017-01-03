@@ -1,0 +1,49 @@
+<article class="message is-danger" *ngIf="notFound">
+  <div class="message-header">Tournoi inexistant</div>
+  <div class="message-body">
+    Le tournoi que vous souhaitez consulter n'existe pas ou plus
+  </div>
+</article>
+
+<div class="card tournament" *ngIf="tournament">
+  <div class="header">
+    <div class="title">
+      <p class="title is-4">{{tournament.town}}-{{tournament.organizer}}</p>
+      <p class="subtitle is-6 uppercase">
+        {{tournament.format || '?'}}
+        <span *ngIf="tournament.date">, le {{tournament.date | date:"dd MMM yyyy"}}</span>
+      </p>
+    </div>
+    <div class="info" *ngIf="!tournament.isDateConfirmed">
+      <span class="icon not-confirmed">
+        <i class="fa fa-exclamation-triangle"></i>
+      </span>
+    </div>
+  </div>
+  <div class="body card-content">
+    <div class="contacts">
+      <a
+        class="contact with-icon no-style"
+        *ngIf="tournament.phoneContact">
+        <span class="icon"><i class="fa fa-phone"></i></span>
+        <span>{{tournament.phoneContact}}</span>
+      </a>
+      <a
+        class="contact with-icon no-style"
+        *ngIf="tournament.emailContact">
+        <span class="icon"><i class="fa fa-envelope"></i></span>
+        <span>{{tournament.emailContact}}</span>
+      </a>
+    </div>
+    <a
+      class="adress with-icon no-style"
+      *ngIf="tournament.adress">
+      <span class="icon"><i class="fa fa-map-marker"></i></span>
+      <span>{{tournament.adress}}</span>
+    </a>
+    <p class="information" *ngIf="tournament.information">{{tournament.information}}</p>
+  </div>
+  <footer class="card-footer" *ngIf="isAdmin">
+    <a [routerLink]="['/admin/tournaments', {id: tournament.id}]" class="card-footer-item">Edit</a>
+  </footer>
+</div>

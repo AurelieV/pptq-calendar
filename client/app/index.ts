@@ -12,7 +12,7 @@ import { routing } from './app.routing';
 import { IAppState, rootReducer } from './store';
 
 // Components
-import { TournamentListComponent } from './tournament';
+import { TournamentListComponent, TournamentDetailComponent } from './tournament';
 import { LoginComponent } from './login';
 import { PageNotFoundComponent } from './utils/404';
 import { AppComponent } from './app';
@@ -67,6 +67,7 @@ require("!style!css!sass!./utils/styles/bulma.sass");
   declarations: [
     AppComponent,
     TournamentListComponent,
+    TournamentDetailComponent,
     LoginComponent,
     PageNotFoundComponent,
     MenuComponent,

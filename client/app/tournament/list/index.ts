@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -29,7 +30,11 @@ export class TournamentListComponent implements OnInit, OnDestroy {
   private isAdmin: boolean = false;
   @select() private session$: Observable<any>;
 
-  constructor(private tournamentsActions: TournamentsActions) {}
+  constructor(
+    private tournamentsActions: TournamentsActions,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.subscriptions.push(this.tournaments$.subscribe((tournaments) => {
@@ -67,6 +72,10 @@ export class TournamentListComponent implements OnInit, OnDestroy {
     });
 
     return result;
+  }
+
+  goToDetail(id: number) {
+    this.router.navigate(['../tournament', id], { relativeTo: this.route });
   }
 
   ngOnDestroy() {

@@ -3,7 +3,10 @@
     <div class="columns">
       <div class="day column" *ngFor="let day of week.days">
         <h2 class="title is-5">{{day.day}}</h2>
-        <div class="card tournament" *ngFor="let tournament of day.tournaments">
+        <div
+          class="card tournament"
+          (click)="goToDetail(tournament.id)"
+          *ngFor="let tournament of day.tournaments">
           <div class="card-content">
             <div class="content">
               <div class="data">
