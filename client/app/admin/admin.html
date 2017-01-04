@@ -1,6 +1,6 @@
 <div class="section">
   <div class=container>
-    <div class="tabs is-medium is-fullwidth">
+    <div class="tabs is-medium is-fullwidth" *ngIf="isAdmin()">
       <ul class="is-center">
         <li routerLink="./tournaments" routerLinkActive="is-active">
           <a>Tournaments</a>

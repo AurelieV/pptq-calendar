@@ -77,6 +77,12 @@
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "judge",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

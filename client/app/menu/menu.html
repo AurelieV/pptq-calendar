@@ -16,11 +16,11 @@
         </a>
       </li>
     </ul>
-    <p class="menu-label" *ngIf="isAdmin()">
+    <p class="menu-label" *ngIf="isAdmin() || isJudge()">
       Administration
     </p>
-    <ul class="menu-list" *ngIf="isAdmin()">
-      <li><a href="#">Utilisateurs</a></li>
+    <ul class="menu-list" *ngIf="isAdmin() || isJudge()">
+      <li *ngIf="isAdmin()"><a href="#">Utilisateurs</a></li>
       <li>
         <a
           routerLink="/admin"

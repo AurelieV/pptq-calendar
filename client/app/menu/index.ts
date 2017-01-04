@@ -59,6 +59,10 @@ export class MenuComponent implements OnInit, OnDestroy {
     return this.roles.indexOf('admin') > -1;
   }
 
+  isJudge() {
+    return this.roles.indexOf('judge') > -1;
+  }
+
   get state() {
     return this.open ? 'open' : 'close';
   }

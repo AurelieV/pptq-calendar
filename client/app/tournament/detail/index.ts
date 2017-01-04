@@ -39,7 +39,7 @@ export class TournamentDetailComponent implements OnInit, OnDestroy {
       });
     });
     this.subscriptions.push(this.roles.subscribe((roles) => {
-      this.isAdmin = roles.indexOf('admin') > -1;
+      this.isAdmin = roles.indexOf('admin') > -1 || roles.indexOf('judge') > -1;
     }));
   }
 

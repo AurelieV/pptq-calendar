@@ -55,7 +55,7 @@ export class TournamentListComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.session$.subscribe((s) => {
       const roles = s.roles;
       if (!roles) return;
-      this.isAdmin = roles.indexOf('admin') > -1;
+      this.isAdmin = roles.indexOf('admin') > -1 || roles.indexOf('judge') > -1;
     }));
     this.tournamentsActions.fetchTournaments();
   }
