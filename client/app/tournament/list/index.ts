@@ -10,6 +10,7 @@ const moment = require('moment');
 const _ = require('lodash');
 
 interface Week {
+  m: any;
   week: string;
   days: Day[];
 }
@@ -40,9 +41,10 @@ export class TournamentListComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.tournaments$.subscribe((tournaments) => {
       const tmp = _.groupBy(tournaments, (t) => moment.utc(t.date).format('YYYY-W'));
       let byWeek = [];
-      Object.keys(tmp).forEach((w) => {
+      Object.keys(tmp).forEach(w => {
         const m = moment(w, 'YYYY-W');
         byWeek.push({
+          m,
           week: {
             start: m.startOf('week').format('DD MMM'),
             end: m.endOf('week').format('DD MMM')
@@ -50,7 +52,12 @@ export class TournamentListComponent implements OnInit, OnDestroy {
           days: this.groupByDay(tmp[w], w)
         });
       });
-      this.weeks = byWeek;
+      this.weeks = byWeek.sort((a, b) => {
+        if (a.m.isSame(b.m)) {
+          return 0;
+        }
+        return a.m.isBefore(b.m) ? -1 : 1;
+      });
     }));
     this.subscriptions.push(this.session$.subscribe((s) => {
       const roles = s.roles;
