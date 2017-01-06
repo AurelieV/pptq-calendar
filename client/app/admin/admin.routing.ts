@@ -7,6 +7,9 @@ import { AdminRegionsComponent } from "./regions";
 import { AdminSeasonsComponent } from "./seasons";
 import { AdminComponent } from './admin.component';
 
+// Guard
+import { AdminGuard, JudgeGuard } from "../guards";
+
 const adminRoutes: Routes = [
   {
     path: 'admin',
@@ -15,9 +18,9 @@ const adminRoutes: Routes = [
     },
     component: AdminComponent,
     children: [
-      { path: 'tournaments', component: AdminTournamentsComponent },
-      { path: 'regions', component: AdminRegionsComponent },
-      { path: 'seasons', component: AdminSeasonsComponent },
+      { path: 'tournaments', component: AdminTournamentsComponent, canActivate: [JudgeGuard] },
+      { path: 'regions', component: AdminRegionsComponent, canActivate: [AdminGuard] },
+      { path: 'seasons', component: AdminSeasonsComponent, canActivate: [AdminGuard] },
       { path: '', redirectTo: 'tournaments', pathMatch: 'full' }
     ]
   }

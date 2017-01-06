@@ -1,7 +1,7 @@
 import { SessionActions } from '../../actions/session';
 import { Session } from '../index';
 
-export function sessionReducer(state: Session = {user: undefined, roles: []}, action: any) {
+export function sessionReducer(state: Session = {user: undefined, roles: undefined}, action: any) {
   switch (action.type) {
     case SessionActions.LOGOUT_USER_SUCCESS:
       return Object.assign({}, state, {user: null, roles: []});

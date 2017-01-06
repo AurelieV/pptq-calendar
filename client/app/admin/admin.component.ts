@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   isAdmin() {
-    return this.roles.indexOf('admin') > -1;
+    return this.roles && this.roles.indexOf('admin') > -1;
   }
 
   ngOnDestroy() {

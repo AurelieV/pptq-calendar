@@ -39,7 +39,7 @@ import {
 import { AdminModule } from './admin';
 
 // Guards
-import { AuthGuard } from './guards';
+import { AuthGuard, AdminGuard, JudgeGuard } from './guards';
 
 require("!style!css!font-awesome/css/font-awesome.min.css");
 require("!style!css!sass!./utils/styles/bulma.sass");
@@ -62,6 +62,8 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     SeasonsActions,
     TournamentsActions,
     AuthGuard,
+    AdminGuard,
+    JudgeGuard,
     SessionEpics
   ],
   declarations: [
