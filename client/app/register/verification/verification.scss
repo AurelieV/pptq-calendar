@@ -1,5 +1,6 @@
-article {
-  margin-top: 50px;
-  margin-left: 10px;
-  margin-right: 10px;
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
 }
