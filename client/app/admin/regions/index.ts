@@ -27,6 +27,7 @@ export class AdminRegionsComponent implements OnInit {
   private region: RegionInterface = Object.assign({}, defaultRegion);
   private subscriptions: Subscription[] = [];
   private isErrored: boolean = false;
+  private isLoading: boolean = false;
   private showForm: boolean = true;
 
   constructor(
@@ -48,6 +49,7 @@ export class AdminRegionsComponent implements OnInit {
 
   resetForm(region: RegionInterface) {
     this.isErrored = false;
+    this.isLoading = false;
     this.form.reset();
     this.region = Object.assign({}, region);
     this.showForm = false;
@@ -56,14 +58,17 @@ export class AdminRegionsComponent implements OnInit {
 
   onSubmit() {
     this.isErrored = false;
+    this.isLoading = true;
     if (this.region.id) {
       this.regionsActions.updateRegion(this.region)
         .subscribe((r) => {
           this.resetForm(defaultRegion);
           const content = `La région ${r.name} a bien été mise à jour`;
           this.messagesActions.addMessage(content, 'success');
+          this.isLoading = false;
         }, (err) => {
           this.isErrored = true;
+          this.isLoading = false;
         })
       ;
     } else {
@@ -72,8 +77,10 @@ export class AdminRegionsComponent implements OnInit {
           this.resetForm(defaultRegion);
           const content = `La région ${r.name} a bien été créée`;
           this.messagesActions.addMessage(content, 'success');
+          this.isLoading = false;
         }, (err) => {
           this.isErrored = true;
+          this.isLoading = false;
         })
       ;
     }

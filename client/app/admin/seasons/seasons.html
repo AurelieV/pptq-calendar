@@ -26,6 +26,7 @@
           required
           name="name"
           class="input"
+          [disabled]="isLoading"
           type="text"
           [(ngModel)]="season.name"
           placeholder="Name">
@@ -33,7 +34,7 @@
       <label class="label" for="format">Format</label>
       <p class="control">
         <span class="select">
-          <select name="format" [(ngModel)]="season.format">
+          <select name="format" [disabled]="isLoading" [(ngModel)]="season.format">
             <option value=""> - </option>
             <option
               *ngFor="let f of formats"
@@ -46,6 +47,7 @@
         <input
           required
           name="startDate"
+          [disabled]="isLoading"
           class="input"
           type="date"
           [(ngModel)]="season.startDate"
@@ -57,6 +59,7 @@
           required
           name="endDate"
           class="input"
+          [disabled]="isLoading"
           type="date"
           [(ngModel)]="season.endDate"
           placeholder="Date de fin">
@@ -65,6 +68,7 @@
         <button
           type="submit"
           class="button is-primary"
+          [class.is-loading]="isLoading"
           [disabled]="!seasonForm.form.valid">
           <span *ngIf="!season.id">Créer</span>
           <span *ngIf="season.id">Editer</span>
@@ -73,6 +77,7 @@
           type="button"
           *ngIf="season.id"
           (click)="cancel()"
+          [disabled]="isLoading"
           class="button is-link">Annuler</button>
       </p>
     </form>

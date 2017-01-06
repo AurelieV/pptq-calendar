@@ -41,6 +41,7 @@ export class AdminTournamentsComponent implements OnInit, OnDestroy {
   private tournament: TournamentInterface = Object.assign({}, defaultTournament);
   private subscriptions: Subscription[] = [];
   private isErrored: boolean = false;
+  private isLoading: boolean = false;
   private formats: any[] = [
     {key: 'standard', name: "Standard"},
     {key: 'modern', name: "Modern"},
@@ -88,6 +89,7 @@ export class AdminTournamentsComponent implements OnInit, OnDestroy {
 
   resetForm(tournament: TournamentInterface) : void {
     this.isErrored = false;
+    this.isLoading = false;
     if (this.form) this.form.reset();
     this.tournament = Object.assign({}, tournament);
     this.showForm = false;
@@ -96,14 +98,17 @@ export class AdminTournamentsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isErrored = false;
+    this.isLoading = true;
     if (this.tournament.id) {
       this.tournamentsActions.updateTournament(this.tournament)
         .subscribe((s) => {
           this.resetForm(defaultTournament);
           const content = `Le tournoi a bien été mis à jour`;
           this.messagesActions.addMessage(content, 'success');
+          this.isLoading = false;
         }, (err) => {
           this.isErrored = true;
+          this.isLoading = false;
         })
       ;
     } else {
@@ -112,8 +117,10 @@ export class AdminTournamentsComponent implements OnInit, OnDestroy {
           this.resetForm(defaultTournament);
           const content = `Le tournoi a bien été créé`;
           this.messagesActions.addMessage(content, 'success');
+          this.isLoading = false;
         }, (err) => {
           this.isErrored = true;
+          this.isLoading = false;
         })
       ;
     }

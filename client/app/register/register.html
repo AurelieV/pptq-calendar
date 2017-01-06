@@ -14,29 +14,29 @@
   <form (ngSubmit)="onSubmit()" #form="ngForm">
     <label class="label">Login</label>
     <p class="control">
-      <input class="input" name="username" [(ngModel)]="user.username" type="text" required>
+      <input class="input" [disabled]="isLoading" name="username" [(ngModel)]="user.username" type="text" required>
     </p>
     <label class="label">Email</label>
     <p class="control">
-      <input class="input" name="email" [(ngModel)]="user.email" type="email" required>
+      <input class="input" [disabled]="isLoading" name="email" [(ngModel)]="user.email" type="email" required>
     </p>
     <label class="label">Mot de passe</label>
     <p class="control">
-      <input class="input" name="password" type="password" [(ngModel)]="user.password" required>
+      <input class="input" [disabled]="isLoading" name="password" type="password" [(ngModel)]="user.password" required>
     </p>
     <label class="label">Confirmation du mot de passe</label>
     <p class="control">
-      <input class="input" type="password">
+      <input class="input" [disabled]="isLoading" type="password">
     </p>
     <div class="divider"></div>
     <div class="control is-grouped">
       <p class="control">
         <label class="label">Prénom</label>
-        <input class="input" name="firstname" [(ngModel)]="user.firstname" type="text">
+        <input class="input" [disabled]="isLoading" name="firstname" [(ngModel)]="user.firstname" type="text">
       </p>
       <p class="control">
         <label class="label">Nom</label>
-        <input class="input" name="lastname" [(ngModel)]="user.lastname" type="text">
+        <input class="input" [disabled]="isLoading" name="lastname" [(ngModel)]="user.lastname" type="text">
       </p>
     </div>
     <p class="control">

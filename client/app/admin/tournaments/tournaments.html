@@ -31,6 +31,7 @@
             required
             name="town"
             class="input"
+            [disabled]="isLoading"
             type="text"
             [(ngModel)]="tournament.town">
         </p>
@@ -40,6 +41,7 @@
             required
             name="organizer"
             class="input"
+            [disabled]="isLoading"
             type="text"
             [(ngModel)]="tournament.organizer">
         </p>
@@ -48,7 +50,7 @@
         <p class="control">
           <label class="label" for="season">Saison</label>
           <span class="select">
-            <select name="season" [(ngModel)]="tournament.seasonId" required>
+            <select name="season" [disabled]="isLoading" [(ngModel)]="tournament.seasonId" required>
               <option [ngValue]="null"> - </option>
               <option
                 *ngFor="let s of seasons$ | async"
@@ -59,7 +61,7 @@
         <p class="control">
           <label class="label" for="region">Région</label>
           <span class="select">
-            <select name="region" [(ngModel)]="tournament.regionId" required>
+            <select name="region" [disabled]="isLoading" [(ngModel)]="tournament.regionId" required>
               <option [ngValue]="null"> - </option>
               <option
                 *ngFor="let r of regions$ | async"
@@ -70,7 +72,7 @@
         <p class="control">
           <label class="label" for="format">Format</label>
           <span class="select">
-            <select name="format" [(ngModel)]="tournament.format">
+            <select name="format" [disabled]="isLoading" [(ngModel)]="tournament.format">
               <option value=""> - </option>
               <option
                 *ngFor="let f of formats"
@@ -83,6 +85,7 @@
           <input
             name="date"
             class="input"
+            [disabled]="isLoading"
             type="date"
             [(ngModel)]="tournament.date"
             placeholder="Date de début">
@@ -92,6 +95,7 @@
         <label class="checkbox">
           <input
             name="isDateConfirmed"
+            [disabled]="isLoading"
             [(ngModel)]="tournament.isDateConfirmed"
             type="checkbox"> Le tournoi est confirmé ?
         </label>
@@ -100,6 +104,7 @@
         <label class="label">Lieu du tournoi</label>
         <input
           name="adress"
+          [disabled]="isLoading"
           [(ngModel)]="tournament.adress"
           class="input"
           type="text">
@@ -110,6 +115,7 @@
           <input
             type="email"
             name="emailContact"
+            [disabled]="isLoading"
             class="input"
             [(ngModel)]="tournament.emailContact">
         </p>
@@ -118,6 +124,7 @@
           <input
             type="phone"
             name="phoneContact"
+            [disabled]="isLoading"
             class="input"
             [(ngModel)]="tournament.phoneContact">
         </p>
@@ -127,6 +134,7 @@
         <textarea
           class="textarea"
           name="information"
+          [disabled]="isLoading"
           [(ngModel)]="tournament.information">
         </textarea>
       </p>
@@ -134,6 +142,7 @@
         <button
           type="submit"
           class="button is-primary"
+          [class.is-loading]="isLoading"
           [disabled]="!tournamentForm.form.valid">
           <span *ngIf="!tournament.id">Créer</span>
           <span *ngIf="tournament.id">Editer</span>
@@ -141,6 +150,7 @@
         <button
           type="button"
           *ngIf="tournament.id"
+          [disabled]="isLoading"
           (click)="cancel()"
           class="button is-link">Annuler</button>
       </p>

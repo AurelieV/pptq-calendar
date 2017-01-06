@@ -25,6 +25,7 @@ export class AdminSeasonsComponent implements OnInit {
   private season: SeasonInterface = Object.assign({}, defaultSeason);
   private subscriptions: Subscription[] = [];
   private isErrored: boolean = false;
+  private isLoading: boolean = false;
   private formats: any[] = [
     {key: 'standard', name: "Standard"},
     {key: 'modern', name: "Modern"}
@@ -48,6 +49,7 @@ export class AdminSeasonsComponent implements OnInit {
 
   resetForm(season: SeasonInterface) {
     this.isErrored = false;
+    this.isLoading = false;
     this.form.reset();
     this.season = Object.assign({}, season);
     this.showForm = false;
@@ -56,14 +58,17 @@ export class AdminSeasonsComponent implements OnInit {
 
   onSubmit() {
     this.isErrored = false;
+    this.isLoading = true;
     if (this.season.id) {
       this.seasonsActions.updateSeason(this.season)
         .subscribe((s) => {
           this.resetForm(defaultSeason);
           const content = `La saison ${s.name} a bien été mise à jour`;
           this.messagesActions.addMessage(content, 'success');
+          this.isLoading = false;
         }, (err) => {
           this.isErrored = true;
+          this.isLoading = false;
         })
       ;
     } else {
@@ -72,8 +77,10 @@ export class AdminSeasonsComponent implements OnInit {
           this.resetForm(defaultSeason);
           const content = `La saison ${s.name} a bien été créée`;
           this.messagesActions.addMessage(content, 'success');
+          this.isLoading = false;
         }, (err) => {
           this.isErrored = true;
+          this.isLoading = false;
         })
       ;
     }

@@ -23,6 +23,7 @@
       <label class="label" for="name">Name</label>
       <p class="control">
         <input
+          [disabled]="isLoading"
           required
           name="name"
           class="input"
@@ -35,6 +36,7 @@
         <input
           name="googleId"
           class="input"
+          [disabled]="isLoading"
           type="text"
           [(ngModel)]="region.googleId"
           placeholder="Google Id">
@@ -42,7 +44,7 @@
       <label class="label" for="captainId">Capitaine</label>
       <p class="control">
         <span class="select">
-          <select name="captainId" [(ngModel)]="region.captainId">
+          <select name="captainId" [(ngModel)]="region.captainId" [disabled]="isLoading">
             <option [ngValue]="null">-</option>
             <option
               *ngFor="let user of users$ | async"
@@ -56,6 +58,7 @@
         <button
           type="submit"
           class="button is-primary"
+          [class.is-loading]="isLoading"
           [disabled]="!regionForm.form.valid">
           <span *ngIf="!region.id">Créer</span>
           <span *ngIf="region.id">Editer</span>
@@ -64,6 +67,7 @@
           type="button"
           *ngIf="region.id"
           (click)="cancel()"
+          [disabled]="isLoading"
           class="button is-link">Annuler</button>
       </p>
     </form>
