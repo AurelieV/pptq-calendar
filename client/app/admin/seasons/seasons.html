@@ -20,7 +20,7 @@
         <div class="message-header">Erreur</div>
         <div class="message-body">Une erreur est survenue. Votre demande n'a pas été traitée</div>
       </article>
-      <label class="label" for="name">Name</label>
+      <label class="label mandatory" for="name">Name</label>
       <p class="control">
         <input
           required
@@ -31,10 +31,10 @@
           [(ngModel)]="season.name"
           placeholder="Name">
       </p>
-      <label class="label" for="format">Format</label>
+      <label class="label mandatory" for="format">Format</label>
       <p class="control">
         <span class="select">
-          <select name="format" [disabled]="isLoading" [(ngModel)]="season.format">
+          <select name="format" required [disabled]="isLoading" [(ngModel)]="season.format">
             <option value=""> - </option>
             <option
               *ngFor="let f of formats"
@@ -42,7 +42,7 @@
           </select>
         </span>
       </p>
-      <label class="label" for="startDate">Date de début</label>
+      <label class="label mandatory" for="startDate">Date de début</label>
       <p class="control">
         <input
           required
@@ -53,7 +53,7 @@
           [(ngModel)]="season.startDate"
           placeholder="Date de début">
       </p>
-      <label class="label" for="endDate">Date de fin</label>
+      <label class="label mandatory" for="endDate">Date de fin</label>
       <p class="control">
         <input
           required

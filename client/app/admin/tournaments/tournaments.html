@@ -26,7 +26,7 @@
       </article>
       <div class="control is-grouped">
         <p class="control">
-          <label class="label" for="town">Ville</label>
+          <label class="label mandatory" for="town">Ville</label>
           <input
             required
             name="town"
@@ -36,7 +36,7 @@
             [(ngModel)]="tournament.town">
         </p>
         <p class="control">
-          <label class="label" for="organizer">Organisateur</label>
+          <label class="label mandatory" for="organizer">Organisateur</label>
           <input
             required
             name="organizer"
@@ -48,7 +48,7 @@
       </div>
       <div class="control is-grouped">
         <p class="control">
-          <label class="label" for="season">Saison</label>
+          <label class="label mandatory" for="season">Saison</label>
           <span class="select">
             <select name="season" [disabled]="isLoading" [(ngModel)]="tournament.seasonId" required>
               <option [ngValue]="null"> - </option>
@@ -59,7 +59,7 @@
           </span>
         </p>
         <p class="control">
-          <label class="label" for="region">Région</label>
+          <label class="label mandatory" for="region">Région</label>
           <span class="select">
             <select name="region" [disabled]="isLoading" [(ngModel)]="tournament.regionId" required>
               <option [ngValue]="null"> - </option>
@@ -81,8 +81,9 @@
           </span>
         </p>
         <p class="control">
-          <label class="label" for="date">Date</label>
+          <label class="label mandatory" for="date">Date</label>
           <input
+            required
             name="date"
             class="input"
             [disabled]="isLoading"

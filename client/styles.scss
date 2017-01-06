@@ -15,3 +15,10 @@ a.no-style {
   color: inherit;
   text-decoration: inherit;
 }
+
+.label.mandatory:after {
+  display: inline-block;
+  content: "*";
+  color: red;
+  padding-left: 3px;
+}
