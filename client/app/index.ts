@@ -21,6 +21,7 @@ import { MyProfileComponent } from './myProfile';
 import { MessagesComponent } from './messages';
 import { RegisterComponent } from './register';
 import { VerificationComponent } from './register/verification';
+import { FiltersComponent } from './filters';
 
 // Epics
 import { SessionEpics } from './login';
@@ -32,7 +33,8 @@ import {
   MessagesActions,
   UsersActions,
   SeasonsActions,
-  TournamentsActions
+  TournamentsActions,
+  TournamentsFiltersActions
 } from './actions';
 
 // Modules
@@ -61,6 +63,7 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     UsersActions,
     SeasonsActions,
     TournamentsActions,
+    TournamentsFiltersActions,
     AuthGuard,
     AdminGuard,
     JudgeGuard,
@@ -76,7 +79,8 @@ require("!style!css!sass!./utils/styles/bulma.sass");
     MyProfileComponent,
     MessagesComponent,
     RegisterComponent,
-    VerificationComponent
+    VerificationComponent,
+    FiltersComponent
   ],
   bootstrap: [ AppComponent ]
 })

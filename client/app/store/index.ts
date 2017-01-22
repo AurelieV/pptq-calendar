@@ -4,6 +4,7 @@ import { messagesReducer } from './reducers/messages';
 import { usersReducer } from './reducers/users';
 import { seasonsReducer } from './reducers/seasons';
 import { tournamentsReducer } from './reducers/tournaments';
+import { tournamentsFiltersReducer } from './reducers/tournamentsFilters';
 import { combineReducers, Action } from 'redux';
 import { MyUser, Region, Season, Tournament }  from '../sdk/models';
 
@@ -13,12 +14,17 @@ export const rootReducer = combineReducers<IAppState>({
   messages: messagesReducer,
   users: usersReducer,
   seasons: seasonsReducer,
-  tournaments: tournamentsReducer
+  tournaments: tournamentsReducer,
+  tournamentsFilters: tournamentsFiltersReducer
 });
 
 export interface Session {
   user?: MyUser;
   roles?: string[];
+}
+
+export interface TournamentsFilters {
+  regionId: number;
 }
 
 export type MessageType = '' | 'info' | 'warning' | 'success' | 'danger';
@@ -35,4 +41,5 @@ export interface IAppState {
   users?: MyUser[];
   seasons?: Season[];
   tournaments?: Tournament[];
+  tournamentsFilters?: TournamentsFilters;
 };

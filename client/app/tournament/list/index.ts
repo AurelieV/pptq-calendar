@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TournamentsActions } from '../../actions';
+import { TournamentsFilters } from '../../store';
 import { Tournament } from '../../sdk/models';
 const moment = require('moment');
 const _ = require('lodash');
@@ -26,6 +27,10 @@ interface Day {
 export class TournamentListComponent implements OnInit, OnDestroy {
   @select()
   private tournaments$: Observable<Tournament[]>;
+  private tournaments: Tournament[];
+  @select('tournamentsFilters')
+  private filters$: Observable<TournamentsFilters>;
+  private filters: TournamentsFilters;
   private weeks: Week[] = [];
   private subscriptions: Subscription[] = [];
   private isAdmin: boolean = false;
@@ -38,33 +43,46 @@ export class TournamentListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subscriptions.push(this.tournaments$.subscribe((tournaments) => {
-      const tmp = _.groupBy(tournaments, (t) => moment.utc(t.date).format('YYYY-W'));
-      let byWeek = [];
-      Object.keys(tmp).forEach(w => {
-        const m = moment(w, 'YYYY-W');
-        byWeek.push({
-          m,
-          week: {
-            start: m.startOf('week').format('DD MMM'),
-            end: m.endOf('week').format('DD MMM')
-          },
-          days: this.groupByDay(tmp[w], w)
-        });
-      });
-      this.weeks = byWeek.sort((a, b) => {
-        if (a.m.isSame(b.m)) {
-          return 0;
-        }
-        return a.m.isBefore(b.m) ? -1 : 1;
-      });
+    this.subscriptions.push(this.tournaments$.subscribe(tournaments => {
+      this.tournaments = tournaments;
+      this.updateWeeks();
     }));
     this.subscriptions.push(this.session$.subscribe((s) => {
       const roles = s.roles;
       if (!roles) return;
       this.isAdmin = roles && (roles.indexOf('admin') > -1 || roles.indexOf('judge') > -1);
     }));
+    this.subscriptions.push(this.filters$.subscribe(filters => {
+      this.filters = filters;
+      this.updateWeeks();
+    }));
     this.tournamentsActions.fetchTournaments();
+  }
+
+  updateWeeks() {
+    let tmp = this.tournaments;
+    if (this.filters) {
+      tmp = tmp.filter(t => this.filters.regionId === null || t.regionId === this.filters.regionId)
+    }
+    tmp = _.groupBy(tmp, (t) => moment.utc(t.date).format('YYYY-W'));
+    let byWeek = [];
+    Object.keys(tmp).forEach(w => {
+      const m = moment(w, 'YYYY-W');
+      byWeek.push({
+        m,
+        week: {
+          start: m.startOf('week').format('DD MMM'),
+          end: m.endOf('week').format('DD MMM')
+        },
+        days: this.groupByDay(tmp[w], w)
+      });
+    });
+    this.weeks = byWeek.sort((a, b) => {
+      if (a.m.isSame(b.m)) {
+        return 0;
+      }
+      return a.m.isBefore(b.m) ? -1 : 1;
+    });
   }
 
   groupByDay(tab: any[], week: string) {

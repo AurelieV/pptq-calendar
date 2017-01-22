@@ -1,0 +1,36 @@
+<div>
+  <div *ngIf="open" class="background" (click)="close()"></div>
+  <aside (click)="$event.stopPropagation()" *ngIf="open" [@flyInOut]="state" id="rightnav">
+    <div class="level">
+      <div class="level-item"></div>
+      <div class="level-right">
+        <div class="level-item">
+          <button class="button is-primary is-inverted close" (click)="close()">
+            <span class="icon">
+              <i class="fa fa-close"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="title">Filtres</div>
+    <form (ngSubmit)="onSubmit()" #tournamentForm="ngForm">
+      <div class="control is-horizontal">
+        <div class="control-label">
+          <label class="label" for="region">Région</label>
+        </div>
+        <div class="select is-fullwidth">
+          <select name="region" [(ngModel)]="filters.regionId">
+            <option [ngValue]="null"> Toutes </option>
+            <option
+              *ngFor="let r of regions$ | async"
+              [ngValue]="r.id"> {{r.name}} </option>
+          </select>
+        </div>
+      </div>
+      <p class="control actions">
+        <button type="submit" class="button is-primary">Valider</button>
+      </p>
+    </form>
+  </aside>
+</div>

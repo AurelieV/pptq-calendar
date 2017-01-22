@@ -10,8 +10,18 @@
     </a>
     <span class="nav-item title is-4">{{title}}</span>
   </div>
+  <div class="nav-right">
+    <div class="nav-item">
+      <button class="button is-medium is-primary filter" (click)="isFiltersOpen = true">
+        <span class="icon is-medium">
+          <i class="fa fa-filter"></i>
+        </span>
+      </button>
+    </div>
+  </div>
 </nav>
 <menu [open]="isSidenavOpen" (close)="isSidenavOpen = false"></menu>
+<filters [open]="isFiltersOpen" (close)="isFiltersOpen = false"></filters>
 <div class="router-content">
   <messages></messages>
   <router-outlet></router-outlet>

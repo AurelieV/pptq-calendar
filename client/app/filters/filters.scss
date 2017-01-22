@@ -1,0 +1,38 @@
+:host {
+  margin: 0;
+}
+
+aside {
+  width: 350px;
+  background: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 150;
+  padding-top: 10px;
+  padding-left: 25px;
+  padding-right: 10px;
+}
+
+.background {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: rgba(17, 17, 17, 0.86);
+  z-index: 100;
+}
+
+.actions {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.close {
+  .icon {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}

@@ -23,6 +23,7 @@ const moment = require('moment');
 })
 export class AppComponent {
   private isSidenavOpen: boolean = false;
+  private isFiltersOpen: boolean = false;
   private title: string;
 
   constructor(
