@@ -77,12 +77,16 @@ export class TournamentListComponent implements OnInit, OnDestroy {
         days: this.groupByDay(tmp[w], w)
       });
     });
-    this.weeks = byWeek.sort((a, b) => {
-      if (a.m.isSame(b.m)) {
-        return 0;
-      }
-      return a.m.isBefore(b.m) ? -1 : 1;
-    });
+    const now = moment();
+    this.weeks = byWeek
+      .sort((a, b) => {
+        if (a.m.isSame(b.m)) {
+          return 0;
+        }
+        return a.m.isBefore(b.m) ? -1 : 1;
+      })
+      .filter(w => now.isBefore(w.m.endOf('week')))
+    ;
   }
 
   groupByDay(tab: any[], week: string) {
