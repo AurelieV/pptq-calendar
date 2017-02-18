@@ -23,12 +23,14 @@
   <div class="body card-content">
     <div class="contacts">
       <a
+        href="tel:{{tournament.phoneContact}}"
         class="contact with-icon no-style"
         *ngIf="tournament.phoneContact">
         <span class="icon"><i class="fa fa-phone"></i></span>
         <span>{{tournament.phoneContact}}</span>
       </a>
       <a
+        href="mailto:{{tournament.emailContact}}"
         class="contact with-icon no-style"
         *ngIf="tournament.emailContact">
         <span class="icon"><i class="fa fa-envelope"></i></span>
