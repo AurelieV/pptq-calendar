@@ -1,0 +1,24 @@
+{
+  "apps" : [
+    {
+      "name": "pptq-calendar",
+      "script": "server/pptq-calendar.js",
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "orwel",
+      "host": "vps",
+      "ref": "origin/master",
+      "repo": "https://github.com/AurelieV/pptq-calendar.git",
+      "path": "production",
+      "post-deploy": "yarn install && npm build && pm2 startOrRestart ecosystem.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
