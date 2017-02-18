@@ -15,7 +15,7 @@
       "ref": "origin/master",
       "repo": "https://github.com/AurelieV/pptq-calendar.git",
       "path": "/home/orwel/production",
-      "post-deploy": "yarn install && npm run build:prod && pm2 startOrRestart ecosystem.json --env production",
+      "post-deploy": "yarn install && npm run build:prod && ./node_modules/.bin/pm2 startOrRestart ecosystem.json --env production",
       "env": {
         "NODE_ENV": "production"
       }
