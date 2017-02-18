@@ -1,11 +1,7 @@
 {
   "db": {
     "name": "db",
-    "connector": "mysql",
-    "host": "localhost",
-    "password": null,
-    "username": "root",
-    "database": "pptqCalendar"
+    "connector": "mysql"
   },
   "Gmail": {
     "name": "Gmail",
