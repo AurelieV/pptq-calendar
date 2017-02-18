@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +8,7 @@ import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { HttpModule } from '@angular/http';
 import { SDKBrowserModule } from './sdk/index';
 import { LoopBackConfig } from './sdk';
+import { environment } from "../environments/environment";
 
 import { routing } from './app.routing';
 import { IAppState, rootReducer } from './store';
@@ -93,14 +95,17 @@ export class AppModule {
     const rootEpic = combineEpics(
       ...this.sessionEpics.getEpics()
     );
+    const middlewares = environment.production ? [] : [ createLogger() ];
+    middlewares.push(createEpicMiddleware(rootEpic));
 
     this.ngRedux.configureStore(
       rootReducer,
       {},
-      [ createLogger(), createEpicMiddleware(rootEpic) ],
-      [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+      middlewares,
+      [ devTool.isEnabled() && environment.production ? devTool.enhancer() : f => f]
+    );
 
-      LoopBackConfig.setBaseURL('');
-      LoopBackConfig.setApiVersion('api');
+    LoopBackConfig.setBaseURL('');
+    LoopBackConfig.setApiVersion('api');
   }
 }

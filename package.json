@@ -5,9 +5,9 @@
   "angular-cli": {},
   "scripts": {
     "createDB": "node server/scripts/loadDB.js",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --proxy-config proxy.conf.json --env=dev",
     "build": "ng build",
-    "build:prod": "ng build --env=production",
+    "build:prod": "ng build --env=prod",
     "build:sdk": "lb-sdk server/pptq-calendar.js client/app/sdk -i disabled -w enabled",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
