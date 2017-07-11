@@ -1,0 +1,25 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "mysql",
+    "host": "localhost",
+    "password": "PAWWSWORD",
+    "username": "USER",
+    "database": "pptqCalendar"
+  },
+  "Gmail": {
+    "name": "Gmail",
+    "connector": "mail",
+    "defaultForType": "mail",
+    "transports": [{
+      "type": "SMTP",
+      "host": "smtp.gmail.com",
+      "secure": true,
+      "port": 465,
+      "auth": {
+        "user": "XXXX@gmail.com",
+        "pass": "PASSWORD"
+      }
+    }]
+  }
+}

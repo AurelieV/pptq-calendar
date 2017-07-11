@@ -7,7 +7,10 @@
 
 ## Installation
 * `npm install`
+* Create a sql database with a user and a pptqCalendar database
+* copy server/datasources.local.json.dist => server/datasources.local.json and change configuration
 * `npm run createDB` (/!\ this will drop existing tables)
 
 ## Run
 * `npm start`
+* `pm2 start ecosystem.json`
